@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rtm20.github.io/cosmic-explorer/sitemap.xml
