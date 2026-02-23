@@ -1,10 +1,6 @@
 <img width="1911" height="887" alt="image" src="https://github.com/user-attachments/assets/fdb86e7b-6034-4f71-b882-798d760598b7" />
 
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/rtm20/cosmic-explorer/main/og-preview.png" alt="Cosmic Explorer Banner" width="800" />
-</p>
-
 <h1 align="center">🪐 Cosmic Explorer</h1>
 
 <p align="center">
