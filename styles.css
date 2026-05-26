@@ -228,7 +228,7 @@ canvas {
 #welcome-screen {
   position: fixed;
   inset: 0;
-  background: #000 url('img/bg.jpg') center/cover no-repeat;
+  background: #000;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -243,10 +243,30 @@ canvas {
   display: flex;
 }
 
-.welcome-spotlight {
+.welcome-bg-image {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  background: url('img/bg.jpg') center/cover no-repeat;
+  z-index: 0;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.welcome-bg-gradient {
   position: absolute;
   inset: 0;
   z-index: 1;
+
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 85%, #000 100%);
+  pointer-events: none;
+}
+
+.welcome-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   pointer-events: none;
   background: radial-gradient(600px circle at 50% 50%, rgba(79, 195, 247, 0.08), transparent 60%);
   transition: background 0.1s;
@@ -275,9 +295,9 @@ canvas {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  z-index: 1;
   will-change: transform;
-
-  transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+  backface-visibility: hidden;
 }
 
 @keyframes welcomeFadeIn {
