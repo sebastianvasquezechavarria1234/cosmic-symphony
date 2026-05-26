@@ -4222,19 +4222,22 @@ function launchExperience() {
   const ws = document.getElementById('welcome-screen');
   if (ws) {
     if (ws._parallaxCleanup) ws._parallaxCleanup();
-    ws.style.transition = 'opacity 0.6s ease';
+    // Welcome exits with scale + blur — revealing planetarium underneath
+    ws.style.transition = 'transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease, filter 0.8s ease';
+    ws.style.transform = 'scale(1.8)';
     ws.style.opacity = '0';
+    ws.style.filter = 'blur(20px)';
     setTimeout(() => {
       ws.remove();
-      // Entrance animation for the planetarium
+      // Planetarium entrance: already visible, just a subtle scale polish
       const canvas = renderer.domElement;
-      canvas.style.transition = 'transform 1s cubic-bezier(0.65, 0, 0.35, 1), opacity 1s ease, filter 1s ease';
+      canvas.style.transition = 'transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease';
       canvas.style.transform = 'scale(1)';
       canvas.style.opacity = '1';
       canvas.style.filter = 'blur(0)';
       cinematicIntro();
       setTimeout(() => { if (!musicPlaying && typeof toggleMusic === 'function') toggleMusic(); }, 800);
-      // Reveal UI overlays after entrance animation
+      // Reveal UI overlays after transition
       setTimeout(() => {
         uiOverlays.forEach(el => {
           if (el) {
@@ -4242,8 +4245,8 @@ function launchExperience() {
             el.style.pointerEvents = '';
           }
         });
-      }, 1200);
-    }, 600);
+      }, 1000);
+    }, 800);
   }
 }
 
