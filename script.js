@@ -13,7 +13,7 @@ const PLANET_DATA = {
     radius: 5, distance: 0, orbitalSpeed: 0, rotationSpeed: 0.001,
     color: '#FDB813', emissive: '#F97C0A',
     glowColor: '#FF8C00',
-    description: 'The Sun is the star at the centre of our Solar System — a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core. It contains 99.86% of all the mass in the Solar System.<br><br><b>🧬 Life Potential:</b> No life can exist on the Sun. With surface temperatures of 5,500°C and core temperatures of 15 million°C, no known molecule — let alone living organism — could survive. The intense radiation and plasma environment make it the most hostile place in the Solar System for biology.',
+    description: 'El Sol es la estrella en el centro de nuestro Sistema Solar — una esfera casi perfecta de plasma caliente, incandescente por reacciones de fusión nuclear en su núcleo. Contiene el 99.86% de toda la masa del Sistema Solar.<br><br><b>🧬 Potencial de vida:</b> Ningún ser vivo puede existir en el Sol. Con temperaturas superficiales de 5,500°C y temperaturas en el núcleo de 15 millones°C, ninguna molécula conocida — mucho menos un organismo — podría sobrevivir. La intensa radiación y el entorno de plasma lo convierten en el lugar más hostil del Sistema Solar para la biología.',
     diameter: '1,392,684 km', mass: '1.989 × 10³⁰ kg',
     distanceFromSun: '0 km', gravity: '274 m/s²',
     dayLength: '25 Earth days (equatorial)', yearLength: 'N/A',
@@ -21,16 +21,16 @@ const PLANET_DATA = {
     moons: 0, moonNames: '',
     orbitalVelocity: 'N/A',
     atmosphere: [
-      { name: 'Hydrogen', pct: 74.9 },
-      { name: 'Helium', pct: 23.8 },
-      { name: 'Oxygen', pct: 0.65 },
-      { name: 'Other', pct: 0.65 }
+      { name: 'Hidrógeno', pct: 74.9 },
+      { name: 'Helio', pct: 23.8 },
+      { name: 'Oxígeno', pct: 0.65 },
+      { name: 'Otros', pct: 0.65 }
     ],
     facts: [
-      { icon: '🔥', text: 'The Sun\'s core temperature reaches 15 million degrees Celsius — hot enough to power nuclear fusion.' },
-      { icon: '⚡', text: 'Every second, the Sun fuses 600 million tonnes of hydrogen into helium, releasing enormous energy.' },
-      { icon: '🌊', text: 'The Sun\'s surface is covered in plasma waves and granules caused by convection cells rising from below.' },
-      { icon: '☄', text: 'Solar flares can eject plasma at over 2,000 km/s, sometimes disrupting Earth\'s magnetic field.' },
+      { icon: '🔥', text: 'La temperatura del núcleo del Sol alcanza 15 millones de grados Celsius — suficiente para alimentar la fusión nuclear.' },
+      { icon: '⚡', text: 'Cada segundo, el Sol fusiona 600 millones de toneladas de hidrógeno en helio, liberando energía enorme.' },
+      { icon: '🌊', text: 'La superficie del Sol está cubierta de ondas de plasma y gránulos causados por celdas de convección que ascienden desde el interior.' },
+      { icon: '☄', text: 'Las llamaradas solares pueden eyectar plasma a más de 2,000 km/s, a veces interrumpiendo el campo magnético de la Tierra.' },
     ],
     missions: [
       { year: '1990', name: 'Ulysses', agency: 'ESA/NASA' },
@@ -46,7 +46,7 @@ const PLANET_DATA = {
     radius: 0.6, distance: 14, orbitalSpeed: 0.0041, rotationSpeed: 0.003,
     color: '#b5b5b5', emissive: '#333',
     glowColor: '#888',
-    description: 'The smallest planet in the Solar System and the closest to the Sun. Mercury has extreme temperature swings, no significant atmosphere, and a heavily cratered surface resembling Earth\'s Moon.<br><br><b>🧬 Life Potential:</b> Mercury is considered lifeless. With no atmosphere to shield from solar radiation, surface temperatures swinging from -180°C to 430°C, and no liquid water, it cannot support any known life form. However, permanently shadowed craters at the poles contain water ice — a faint glimmer of a key life ingredient, though far too hostile for biology.',
+    description: 'El planeta más pequeño del Sistema Solar y el más cercano al Sol. Mercurio tiene cambios extremos de temperatura, sin atmósfera significativa y una superficie llena de cráteres similar a la Luna terrestre.<br><br><b>🧬 Potencial de vida:</b> Mercurio se considera sin vida. Sin atmósfera que proteja de la radiación solar, temperaturas superficiales que oscilan entre -180°C y 430°C, y sin agua líquida, no puede albergar ninguna forma de vida conocida. Sin embargo, los cráteres permanentemente sombreados en los polos contienen hielo de agua — un débil destello de un ingrediente clave para la vida, aunque demasiado hostil para la biología.',
     diameter: '4,879 km', mass: '3.30 × 10²³ kg',
     distanceFromSun: '57.9 million km', gravity: '3.7 m/s²',
     dayLength: '1,408 hours', yearLength: '88 Earth days',
@@ -54,16 +54,16 @@ const PLANET_DATA = {
     moons: 0, moonNames: 'None',
     orbitalVelocity: '47.4 km/s',
     atmosphere: [
-      { name: 'Oxygen', pct: 42 },
-      { name: 'Sodium', pct: 29 },
-      { name: 'Hydrogen', pct: 22 },
-      { name: 'Other', pct: 7 }
+      { name: 'Oxígeno', pct: 42 },
+      { name: 'Sodio', pct: 29 },
+      { name: 'Hidrógeno', pct: 22 },
+      { name: 'Otros', pct: 7 }
     ],
     facts: [
-      { icon: '🌡', text: 'Mercury has the most extreme temperature swings in the Solar System — from -180°C at night to 430°C during the day.' },
-      { icon: '🧲', text: 'Despite its small size, Mercury has a global magnetic field, thought to be generated by its large iron core.' },
-      { icon: '💨', text: 'Mercury has virtually no atmosphere to retain heat or protect its surface from micrometeorite impacts.' },
-      { icon: '🌀', text: 'Mercury rotates 3 times for every 2 orbits around the Sun — a 3:2 spin-orbit resonance.' },
+      { icon: '🌡', text: 'Mercurio tiene los cambios de temperatura más extremos del Sistema Solar — de -180°C de noche a 430°C de día.' },
+      { icon: '🧲', text: 'A pesar de su pequeño tamaño, Mercurio tiene un campo magnético global, generado probablemente por su gran núcleo de hierro.' },
+      { icon: '💨', text: 'Mercurio prácticamente no tiene atmósfera para retener calor o proteger su superficie de impactos de micrometeoritos.' },
+      { icon: '🌀', text: 'Mercurio rota 3 veces por cada 2 órbitas alrededor del Sol — una resonancia de rotación-órbita 3:2.' },
     ],
     missions: [
       { year: '1974', name: 'Mariner 10', agency: 'NASA' },
@@ -79,7 +79,7 @@ const PLANET_DATA = {
     radius: 0.95, distance: 20, orbitalSpeed: 0.0016, rotationSpeed: -0.0007,
     color: '#E8B96F', emissive: '#7a4a00',
     glowColor: '#D4A843',
-    description: 'The hottest planet in the Solar System and Earth\'s nearest neighbour. Venus is shrouded in thick clouds of sulfuric acid and has a runaway greenhouse effect that makes its surface hotter than Mercury.<br><br><b>🧬 Life Potential:</b> Venus\'s scorching 465°C surface is too extreme for known life, but its upper atmosphere (50–60 km altitude) is surprisingly Earth-like — 30°C temperatures and pressures similar to sea level. In 2020, phosphine gas (a potential biosignature) was detected in Venus\'s clouds, sparking debate about possible aerial microbial life — extremophile bacteria or archaea floating in sulfuric acid cloud droplets. If life exists, it would be unlike anything on Earth.',
+    description: 'El planeta más caliente del Sistema Solar y el vecino más cercano de la Tierra. Venus está envuelto en gruesas nubes de ácido sulfúrico y tiene un efecto invernadero descontrolado que hace su superficie más caliente que Mercurio.<br><br><b>🧬 Potencial de vida:</b> La superficie abrasadora de Venus a 465°C es demasiado extrema para la vida conocida, pero su atmósfera superior (50–60 km de altitud) es sorprendentemente similar a la Tierra — temperaturas de 30°C y presiones similares al nivel del mar. En 2020, se detectó fosfina (un posible bioindicador) en las nubes de Venus, generando debate sobre posible vida microbiana aérea — bacterias extremófilas o arqueas flotando en gotas de ácido sulfúrico. Si existe vida, sería diferente a todo lo conocido en la Tierra.',
     diameter: '12,104 km', mass: '4.87 × 10²⁴ kg',
     distanceFromSun: '108.2 million km', gravity: '8.87 m/s²',
     dayLength: '5,832 hours (retrograde)', yearLength: '225 Earth days',
@@ -87,16 +87,16 @@ const PLANET_DATA = {
     moons: 0, moonNames: 'None',
     orbitalVelocity: '35.0 km/s',
     atmosphere: [
-      { name: 'Carbon Dioxide', pct: 96.5 },
-      { name: 'Nitrogen', pct: 3.5 },
-      { name: 'Sulfur Dioxide', pct: 0.015 },
-      { name: 'Other', pct: 0 },
+      { name: 'Dióxido de carbono', pct: 96.5 },
+      { name: 'Nitrógeno', pct: 3.5 },
+      { name: 'Dióxido de azufre', pct: 0.015 },
+      { name: 'Otros', pct: 0 },
     ],
     facts: [
-      { icon: '♨', text: 'At 465°C, Venus is hot enough to melt lead — hotter than Mercury despite being twice as far from the Sun.' },
-      { icon: '🔄', text: 'Venus rotates backwards compared to most planets. On Venus, the Sun rises in the west and sets in the east.' },
-      { icon: '☁', text: 'The dense cloud cover of sulfuric acid reflects 70% of sunlight, making Venus the brightest object in the sky after the Sun and Moon.' },
-      { icon: '💎', text: 'The atmospheric pressure on Venus\'s surface is 90 times that of Earth — equivalent to being 900m underwater.' },
+      { icon: '♨', text: 'A 465°C, Venus es lo suficientemente caliente para derretir plomo — más caliente que Mercurio a pesar de estar al doble de distancia del Sol.' },
+      { icon: '🔄', text: 'Venus rota al revés comparado con la mayoría de los planetas. En Venus, el Sol sale por el oeste y se pone por el este.' },
+      { icon: '☁', text: 'La densa capa de nubes de ácido sulfúrico refleja el 70% de la luz solar, haciendo de Venus el objeto más brillante del cielo después del Sol y la Luna.' },
+      { icon: '💎', text: 'La presión atmosférica en la superficie de Venus es 90 veces la de la Tierra — equivalente a estar a 900 m bajo el agua.' },
     ],
     missions: [
       { year: '1970', name: 'Venera 7', agency: 'Soviet' },
@@ -112,7 +112,7 @@ const PLANET_DATA = {
     radius: 1, distance: 28, orbitalSpeed: 0.001, rotationSpeed: 0.01,
     color: '#2E86C1', emissive: '#0a3055',
     glowColor: '#4fc3f7',
-    description: 'Our home planet — the third from the Sun and the only known world in the Universe to harbour life. Earth\'s liquid water oceans, oxygen-rich atmosphere, and protective magnetic field make it uniquely habitable.<br><br><b>🧬 Life Forms:</b> Earth teems with an extraordinary diversity of life — an estimated <b>8.7 million species</b>. From microscopic bacteria and archaea in deep-sea hydrothermal vents, to giant blue whales in the oceans; from tardigrades (water bears) surviving extreme conditions, to fungi networks spanning kilometres underground. Life includes: <em>Bacteria, Archaea, Protists, Fungi, Plants, and Animals</em> — from bioluminescent deep-sea creatures and extremophile microbes in boiling acid springs, to tropical rainforest ecosystems, coral reefs, and the intelligent species Homo sapiens. Life has existed here for ~3.8 billion years.',
+    description: 'Nuestro hogar — el tercero desde el Sol y el único mundo conocido en el Universo que alberga vida. Los océanos de agua líquida, la atmósfera rica en oxígeno y el campo magnético protector hacen de la Tierra un lugar únicamente habitable.<br><br><b>🧬 Formas de vida:</b> La Tierra rebosa de una diversidad extraordinaria de vida — se estiman <b>8.7 millones de especies</b>. Desde bacterias microscópicas y arqueas en respiraderos hidrotermales de aguas profundas, hasta ballenas azules gigantes en los océanos; desde tardígrados (osos de agua) que sobreviven en condiciones extremas, hasta redes de hongos que se extienden kilómetros bajo tierra. La vida incluye: <em>Bacterias, Arqueas, Protistas, Hongos, Plantas y Animales</em> — desde criaturas bioluminiscentes de aguas profundas y microbios extremófilos en manantiales ácidos hirvientes, hasta ecosistemas de selvas tropicales, arrecifes de coral y la especie inteligente Homo sapiens. La vida ha existido aquí por ~3.8 mil millones de años.',
     diameter: '12,742 km', mass: '5.97 × 10²⁴ kg',
     distanceFromSun: '149.6 million km', gravity: '9.81 m/s²',
     dayLength: '24 hours', yearLength: '365.25 days',
@@ -120,16 +120,16 @@ const PLANET_DATA = {
     moons: 1, moonNames: 'The Moon',
     orbitalVelocity: '29.8 km/s',
     atmosphere: [
-      { name: 'Nitrogen', pct: 78.1 },
-      { name: 'Oxygen', pct: 20.9 },
-      { name: 'Argon', pct: 0.93 },
-      { name: 'CO₂ & Others', pct: 0.04 },
+      { name: 'Nitrógeno', pct: 78.1 },
+      { name: 'Oxígeno', pct: 20.9 },
+      { name: 'Argón', pct: 0.93 },
+      { name: 'CO₂ y otros', pct: 0.04 },
     ],
     facts: [
-      { icon: '💧', text: 'Over 71% of Earth\'s surface is covered by liquid water — a key ingredient for the chemistry of life.' },
-      { icon: '🧲', text: 'Earth\'s magnetic field acts as a shield against harmful solar wind and cosmic radiation.' },
-      { icon: '🌙', text: 'The Moon is unusually large relative to Earth — its gravitational pull stabilises Earth\'s axial tilt and drives ocean tides.' },
-      { icon: '🌍', text: 'Earth is the densest planet in the Solar System, with an average density of 5,515 kg/m³.' },
+      { icon: '💧', text: 'Más del 71% de la superficie terrestre está cubierta por agua líquida — un ingrediente clave para la química de la vida.' },
+      { icon: '🧲', text: 'El campo magnético de la Tierra actúa como escudo contra el viento solar dañino y la radiación cósmica.' },
+      { icon: '🌙', text: 'La Luna es inusualmente grande en relación a la Tierra — su atracción gravitacional estabiliza la inclinación axial de la Tierra y genera las mareas oceánicas.' },
+      { icon: '🌍', text: 'La Tierra es el planeta más denso del Sistema Solar, con una densidad promedio de 5,515 kg/m³.' },
     ],
     missions: [
       { year: '1972', name: 'Apollo 17 (last lunar)', agency: 'NASA' },
@@ -145,7 +145,7 @@ const PLANET_DATA = {
     radius: 0.75, distance: 37, orbitalSpeed: 0.00053, rotationSpeed: 0.0097,
     color: '#C0392B', emissive: '#5a0000',
     glowColor: '#E74C3C',
-    description: 'The Red Planet — named for the iron oxide that colours its surface. Mars is the most explored planet beyond Earth, with evidence of ancient rivers, volcanoes, and the potential for past microbial life.<br><br><b>🧬 Life Potential:</b> Mars is the strongest candidate for past extraterrestrial life. Billions of years ago, Mars had liquid water oceans, a thicker atmosphere, and warmer temperatures — conditions favourable for microbial life. NASA\'s Curiosity and Perseverance rovers have found organic molecules, seasonal methane spikes (a possible biosignature), and ancient lake beds. If life existed, it was likely <em>chemolithotrophic bacteria</em> — microbes feeding on rock minerals. Today, life could potentially survive underground in subsurface aquifers, shielded from intense UV radiation, similar to Earth\'s deep-rock bacteria.',
+    description: 'El Planeta Rojo — nombrado así por el óxido de hierro que colorea su superficie. Marte es el planeta más explorado más allá de la Tierra, con evidencia de ríos antiguos, volcanes y el potencial de vida microbiana pasada.<br><br><b>🧬 Potencial de vida:</b> Marte es el candidato más fuerte para vida extraterrestre pasada. Hace miles de millones de años, Marte tenía océanos de agua líquida, una atmósfera más densa y temperaturas más cálidas — condiciones favorables para la vida microbiana. Los rovers Curiosity y Perseverance de la NASA han encontrado moléculas orgánicas, picos estacionales de metano (un posible bioindicador) y lechos de lagos antiguos. Si existió vida, probablemente fueron <em>bacterias quimiolitotróficas</em> — microbios que se alimentan de minerales rocosos. Hoy, la vida podría potencialmente sobrevivir bajo tierra en acuíferos subterráneos, protegida de la intensa radiación UV, similar a las bacterias de rocas profundas de la Tierra.',
     diameter: '6,779 km', mass: '6.39 × 10²³ kg',
     distanceFromSun: '227.9 million km', gravity: '3.72 m/s²',
     dayLength: '24.6 hours', yearLength: '687 Earth days',
@@ -153,16 +153,16 @@ const PLANET_DATA = {
     moons: 2, moonNames: 'Phobos, Deimos',
     orbitalVelocity: '24.1 km/s',
     atmosphere: [
-      { name: 'Carbon Dioxide', pct: 95.3 },
-      { name: 'Nitrogen', pct: 2.6 },
-      { name: 'Argon', pct: 1.9 },
-      { name: 'Other', pct: 0.3 },
+      { name: 'Dióxido de carbono', pct: 95.3 },
+      { name: 'Nitrógeno', pct: 2.6 },
+      { name: 'Argón', pct: 1.9 },
+      { name: 'Otros', pct: 0.3 },
     ],
     facts: [
-      { icon: '🏔', text: 'Olympus Mons on Mars is the largest volcano in the Solar System — 3 times the height of Mount Everest.' },
-      { icon: '🌊', text: 'Valles Marineris is a canyon system 4,000 km long and up to 7 km deep — dwarfing Earth\'s Grand Canyon.' },
-      { icon: '💨', text: 'Dust storms on Mars can engulf the entire planet and last for months, blocking sunlight.' },
-      { icon: '🧊', text: 'Mars has polar ice caps containing water ice and dry ice (frozen CO₂) that grow and shrink with the seasons.' },
+      { icon: '🏔', text: 'El Monte Olimpo en Marte es el volcán más grande del Sistema Solar — 3 veces la altura del Monte Everest.' },
+      { icon: '🌊', text: 'Valles Marineris es un sistema de cañones de 4,000 km de largo y hasta 7 km de profundidad — empequeñeciendo al Gran Cañón de la Tierra.' },
+      { icon: '💨', text: 'Las tormentas de polvo en Marte pueden cubrir todo el planeta y durar meses, bloqueando la luz solar.' },
+      { icon: '🧊', text: 'Marte tiene casquetes polares que contienen hielo de agua y hielo seco (CO₂ congelado) que crecen y se encogen con las estaciones.' },
     ],
     missions: [
       { year: '1976', name: 'Viking 1 & 2', agency: 'NASA' },
@@ -177,7 +177,7 @@ const PLANET_DATA = {
     radius: 2.5, distance: 55, orbitalSpeed: 0.000084, rotationSpeed: 0.04,
     color: '#C88B3A', emissive: '#3a1a00',
     glowColor: '#D4A843',
-    description: 'The king of planets — the largest in our Solar System. Jupiter is a massive gas giant with iconic cloud bands, a Great Red Spot storm larger than Earth, and a powerful magnetic field that traps deadly radiation.<br><br><b>🧬 Life Potential:</b> Jupiter itself — with its crushing pressures, extreme radiation, and no solid surface — is unlikely to harbour life. However, its moon <b>Europa</b> is one of the most promising places for alien life in the Solar System. Beneath Europa\'s icy crust lies a global saltwater ocean with more water than all of Earth\'s oceans combined — warmed by tidal heating. Hydrothermal vents on Europa\'s ocean floor could support <em>chemosynthetic microorganisms</em> similar to those found near Earth\'s deep-sea vents. Jupiter\'s moon <b>Ganymede</b> also has a subsurface ocean. The upcoming Europa Clipper mission will search for signs of habitability.',
+    description: 'El rey de los planetas — el más grande de nuestro Sistema Solar. Júpiter es un gigante gaseoso masivo con icónicas bandas de nubes, una Gran Mancha Roja mayor que la Tierra y un potente campo magnético que atrapa radiación mortal.<br><br><b>🧬 Potencial de vida:</b> Júpiter mismo — con sus presiones aplastantes, radiación extrema y sin superficie sólida — es poco probable que albergue vida. Sin embargo, su luna <b>Europa</b> es uno de los lugares más prometedores para vida alienígena en el Sistema Solar. Bajo la corteza helada de Europa hay un océano global de agua salada con más agua que todos los océanos de la Tierra combinados — calentado por calentamiento de marea. Los respiraderos hidrotermales en el fondo oceánico de Europa podrían albergar <em>microorganismos quimiosintéticos</em> similares a los encontrados cerca de los respiraderos de aguas profundas de la Tierra. La luna de Júpiter <b>Ganímedes</b> también tiene un océano subterráneo. La próxima misión Europa Clipper buscará signos de habitabilidad.',
     diameter: '139,820 km', mass: '1.898 × 10²⁷ kg',
     distanceFromSun: '778.5 million km', gravity: '24.8 m/s²',
     dayLength: '9.93 hours', yearLength: '11.86 Earth years',
@@ -185,16 +185,16 @@ const PLANET_DATA = {
     moons: 95, moonNames: 'Io, Europa, Ganymede, Callisto + 91 more',
     orbitalVelocity: '13.1 km/s',
     atmosphere: [
-      { name: 'Hydrogen', pct: 89.9 },
-      { name: 'Helium', pct: 10.2 },
-      { name: 'Methane', pct: 0.3 },
-      { name: 'Other', pct: 0.1 },
+      { name: 'Hidrógeno', pct: 89.9 },
+      { name: 'Helio', pct: 10.2 },
+      { name: 'Metano', pct: 0.3 },
+      { name: 'Otros', pct: 0.1 },
     ],
     facts: [
-      { icon: '🌀', text: 'The Great Red Spot is a storm that has been raging for at least 350 years and is 1.3 times the diameter of Earth.' },
-      { icon: '🔱', text: 'Jupiter\'s magnetic field is 14 times stronger than Earth\'s, creating the largest structure in the Solar System.' },
-      { icon: '🌐', text: 'Jupiter is so massive it doesn\'t orbit the Sun — Jupiter and the Sun both orbit a common barycentre.' },
-      { icon: '🧲', text: 'Jupiter\'s moon Europa is considered one of the best candidates for extraterrestrial life, with a subsurface ocean.' },
+      { icon: '🌀', text: 'La Gran Mancha Roja es una tormenta que ha durado al menos 350 años y es 1.3 veces el diámetro de la Tierra.' },
+      { icon: '🔱', text: 'El campo magnético de Júpiter es 14 veces más fuerte que el de la Tierra, creando la estructura más grande del Sistema Solar.' },
+      { icon: '🌐', text: 'Júpiter es tan masivo que no orbita al Sol — Júpiter y el Sol orbitan un baricentro común.' },
+      { icon: '🧲', text: 'La luna Europa de Júpiter es considerada uno de los mejores candidatos para vida extraterrestre, con un océano subterráneo.' },
     ],
     missions: [
       { year: '1979', name: 'Voyager 1 & 2', agency: 'NASA' },
@@ -210,24 +210,24 @@ const PLANET_DATA = {
     radius: 2.1, distance: 75, orbitalSpeed: 0.0000339, rotationSpeed: 0.038,
     color: '#E4C07A', emissive: '#5a3d00',
     glowColor: '#F0D090',
-    description: 'The jewel of the Solar System. Saturn\'s spectacular ring system — made of billions of ice and rock particles — stretches 282,000 km wide but is only about 10 metres thick in some places. Saturn is so light it could float in water.<br><br><b>🧬 Life Potential:</b> Saturn\'s moon <b>Enceladus</b> is a top candidate for extraterrestrial life. The Cassini spacecraft discovered geysers shooting water vapour containing organic molecules, molecular hydrogen, and silica nanoparticles — strong evidence of hydrothermal activity in a subsurface ocean. These conditions could support <em>methanogenic archaea</em> (methane-producing microbes). Saturn\'s largest moon <b>Titan</b> has lakes of liquid methane and ethane, a thick nitrogen atmosphere, and complex organic chemistry. If life exists on Titan, it would be radically alien — possibly <em>methane-based organisms</em> using liquid hydrocarbons as a solvent instead of water. NASA\'s Dragonfly drone will explore Titan in the 2030s.',
+    description: 'La joya del Sistema Solar. El espectacular sistema de anillos de Saturno — hecho de miles de millones de partículas de hielo y roca — se extiende 282,000 km de ancho pero solo tiene unos 10 metros de grosor en algunos lugares. Saturno es tan ligero que flotaría en el agua.<br><br><b>🧬 Potencial de vida:</b> La luna de Saturno <b>Encélado</b> es un candidato principal para vida extraterrestre. La sonda Cassini descubrió géiseres que disparan vapor de agua que contiene moléculas orgánicas, hidrógeno molecular y nanopartículas de sílice — fuerte evidencia de actividad hidrotermal en un océano subterráneo. Estas condiciones podrían albergar <em>arqueas metanógenas</em> (microbios productores de metano). La luna más grande de Saturno, <b>Titán</b>, tiene lagos de metano y etano líquidos, una atmósfera espesa de nitrógeno y química orgánica compleja. Si existe vida en Titán, sería radicalmente alienígena — posiblemente <em>organismos basados en metano</em> que usan hidrocarburos líquidos como solvente en lugar de agua. El dron Dragonfly de la NASA explorará Titán en la década de 2030.',
     diameter: '116,460 km', mass: '5.68 × 10²⁶ kg',
     distanceFromSun: '1.43 billion km', gravity: '10.4 m/s²',
     dayLength: '10.7 hours', yearLength: '29.46 Earth years',
     avgTemp: '-140°C', minTemp: '-185°C', maxTemp: '11,700°C (core)',
-    moons: 146, moonNames: 'Titan, Enceladus, Mimas, Rhea + 142 more',
+    moons: 146, moonNames: 'Titán, Encélado, Mimas, Rea + 142 más',
     orbitalVelocity: '9.7 km/s',
     atmosphere: [
-      { name: 'Hydrogen', pct: 96.3 },
-      { name: 'Helium', pct: 3.25 },
-      { name: 'Methane', pct: 0.45 },
-      { name: 'Other', pct: 0.05 },
+      { name: 'Hidrógeno', pct: 96.3 },
+      { name: 'Helio', pct: 3.25 },
+      { name: 'Metano', pct: 0.45 },
+      { name: 'Otros', pct: 0.05 },
     ],
     facts: [
-      { icon: '💍', text: 'Saturn\'s rings are made of chunks of ice and rock ranging from tiny grains to objects as large as houses.' },
-      { icon: '🌊', text: 'Saturn\'s moon Enceladus shoots geysers of water ice up to 500 km into space, hinting at a subsurface ocean.' },
-      { icon: '🪐', text: 'Saturn has the lowest density of any planet — it would float if placed in a large enough body of water.' },
-      { icon: '🌀', text: 'A hexagonal storm at Saturn\'s north pole spans 30,000 km across — big enough to fit 4 Earths inside.' },
+      { icon: '💍', text: 'Los anillos de Saturno están hechos de trozos de hielo y roca que van desde diminutos granos hasta objetos del tamaño de casas.' },
+      { icon: '🌊', text: 'La luna Encélado de Saturno dispara géiseres de hielo de agua a 500 km en el espacio, insinuando un océano subterráneo.' },
+      { icon: '🪐', text: 'Saturno tiene la densidad más baja de cualquier planeta — flotaría si se colocara en un cuerpo de agua suficientemente grande.' },
+      { icon: '🌀', text: 'Una tormenta hexagonal en el polo norte de Saturno abarca 30,000 km de ancho — suficientemente grande para 4 Tierras.' },
     ],
     missions: [
       { year: '1980', name: 'Voyager 1', agency: 'NASA' },
@@ -244,7 +244,7 @@ const PLANET_DATA = {
     radius: 1.6, distance: 94, orbitalSpeed: 0.0000119, rotationSpeed: -0.022,
     color: '#7DE8E8', emissive: '#003a3a',
     glowColor: '#5DADE2',
-    description: 'The tilted ice giant. Uranus rotates on its side with an axial tilt of 98 degrees — likely due to a massive collision billions of years ago. Its blue-green color comes from methane gas absorbing red light in its atmosphere.<br><br><b>🧬 Life Potential:</b> Uranus is generally considered inhospitable to life as we know it. The extreme cold (-224°C), lack of a solid surface, and high-pressure interior of water, methane, and ammonia ices make it a harsh environment. However, some astrobiologists speculate that deep within its atmosphere, where pressures and temperatures are more moderate, exotic <em>extremophile microorganisms</em> could hypothetically exist in water-ammonia cloud layers. Its moon <b>Ariel</b> shows signs of past geological activity, and <b>Miranda</b>\'s fractured surface hints at internal heating — but both remain long shots for life.',
+    description: 'El gigante de hielo inclinado. Urano rota de lado con una inclinación axial de 98 grados — probablemente debido a una colisión masiva hace miles de millones de años. Su color azul-verdoso proviene del gas metano que absorbe la luz roja en su atmósfera.<br><br><b>🧬 Potencial de vida:</b> Urano es generalmente considerado inhóspito para la vida tal como la conocemos. El frío extremo (-224°C), la falta de superficie sólida y el interior de alta presión de hielos de agua, metano y amoníaco lo convierten en un entorno hostil. Sin embargo, algunos astrobiólogos especulan que en lo profundo de su atmósfera, donde las presiones y temperaturas son más moderadas, <em>microorganismos extremófilos</em> exóticos podrían existir hipotéticamente en capas de nubes de agua y amoníaco. Su luna <b>Ariel</b> muestra signos de actividad geológica pasada, y la superficie fracturada de <b>Miranda</b> sugiere calentamiento interno — pero ambas siguen siendo posibilidades remotas para la vida.',
     diameter: '50,724 km', mass: '8.68 × 10²⁵ kg',
     distanceFromSun: '2.87 billion km', gravity: '8.87 m/s²',
     dayLength: '17.2 hours (retrograde)', yearLength: '84 Earth years',
@@ -252,16 +252,16 @@ const PLANET_DATA = {
     moons: 27, moonNames: 'Miranda, Ariel, Umbriel, Titania, Oberon',
     orbitalVelocity: '6.8 km/s',
     atmosphere: [
-      { name: 'Hydrogen', pct: 82.5 },
-      { name: 'Helium', pct: 15.2 },
-      { name: 'Methane', pct: 2.3 },
-      { name: 'Other', pct: 0 },
+      { name: 'Hidrógeno', pct: 82.5 },
+      { name: 'Helio', pct: 15.2 },
+      { name: 'Metano', pct: 2.3 },
+      { name: 'Otros', pct: 0 },
     ],
     facts: [
-      { icon: '↔', text: 'Uranus rotates almost completely on its side, so its poles receive more sunlight than its equator over its 84-year orbit.' },
-      { icon: '🌊', text: 'Uranus is an ice giant — it contains a slushy mix of water, methane, and ammonia ices beneath its atmosphere.' },
-      { icon: '💨', text: 'Wind speeds on Uranus can exceed 900 km/h, despite it being the coldest planet in the Solar System.' },
-      { icon: '💍', text: 'Uranus has 13 known rings that are very dark (nearly as black as coal) and relatively thin.' },
+      { icon: '↔', text: 'Urano rota casi completamente de lado, por lo que sus polos reciben más luz solar que su ecuador durante su órbita de 84 años.' },
+      { icon: '🌊', text: 'Urano es un gigante de hielo — contiene una mezcla semilíquida de hielos de agua, metano y amoníaco bajo su atmósfera.' },
+      { icon: '💨', text: 'Las velocidades del viento en Urano pueden superar los 900 km/h, a pesar de ser el planeta más frío del Sistema Solar.' },
+      { icon: '💍', text: 'Urano tiene 13 anillos conocidos que son muy oscuros (casi negros como el carbón) y relativamente delgados.' },
     ],
     missions: [
       { year: '1986', name: 'Voyager 2 (flyby)', agency: 'NASA' },
@@ -277,7 +277,7 @@ const PLANET_DATA = {
     radius: 1.55, distance: 112, orbitalSpeed: 0.000006, rotationSpeed: 0.023,
     color: '#3455DB', emissive: '#000a3a',
     glowColor: '#5D6CC0',
-    description: 'The windiest planet — Neptune\'s storms produce the fastest winds in the Solar System. Despite being so far from the Sun, Neptune radiates more heat internally than it receives, suggesting a warm interior.<br><br><b>🧬 Life Potential:</b> Neptune\'s frigid temperatures (-218°C), 2,100 km/h winds, and lack of solid surface make it extremely hostile. Yet its moon <b>Triton</b> — a captured Kuiper Belt object — is intriguing. Triton has active nitrogen geysers, a thin atmosphere, and possibly a subsurface ocean of liquid water kept warm by tidal heating from Neptune. If such an ocean exists, it could harbour <em>psychrophilic (cold-loving) microorganisms</em> similar to extremophiles found in Antarctica\'s subglacial lakes. Triton remains one of the most mysterious and underexplored worlds in the outer Solar System.',
+    description: 'El planeta más ventoso — las tormentas de Neptuno producen los vientos más rápidos del Sistema Solar. A pesar de estar tan lejos del Sol, Neptuno irradia más calor internamente del que recibe, sugiriendo un interior cálido.<br><br><b>🧬 Potencial de vida:</b> Las temperaturas gélidas de Neptuno (-218°C), los vientos de 2,100 km/h y la falta de superficie sólida lo hacen extremadamente hostil. Sin embargo, su luna <b>Tritón</b> — un objeto capturado del Cinturón de Kuiper — es intrigante. Tritón tiene géiseres activos de nitrógeno, una atmósfera delgada y posiblemente un océano subterráneo de agua líquida mantenido caliente por el calentamiento de marea de Neptuno. Si existe tal océano, podría albergar <em>microorganismos psicrófilos (amantes del frío)</em> similares a los extremófilos encontrados en los lagos subglaciales de la Antártida. Tritón sigue siendo uno de los mundos más misteriosos y menos explorados del Sistema Solar exterior.',
     diameter: '49,244 km', mass: '1.02 × 10²⁶ kg',
     distanceFromSun: '4.5 billion km', gravity: '11.15 m/s²',
     dayLength: '16.1 hours', yearLength: '164.8 Earth years',
@@ -285,16 +285,16 @@ const PLANET_DATA = {
     moons: 16, moonNames: 'Triton, Proteus, Nereid + 13 more',
     orbitalVelocity: '5.4 km/s',
     atmosphere: [
-      { name: 'Hydrogen', pct: 80 },
-      { name: 'Helium', pct: 19 },
-      { name: 'Methane', pct: 1.5 },
-      { name: 'Other', pct: 0 },
+      { name: 'Hidrógeno', pct: 80 },
+      { name: 'Helio', pct: 19 },
+      { name: 'Metano', pct: 1.5 },
+      { name: 'Otros', pct: 0 },
     ],
     facts: [
-      { icon: '💨', text: 'Neptune has the strongest winds in the Solar System — up to 2,100 km/h, over 6 times hurricane-force winds on Earth.' },
-      { icon: '🌀', text: 'The Great Dark Spot — a storm as large as Earth — was observed by Voyager 2 but disappeared by 1994.' },
-      { icon: '🔵', text: 'Neptune\'s moon Triton orbits in the opposite direction to Neptune\'s rotation — it was likely captured from the Kuiper Belt.' },
-      { icon: '🌊', text: 'Neptune was the first planet found through mathematical prediction rather than direct observation, in 1846.' },
+      { icon: '💨', text: 'Neptuno tiene los vientos más fuertes del Sistema Solar — hasta 2,100 km/h, más de 6 veces la fuerza de un huracán en la Tierra.' },
+      { icon: '🌀', text: 'La Gran Mancha Oscura — una tormenta del tamaño de la Tierra — fue observada por la Voyager 2 pero desapareció en 1994.' },
+      { icon: '🔵', text: 'La luna Tritón de Neptuno orbita en dirección opuesta a la rotación de Neptuno — probablemente fue capturada del Cinturón de Kuiper.' },
+      { icon: '🌊', text: 'Neptuno fue el primer planeta encontrado mediante predicción matemática en lugar de observación directa, en 1846.' },
     ],
     missions: [
       { year: '1989', name: 'Voyager 2 (flyby)', agency: 'NASA' },
@@ -309,7 +309,7 @@ const PLANET_DATA = {
     radius: 0.22, distance: 1.8, orbitalSpeed: 0, rotationSpeed: 0.001,
     color: '#cccccc', emissive: '#222222',
     glowColor: '#888888',
-    description: 'Earth\'s only natural satellite and the fifth largest moon in the Solar System. The Moon profoundly influences life on Earth — stabilising our planet\'s axial tilt, driving ocean tides, and lengthening Earth\'s days over billions of years. It is the only celestial body beyond Earth that humans have visited in person.<br><br><b>🧬 Life Potential:</b> The Moon has no atmosphere, no magnetic field, and is bombarded by solar radiation and micrometeorites. Surface temperatures swing from 127°C in sunlight to -173°C in shadow. These conditions are incompatible with known life. However, water ice has been confirmed in permanently shadowed craters at the poles (by LCROSS and Chandrayaan-1), which could be a resource for future human habitation rather than native biology.',
+    description: 'El único satélite natural de la Tierra y la quinta luna más grande del Sistema Solar. La Luna influye profundamente en la vida en la Tierra — estabilizando la inclinación axial de nuestro planeta, generando las mareas oceánicas y alargando los días terrestres durante miles de millones de años. Es el único cuerpo celeste más allá de la Tierra que los humanos han visitado en persona.<br><br><b>🧬 Potencial de vida:</b> La Luna no tiene atmósfera, ni campo magnético, y es bombardeada por radiación solar y micrometeoritos. Las temperaturas superficiales oscilan entre 127°C a la luz del sol y -173°C en la sombra. Estas condiciones son incompatibles con la vida conocida. Sin embargo, se ha confirmado hielo de agua en cráteres permanentemente sombreados en los polos (por LCROSS y Chandrayaan-1), que podría ser un recurso para futura habitación humana más que biología nativa.',
     diameter: '3,474 km', mass: '7.34 × 10²² kg',
     distanceFromSun: '384,400 km (from Earth)', gravity: '1.62 m/s²',
     dayLength: '29.5 Earth days', yearLength: '27.3 Earth days (orbit)',
@@ -317,17 +317,17 @@ const PLANET_DATA = {
     moons: 0, moonNames: 'N/A — the Moon is itself a satellite',
     orbitalVelocity: '1.022 km/s',
     atmosphere: [
-      { name: 'Helium', pct: 25 },
-      { name: 'Neon', pct: 25 },
-      { name: 'Hydrogen', pct: 23 },
-      { name: 'Argon', pct: 20 },
+      { name: 'Helio', pct: 25 },
+      { name: 'Neón', pct: 25 },
+      { name: 'Hidrógeno', pct: 23 },
+      { name: 'Argón', pct: 20 },
     ],
     facts: [
-      { icon: '🌕', text: 'The Moon is slowly drifting away from Earth at 3.8 cm per year due to tidal interactions.' },
-      { icon: '👣', text: '12 humans have walked on the Moon between 1969 and 1972 — the only humans to set foot on another world.' },
-      { icon: '🌑', text: 'The Moon is tidally locked — it always shows the same face to Earth. The far side was first photographed by Luna 3 in 1959.' },
-      { icon: '💧', text: 'NASA\'s LCROSS mission confirmed water ice in permanently shadowed craters at the south pole in 2009.' },
-      { icon: '🌊', text: 'The Moon\'s gravity is the primary driver of Earth\'s ocean tides, pulling water into bulges on opposite sides of the planet.' },
+      { icon: '🌕', text: 'La Luna se está alejando lentamente de la Tierra a 3.8 cm por año debido a interacciones de marea.' },
+      { icon: '👣', text: '12 humanos han caminado sobre la Luna entre 1969 y 1972 — los únicos humanos en pisar otro mundo.' },
+      { icon: '🌑', text: 'La Luna está bloqueada por marea — siempre muestra la misma cara a la Tierra. La cara oculta fue fotografiada por primera vez por Luna 3 en 1959.' },
+      { icon: '💧', text: 'La misión LCROSS de la NASA confirmó hielo de agua en cráteres permanentemente sombreados en el polo sur en 2009.' },
+      { icon: '🌊', text: 'La gravedad de la Luna es el principal motor de las mareas oceánicas de la Tierra, atrayendo agua hacia protuberancias en lados opuestos del planeta.' },
     ],
     missions: [
       { year: '1969', name: 'Apollo 11 (first landing)', agency: 'NASA' },
@@ -3261,7 +3261,7 @@ renderer.domElement.addEventListener('dblclick', e => {
         currentFocus = target;
         showPlanetPanel(target);
       });
-      unlockAchievement('wormhole', '🌀', 'WORMHOLE NAVIGATOR', 'Used wormhole travel for the first time');
+      unlockAchievement('wormhole', '🌀', 'Navegante de agujero de gusano', 'Usaste el viaje por agujero de gusano por primera vez');
     }
   }
 });
@@ -3271,15 +3271,15 @@ renderer.domElement.addEventListener('dblclick', e => {
 // ═══════════════════════════════════════════════════════
 let tourActive = false, tourStep = 0;
 const tourSteps = [
-  { target: 'Sun', title: '☆ THE SUN', text: 'Welcome aboard! Our journey begins at the heart of the solar system — a blazing thermonuclear furnace containing 99.86% of all mass here. Its surface is 5,500°C, but the core reaches 15 million degrees.' },
-  { target: 'Mercury', title: '☿ MERCURY', text: 'The closest planet to the Sun and the smallest. A day on Mercury lasts 59 Earth days, and temperatures swing from -180°C at night to 430°C during the day — the most extreme range of any planet.' },
-  { target: 'Venus', title: '♀ VENUS', text: 'Often called Earth\'s twin in size, but wildly different. Its thick CO₂ atmosphere traps heat so effectively that the surface reaches 462°C — hotter than Mercury despite being further from the Sun.' },
-  { target: 'Earth', title: '🌍 EARTH', text: 'Our pale blue dot. The only known world harboring life, with liquid water oceans covering 71% of the surface. Its magnetic field shields us from deadly solar radiation.' },
-  { target: 'Mars', title: '♂ MARS', text: 'The Red Planet, coloured by iron oxide dust. Home to Olympus Mons — the tallest mountain in the solar system at 21.9 km — and Valles Marineris, a canyon stretching 4,000 km.' },
-  { target: 'Jupiter', title: '♃ JUPITER', text: 'The king of planets. So massive that 1,300 Earths could fit inside it. The Great Red Spot is a storm that has raged for at least 400 years, wider than our entire planet.' },
-  { target: 'Saturn', title: '♄ SATURN', text: 'The jewel of the solar system. Its iconic rings are made of billions of chunks of ice and rock, ranging from dust-sized to house-sized. Saturn is so light it would float in water.' },
-  { target: 'Uranus', title: '♅ URANUS', text: 'The ice giant that rolls on its side — tilted 98° from its orbital plane, likely from an ancient collision. Its blue-green colour comes from methane in the atmosphere absorbing red light.' },
-  { target: 'Neptune', title: '♆ NEPTUNE', text: 'The furthest planet, discovered through mathematics before it was ever seen. Winds reach 2,100 km/h — the fastest in the solar system. It takes 165 years to orbit the Sun once.' },
+  { target: 'Sun', title: '☆ El Sol', text: 'Bienvenido! Nuestro viaje comienza en el corazón del sistema solar — un horno termonuclear que contiene el 99.86% de toda la masa. Su superficie está a 5,500°C, pero el núcleo alcanza 15 millones de grados.' },
+  { target: 'Mercury', title: '☿ Mercurio', text: 'El planeta más cercano al Sol y el más pequeño. Un día en Mercurio dura 59 días terrestres, y las temperaturas oscilan entre -180°C de noche y 430°C de día — el rango más extremo de cualquier planeta.' },
+  { target: 'Venus', title: '♀ Venus', text: 'A menudo llamado el gemelo de la Tierra en tamaño, pero salvajemente diferente. Su gruesa atmósfera de CO₂ atrapa el calor tan eficazmente que la superficie alcanza 462°C — más caliente que Mercurio a pesar de estar más lejos del Sol.' },
+  { target: 'Earth', title: '🌍 La Tierra', text: 'Nuestro pálido punto azul. El único mundo conocido que alberga vida, con océanos de agua líquida que cubren el 71% de la superficie. Su campo magnético nos protege de la radiación solar mortal.' },
+  { target: 'Mars', title: '♂ Marte', text: 'El Planeta Rojo, coloreado por el óxido de hierro. Hogar del Monte Olimpo — la montaña más alta del sistema solar con 21.9 km — y Valles Marineris, un cañón que se extiende por 4,000 km.' },
+  { target: 'Jupiter', title: '♃ Júpiter', text: 'El rey de los planetas. Tan masivo que 1,300 Tierras cabrían dentro. La Gran Mancha Roja es una tormenta que ha durado al menos 400 años, más ancha que nuestro planeta entero.' },
+  { target: 'Saturn', title: '♄ Saturno', text: 'La joya del sistema solar. Sus icónicos anillos están hechos de miles de millones de trozos de hielo y roca, desde tamaño polvo hasta tamaño casa. Saturno es tan ligero que flotaría en el agua.' },
+  { target: 'Uranus', title: '♅ Urano', text: 'El gigante de hielo que rueda de lado — inclinado 98° desde su plano orbital, probablemente por una colisión antigua. Su color azul-verdoso proviene del metano en la atmósfera que absorbe la luz roja.' },
+  { target: 'Neptune', title: '♆ Neptuno', text: 'El planeta más lejano, descubierto mediante matemáticas antes de ser visto. Los vientos alcanzan 2,100 km/h — los más rápidos del sistema solar. Tarda 165 años en orbitar el Sol una vez.' },
 ];
 
 window.startGuidedTour = function() {
@@ -3287,7 +3287,7 @@ window.startGuidedTour = function() {
   tourActive = true; tourStep = 0;
   document.getElementById('tour-btn').classList.add('active');
   playTourStep();
-  unlockAchievement('tour', '🎙', 'COSMIC GUIDE', 'Started the guided tour of the solar system');
+  unlockAchievement('tour', '🎙', 'Guía cósmico', 'Iniciaste el tour guiado del sistema solar');
 };
 
 window.endTour = function() {
@@ -3301,7 +3301,7 @@ window.nextTourStep = function() {
   tourStep++;
   if (tourStep >= tourSteps.length) {
     endTour();
-    unlockAchievement('grandtour', '🪐', 'GRAND TOUR COMPLETE', 'Visited every planet on the guided tour');
+    unlockAchievement('grandtour', '🪐', 'Gran tour completado', 'Visitaste todos los planetas en el tour guiado');
     return;
   }
   playTourStep();
@@ -3401,7 +3401,7 @@ window.takePhoto = function() {
   };
   img.src = dataURL;
 
-  unlockAchievement('photographer', '📷', 'SPACE PHOTOGRAPHER', 'Captured your first cosmic screenshot');
+  unlockAchievement('photographer', '📷', 'Fotógrafo espacial', 'Capturaste tu primera captura cósmica');
 };
 
 // ═══════════════════════════════════════════════════════
@@ -3453,20 +3453,20 @@ function showNextAchievement() {
 function trackVisit(name) {
   visitedPlanets.add(name);
   // First visit
-  if (visitedPlanets.size === 1) unlockAchievement('explorer', '🔭', 'FIRST CONTACT', 'Explored your first celestial body');
+  if (visitedPlanets.size === 1) unlockAchievement('explorer', '🔭', 'Primer contacto', 'Exploraste tu primer cuerpo celeste');
   // All inner planets
   const inner = ['Mercury','Venus','Earth','Mars'];
-  if (inner.every(p => visitedPlanets.has(p))) unlockAchievement('inner', '🪨', 'INNER SYSTEM', 'Visited all rocky planets');
+  if (inner.every(p => visitedPlanets.has(p))) unlockAchievement('inner', '🪨', 'Sistema interior', 'Visitaste todos los planetas rocosos');
   // All gas giants
   const outer = ['Jupiter','Saturn','Uranus','Neptune'];
-  if (outer.every(p => visitedPlanets.has(p))) unlockAchievement('outer', '⛽', 'GAS GIANT HUNTER', 'Visited all gas and ice giants');
+  if (outer.every(p => visitedPlanets.has(p))) unlockAchievement('outer', '⛽', 'Cazador de gigantes gaseosos', 'Visitaste todos los gigantes de gas y hielo');
   // All planets + Sun
-  if (visitedPlanets.size >= 9) unlockAchievement('complete', '🌟', 'COSMIC COMPLETIONIST', 'Visited every body in the solar system');
+  if (visitedPlanets.size >= 9) unlockAchievement('complete', '🌟', 'Completista cósmico', 'Visitaste todos los cuerpos del sistema solar');
   // Individual planet specials
-  if (name === 'Saturn') unlockAchievement('saturn', '💍', 'LORD OF THE RINGS', 'Visited Saturn and its magnificent rings');
-  if (name === 'Earth') unlockAchievement('earth', '🏠', 'HOME SWEET HOME', 'Visited our pale blue dot');
-  if (name === 'Jupiter') unlockAchievement('jupiter', '👁', 'FACE THE STORM', 'Witnessed Jupiter\'s Great Red Spot');
-  if (name === 'Sun') unlockAchievement('sun', '☀', 'TOO CLOSE TO THE SUN', 'Dared to approach the Sun itself');
+  if (name === 'Saturn') unlockAchievement('saturn', '💍', 'Señor de los anillos', 'Visitaste Saturno y sus magníficos anillos');
+  if (name === 'Earth') unlockAchievement('earth', '🏠', 'Hogar, dulce hogar', 'Visitaste nuestro pálido punto azul');
+  if (name === 'Jupiter') unlockAchievement('jupiter', '👁', 'Enfrenta la tormenta', 'Presenciaste la Gran Mancha Roja de Júpiter');
+  if (name === 'Sun') unlockAchievement('sun', '☀', 'Demasiado cerca del sol', 'Te atreviste a acercarte al Sol');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -3499,7 +3499,7 @@ document.addEventListener('keydown', e => {
 });
 
 function activateKonamiEgg() {
-  unlockAchievement('konami', '🕹', 'RETRO GAMER', 'Entered the Konami Code — a classic!');
+  unlockAchievement('konami', '🕹', 'Jugador retro', 'Entered the Konami Code — a classic!');
   // Rainbow mode: all planets emit rainbow glow for 10 seconds
   const origColors = {};
   Object.keys(planetObjects).forEach(name => {
@@ -3533,7 +3533,7 @@ function activateKonamiEgg() {
 }
 
 function activateMurphEgg() {
-  unlockAchievement('murph', '⏳', 'DON\'T LET ME LEAVE, MURPH!', 'Love transcends dimensions of time and space');
+  unlockAchievement('murph', '⏳', 'DON\'T LET ME LEAVE, MURPH!', 'El amor trasciende dimensiones de tiempo y espacio');
   // Wormhole to Earth with dramatic effect
   triggerWormhole('Earth', () => {
     const po = planetObjects['Earth'];
@@ -3548,7 +3548,7 @@ function activateMurphEgg() {
 }
 
 function activateTarsEgg() {
-  unlockAchievement('tars', '🤖', 'HUMOR 75%', 'TARS online. Honesty parameter at 90%.');
+  unlockAchievement('tars', '🤖', 'Humor 75%', 'TARS en línea. Parámetro de honestidad al 90%.');
   // Display TARS message
   const msg = document.createElement('div');
   msg.style.cssText = 'position:fixed;bottom:8rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);border:1px solid rgba(79,195,247,0.4);border-radius:12px;padding:1rem 2rem;z-index:45;font-family:Orbitron,sans-serif;font-size:0.8rem;color:#4fc3f7;letter-spacing:2px;';
@@ -3584,7 +3584,7 @@ window.toggleScreensaver = function() {
     if (shipMode) toggleShipMode();
     screensaverIdx = 0;
     doScreensaverStep();
-    unlockAchievement('screensaver', '🎬', 'SIT BACK & RELAX', 'Activated the autopilot screensaver mode');
+    unlockAchievement('screensaver', '🎬', 'Siéntate y relájate', 'Activaste el modo salvapantallas automático');
   } else {
     btn.classList.remove('active');
     badge.classList.remove('active');
@@ -4042,20 +4042,20 @@ const loaderStepsList = document.getElementById('loader-steps-list');
 })();
 
 const buildQueue = [
-  { label: 'DOWNLOADING SATELLITE IMAGERY...', fn: () => loadRealTextures() },
-  { label: 'PAINTING THE COSMOS...', fn: () => buildNebulaBackground() },
-  { label: 'IGNITING THE SUN...', fn: () => buildSun() },
-  { label: 'GENERATING MERCURY...', fn: () => buildPlanet('Mercury') },
-  { label: 'GENERATING VENUS...', fn: () => buildPlanet('Venus') },
-  { label: 'GENERATING EARTH...', fn: () => buildPlanet('Earth') },
-  { label: 'GENERATING MARS...', fn: () => buildPlanet('Mars') },
-  { label: 'GENERATING JUPITER...', fn: () => buildPlanet('Jupiter') },
-  { label: 'GENERATING SATURN...', fn: () => buildPlanet('Saturn') },
-  { label: 'GENERATING URANUS...', fn: () => buildPlanet('Uranus') },
-  { label: 'GENERATING NEPTUNE...', fn: () => buildPlanet('Neptune') },
-  { label: 'SCATTERING ASTEROIDS...', fn: () => buildAsteroidBelt() },
-  { label: 'SCATTERING KUIPER BELT...', fn: () => buildKuiperBelt() },
-  { label: 'LAUNCHING COMET...', fn: () => buildComet() },
+  { label: 'Descargando imágenes satelitales...', fn: () => loadRealTextures() },
+  { label: 'Pintando el cosmos...', fn: () => buildNebulaBackground() },
+  { label: 'Encendiendo el sol...', fn: () => buildSun() },
+  { label: 'Generando mercurio...', fn: () => buildPlanet('Mercury') },
+  { label: 'Generando venus...', fn: () => buildPlanet('Venus') },
+  { label: 'Generando la tierra...', fn: () => buildPlanet('Earth') },
+  { label: 'Generando marte...', fn: () => buildPlanet('Mars') },
+  { label: 'Generando júpiter...', fn: () => buildPlanet('Jupiter') },
+  { label: 'Generando saturno...', fn: () => buildPlanet('Saturn') },
+  { label: 'Generando urano...', fn: () => buildPlanet('Uranus') },
+  { label: 'Generando neptuno...', fn: () => buildPlanet('Neptune') },
+  { label: 'Sembrando asteroides...', fn: () => buildAsteroidBelt() },
+  { label: 'Sembrando el cinturón de kuiper...', fn: () => buildKuiperBelt() },
+  { label: 'Lanzando cometa...', fn: () => buildComet() },
 ];
 
 // Populate step list in loading screen
@@ -4198,7 +4198,7 @@ function cinematicIntro() {
 
 // Kick off deferred loading after the loading screen renders
 requestAnimationFrame(() => {
-  loaderStatus.textContent = 'INITIALIZING SYSTEMS...';
+  loaderStatus.textContent = 'Inicializando sistemas...';
   setTimeout(processNext, 100);
 });
 
@@ -4261,13 +4261,13 @@ requestAnimationFrame(() => {
 
   // === LEVEL / MISSION SYSTEM ===
   const LEVELS = [
-    { name: 'ZONE 1 — INNER BELT',      distKm: 10,  asteroidRate: 1.0, desc: 'Light debris field',
+    { name: 'ZONE 1 — INNER BELT',      distKm: 10,  asteroidRate: 1.0, desc: 'Campo de escombros ligero',
       fogColor: 0x000a1a, ambientColor: 0x223355, sunColor: 0xaaccff, tunnelColor: 0x1144aa,
       asteroidTypes: ['rocky','dark'], starRate: 4.5, bloomStrength: 1.5 },
-    { name: 'ZONE 2 — KESSLER FIELD',    distKm: 15,  asteroidRate: 1.4, desc: 'Asteroid density increasing',
+    { name: 'ZONE 2 — KESSLER FIELD',    distKm: 15,  asteroidRate: 1.4, desc: 'Densidad de asteroides aumentando',
       fogColor: 0x0a0800, ambientColor: 0x443322, sunColor: 0xffcc88, tunnelColor: 0xaa6622,
       asteroidTypes: ['rocky','metallic','dark'], starRate: 4.0, bloomStrength: 1.6 },
-    { name: 'ZONE 3 — SHATTERED CORE',   distKm: 20,  asteroidRate: 1.8, desc: 'Massive rock formations ahead',
+    { name: 'ZONE 3 — SHATTERED CORE',   distKm: 20,  asteroidRate: 1.8, desc: 'Formaciones rocosas masivas adelante',
       fogColor: 0x0a0005, ambientColor: 0x442233, sunColor: 0xff6644, tunnelColor: 0xaa2222,
       asteroidTypes: ['volcanic','metallic','rocky'], starRate: 3.5, bloomStrength: 1.8 },
     { name: 'ZONE 4 — DEBRIS STORM',     distKm: 25,  asteroidRate: 2.3, desc: 'Critical density — stay sharp!',
@@ -5438,8 +5438,8 @@ requestAnimationFrame(() => {
     document.getElementById('gvic-high').textContent = 'HIGH SCORE: ' + gHighScore.toLocaleString();
     gameVictoryScr.classList.add('active');
     if (typeof unlockAchievement === 'function') {
-      unlockAchievement('asteroid_escape_win', '🏅 Commander', 'Completed all 5 zones in Asteroid Escape');
-      if (gDifficulty >= 2.2) unlockAchievement('insane_winner', '👑 Legendary Pilot', 'Won on INSANE difficulty');
+      unlockAchievement('asteroid_escape_win', '🏅 Commander', 'Completaste todas las 5 zonas en Asteroide Escape');
+      if (gDifficulty >= 2.2) unlockAchievement('insane_winner', '👑 Legendary Pilot', 'Ganaste en dificultad Infernal');
     }
   }
 
@@ -5697,7 +5697,7 @@ requestAnimationFrame(() => {
     document.getElementById('game-over-title').textContent = 'MISSION FAILED';
     gameFinalScore.textContent = finalScore.toLocaleString();
     gameFinalDist.textContent = 'DISTANCE: ' + (gDistance/1000).toFixed(2) + ' KM';
-    gameFinalLevel.textContent = 'REACHED: ' + (LEVELS[gLevel] ? LEVELS[gLevel].name : 'ZONE ' + (gLevel+1));
+    gameFinalLevel.textContent = 'Alcanzaste: ' + (LEVELS[gLevel] ? LEVELS[gLevel].name : 'ZONE ' + (gLevel+1));
     gameHighScore.textContent = 'HIGH SCORE: ' + gHighScore.toLocaleString();
 
     gameHud.classList.remove('active');
@@ -5706,11 +5706,11 @@ requestAnimationFrame(() => {
 
     // achievement check
     if (typeof unlockAchievement === 'function') {
-      unlockAchievement('asteroid_escape', '🪨 Asteroid Dodger', 'Played the Asteroid Escape game');
-      if (gDistance > 50000) unlockAchievement('deep_space', '🌌 Deep Space', 'Traveled 50 KM in Asteroid Escape');
-      if (gDifficulty >= 2.2 && gDistance > 20000) unlockAchievement('insane_pilot', '💀 Insane Pilot', 'Survived 20 KM on INSANE');
-      if (gComboCount >= 5) unlockAchievement('near_miss_master', '😎 Near Miss Master', 'Got 5x near miss combo');
-      if (finalScore >= 10000) unlockAchievement('score_10k', '🏆 Ten Thousand', 'Scored 10,000+ points in Asteroid Escape');
+      unlockAchievement('asteroid_escape', '🪨 Asteroid Dodger', 'Jugaste al juego Asteroide Escape');
+      if (gDistance > 50000) unlockAchievement('deep_space', '🌌 Deep Space', 'Viajaste 50 km en Asteroide Escape');
+      if (gDifficulty >= 2.2 && gDistance > 20000) unlockAchievement('insane_pilot', '💀 Insane Pilot', 'Sobreviviste 20 km en Infernal');
+      if (gComboCount >= 5) unlockAchievement('near_miss_master', '😎 Near Miss Master', 'Conseguiste combo de 5 casi impactos');
+      if (finalScore >= 10000) unlockAchievement('score_10k', '🏆 Ten Thousand', 'Obtuviste 10,000+ puntos en Asteroide Escape');
     }
   }
 
