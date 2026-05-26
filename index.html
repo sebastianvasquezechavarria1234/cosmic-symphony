@@ -247,6 +247,7 @@
   <button class="nav-btn" onclick="focusPlanet('Uranus')">Uranus</button>
   <button class="nav-btn" onclick="focusPlanet('Neptune')">Neptune</button>
   <button class="nav-btn" id="btn-reset" onclick="resetView()">↺ Reiniciar</button>
+  <div class="nav-indicator"></div>
 </div>
 
 <!-- PLANET PANEL -->
@@ -505,6 +506,81 @@
   window.__lucideRefresh = function() {
     if (typeof lucide !== 'undefined') lucide.createIcons();
   };
+
+  // Sliding Planet Nav Highlight Indicator
+  document.addEventListener('DOMContentLoaded', function() {
+    const planetNav = document.getElementById('planet-nav');
+    const indicator = planetNav.querySelector('.nav-indicator');
+    const navBtns = planetNav.querySelectorAll('.nav-btn');
+
+    function updateIndicator(targetElement, isSolid) {
+      if (!targetElement) {
+        indicator.style.opacity = '0';
+        return;
+      }
+      const rect = targetElement.getBoundingClientRect();
+      const parentRect = planetNav.getBoundingClientRect();
+      
+      const left = rect.left - parentRect.left + planetNav.scrollLeft;
+      const top = rect.top - parentRect.top;
+      
+      indicator.style.left = `${left}px`;
+      indicator.style.width = `${rect.width}px`;
+      indicator.style.top = `${top}px`;
+      indicator.style.height = `${rect.height}px`;
+      indicator.style.opacity = '1';
+      
+      if (isSolid) {
+        indicator.classList.add('is-active');
+      } else {
+        indicator.classList.remove('is-active');
+      }
+    }
+
+    function updateToActive() {
+      const activeBtn = planetNav.querySelector('.nav-btn.active');
+      if (activeBtn) {
+        updateIndicator(activeBtn, true);
+      } else {
+        updateIndicator(null);
+      }
+    }
+
+    // Add event listeners for hover and click
+    navBtns.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        const isActive = btn.classList.contains('active');
+        updateIndicator(btn, isActive);
+      });
+      btn.addEventListener('mouseleave', () => {
+        updateToActive();
+      });
+      btn.addEventListener('click', () => {
+        // Delay slightly to allow the active class to be swapped by main script.js
+        setTimeout(updateToActive, 50);
+      });
+    });
+
+    // Handle scroll events to maintain indicator position if container scrolls
+    planetNav.addEventListener('scroll', updateToActive);
+
+    // Watch for class changes (active status swaps) using MutationObserver
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.attributeName === 'class') {
+          updateToActive();
+        }
+      });
+    });
+
+    navBtns.forEach(btn => {
+      observer.observe(btn, { attributes: true });
+    });
+
+    // Set initial position
+    setTimeout(updateToActive, 300);
+    window.addEventListener('resize', updateToActive);
+  });
 </script>
 </body>
 </html>

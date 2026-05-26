@@ -516,28 +516,77 @@ p {
   flex-wrap: wrap;
 }
 
+#planet-nav {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(8, 8, 28, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  z-index: 10;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  max-width: 90vw;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+#planet-nav::-webkit-scrollbar {
+  display: none;
+}
+
 .nav-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: none;
+  border-radius: 100px;
+  padding: 0.45rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: color 0.25s, transform 0.2s;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  outline: none;
 }
 
-.nav-btn:hover,
-.nav-btn.active {
-  background: rgba(79, 195, 247, 0.15);
-  border-color: rgba(79, 195, 247, 0.5);
-  color: #4fc3f7;
-  box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
+.nav-btn:hover {
+  color: #fff;
 }
 
 .nav-btn.active {
-  font-weight: 600;
+  color: #000;
+  font-weight: 400;
+}
+
+.nav-indicator {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  z-index: 1;
+  transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              top 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.2s ease,
+              background-color 0.25s ease;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.nav-indicator.is-active {
+  background: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
 /* ── TOOLTIP ── */
@@ -1256,24 +1305,7 @@ p {
   }
 }
 
-/* ── PLANET NAV BUTTON ICONS ── */
-.nav-btn {
-  position: relative;
-  overflow: hidden;
-}
 
-.nav-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 120%, rgba(79, 195, 247, 0.2), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.nav-btn:hover::after {
-  opacity: 1;
-}
 
 /* ── SPACESHIP HUD ── */
 #ship-hud {
