@@ -249,6 +249,7 @@ canvas {
   object-fit: cover;
   z-index: 0;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .welcome-content {
@@ -259,6 +260,7 @@ canvas {
   max-width: 520px;
   padding: 2rem;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .welcome-bg-overlay {
@@ -273,6 +275,7 @@ canvas {
   inset: 0;
   overflow: hidden;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .welcome-bg-stars {
