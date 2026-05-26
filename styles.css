@@ -228,7 +228,7 @@ canvas {
 #welcome-screen {
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 40%, rgba(15, 10, 50, 0.98) 0%, rgba(0, 0, 0, 0.99) 100%);
+  background: #000;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -249,204 +249,170 @@ canvas {
 
 .welcome-star {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: #fff;
+  width: 1px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  animation: welcomeTwinkle 4s ease-in-out infinite;
-}
-
-@keyframes welcomeTwinkle {
-
-  0%,
-  100% {
-    opacity: 0.1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.8;
-    transform: scale(1.5);
-  }
 }
 
 .welcome-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  animation: welcomeFadeIn 1s ease-out;
-  max-width: 600px;
+  animation: welcomeFadeIn 0.8s ease-out;
+  max-width: 520px;
   padding: 2rem;
 }
 
 @keyframes welcomeFadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px) scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .welcome-icon {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  animation: welcomeFloat 3s ease-in-out infinite;
-}
-
-@keyframes welcomeFloat {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.3;
+  letter-spacing: 6px;
 }
 
 .welcome-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 300;
+  font-family: 'Exo 2', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 200;
   color: #fff;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
 }
 
 .welcome-subtitle {
-  font-size: 0.85rem;
-  letter-spacing: 4px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 3rem;
+  font-weight: 400;
 }
 
 .welcome-features {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  margin-bottom: 2.5rem;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
   text-align: left;
 }
 
 .welcome-feature {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
+  padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  transition: all 0.3s;
+  gap: 0.75rem;
+  transition: all 0.2s;
+  border-radius: 8px;
 }
 
 .welcome-feature:hover {
-  border-color: rgba(79, 195, 247, 0.3);
-  background: rgba(79, 195, 247, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .welcome-feature-icon {
-  font-size: 1.3rem;
+  font-size: 1rem;
   flex-shrink: 0;
+  opacity: 0.5;
 }
 
 .welcome-feature-text {
   font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.35);
   line-height: 1.4;
 }
 
 .welcome-feature-text strong {
   display: block;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.78rem;
-  margin-bottom: 2px;
+  font-weight: 500;
+  margin-bottom: 1px;
 }
 
 .welcome-controls {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
 .welcome-key {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.2);
 }
 
 .welcome-kbd {
   display: inline-block;
-  padding: 0.2rem 0.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.15rem 0.4rem;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 4px;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.4);
+  min-width: 1.4rem;
+  text-align: center;
 }
 
 .welcome-launch-btn {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 3rem;
-  background: linear-gradient(135deg, rgba(79, 195, 247, 0.15), rgba(171, 71, 188, 0.15));
-  border: 1px solid rgba(79, 195, 247, 0.4);
-  color: #4fc3f7;
-  border-radius: 40px;
+  gap: 0.6rem;
+  padding: 0.8rem 2rem;
+  background: #fff;
+  border: none;
+  color: #000;
+  border-radius: 100px;
   cursor: pointer;
-  transition: all 0.4s;
-  position: relative;
-  overflow: hidden;
-  animation: welcomeBtnPulse 2.5s ease-in-out infinite;
+  transition: all 0.2s;
+  letter-spacing: -0.01em;
+}
+
+.welcome-launch-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #000;
 }
 
 .welcome-launch-btn:hover {
-  background: linear-gradient(135deg, rgba(79, 195, 247, 0.3), rgba(171, 71, 188, 0.3));
-  border-color: #4fc3f7;
-  box-shadow: 0 0 30px rgba(79, 195, 247, 0.3), 0 0 60px rgba(79, 195, 247, 0.1);
-  transform: scale(1.05);
-  color: #fff;
-}
-
-@keyframes welcomeBtnPulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 15px rgba(79, 195, 247, 0.15);
-  }
-
-  50% {
-    box-shadow: 0 0 30px rgba(79, 195, 247, 0.3), 0 0 60px rgba(79, 195, 247, 0.1);
-  }
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(1.02);
 }
 
 .welcome-footer {
-  margin-top: 1.5rem;
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.2);
-  letter-spacing: 2px;
+  margin-top: 2.5rem;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.15);
+  letter-spacing: 0.5px;
 }
 
 .welcome-footer a {
-  color: rgba(79, 195, 247, 0.5);
+  color: rgba(255, 255, 255, 0.3);
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 .welcome-footer a:hover {
-  color: #4fc3f7;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @media (max-width: 600px) {
@@ -455,7 +421,12 @@ canvas {
   }
 
   .welcome-controls {
-    gap: 0.5rem;
+    gap: 0.75rem;
+  }
+
+  .welcome-launch-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
   }
 }
 
