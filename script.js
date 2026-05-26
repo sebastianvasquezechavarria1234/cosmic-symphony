@@ -4151,17 +4151,17 @@ function showWelcomeScreen() {
   };
 
   const animate = () => {
-    currentX += (targetX - currentX) * 0.04;
-    currentY += (targetY - currentY) * 0.04;
+    currentX += (targetX - currentX) * 0.06;
+    currentY += (targetY - currentY) * 0.06;
 
     if (video) {
-      video.style.transform = `translate3d(${currentX * -25}px, ${currentY * -25}px, 0)`;
+      video.style.transform = `translate3d(${currentX * -60}px, ${currentY * -60}px, 0)`;
     }
     if (content) {
-      content.style.transform = `translate3d(${currentX * -15}px, ${currentY * -15}px, 0)`;
+      content.style.transform = `translate3d(${currentX * -40}px, ${currentY * -40}px, 0)`;
     }
     if (stars) {
-      stars.style.transform = `translate3d(${currentX * -35}px, ${currentY * -35}px, 0)`;
+      stars.style.transform = `translate3d(${currentX * -80}px, ${currentY * -80}px, 0)`;
     }
 
     rafId = requestAnimationFrame(animate);
