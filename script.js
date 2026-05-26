@@ -4195,14 +4195,15 @@ function launchExperience() {
   const ws = document.getElementById('welcome-screen');
   if (ws) {
     if (ws._parallaxCleanup) ws._parallaxCleanup();
-    ws.style.transition = 'opacity 0.8s ease';
+    ws.style.transition = 'transform 0.9s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.9s ease, filter 0.9s ease';
+    ws.style.transform = 'scale(1.15) translateY(-40px) rotateX(8deg)';
     ws.style.opacity = '0';
+    ws.style.filter = 'blur(12px)';
     setTimeout(() => {
       ws.remove();
       cinematicIntro();
-      // Auto-start music
       setTimeout(() => { if (!musicPlaying && typeof toggleMusic === 'function') toggleMusic(); }, 800);
-    }, 800);
+    }, 900);
   }
 }
 
