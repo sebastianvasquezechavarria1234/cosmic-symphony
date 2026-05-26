@@ -249,7 +249,16 @@ canvas {
   object-fit: cover;
   z-index: 0;
   will-change: transform;
-  transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  animation: welcomeFadeIn 0.8s ease-out;
+  max-width: 520px;
+  padding: 2rem;
+  will-change: transform;
 }
 
 .welcome-bg-overlay {
@@ -264,25 +273,14 @@ canvas {
   inset: 0;
   overflow: hidden;
   will-change: transform;
-  transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.welcome-star {
+.welcome-bg-stars {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-}
-
-.welcome-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  animation: welcomeFadeIn 0.8s ease-out;
-  max-width: 520px;
-  padding: 2rem;
+  inset: 0;
+  overflow: hidden;
   will-change: transform;
+
   transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 

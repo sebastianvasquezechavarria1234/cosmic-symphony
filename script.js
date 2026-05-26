@@ -4135,32 +4135,44 @@ function showWelcomeScreen() {
     }
   }
 
-  // Parallax effect — elements move opposite to cursor
+  // Parallax effect — smooth lerp-based cursor tracking
   const video = document.querySelector('.welcome-bg-video');
   const content = document.querySelector('.welcome-content');
   const stars = document.querySelector('.welcome-bg-stars');
 
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+  let rafId = null;
+
   const onMove = (e) => {
     const rect = ws.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    targetX = (e.clientX - rect.left) / rect.width - 0.5;
+    targetY = (e.clientY - rect.top) / rect.height - 0.5;
+  };
+
+  const animate = () => {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
 
     if (video) {
-      video.style.transform = `translate(${x * -8}px, ${y * -8}px)`;
+      video.style.transform = `translate(${currentX * -25}px, ${currentY * -25}px)`;
     }
     if (content) {
-      content.style.transform = `translate(${x * -5}px, ${y * -5}px)`;
+      content.style.transform = `translate(${currentX * -15}px, ${currentY * -15}px)`;
     }
     if (stars) {
-      stars.style.transform = `translate(${x * -12}px, ${y * -12}px)`;
+      stars.style.transform = `translate(${currentX * -35}px, ${currentY * -35}px)`;
     }
+
+    rafId = requestAnimationFrame(animate);
   };
 
   ws.addEventListener('mousemove', onMove);
+  animate();
 
-  // Store cleanup function on the element so it can be removed later
   ws._parallaxCleanup = () => {
     ws.removeEventListener('mousemove', onMove);
+    if (rafId) cancelAnimationFrame(rafId);
     if (video) video.style.transform = '';
     if (content) content.style.transform = '';
     if (stars) stars.style.transform = '';
