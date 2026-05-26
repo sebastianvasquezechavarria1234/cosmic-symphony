@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
@@ -89,7 +89,6 @@ canvas {
   letter-spacing: 4px;
   color: rgba(255, 255, 255, 0.3);
   margin-bottom: 2rem;
-  text-transform: uppercase;
   position: relative;
   z-index: 2;
 }
@@ -328,7 +327,6 @@ canvas {
   letter-spacing: 4px;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 2.5rem;
-  text-transform: uppercase;
 }
 
 .welcome-features {
@@ -716,7 +714,6 @@ canvas {
   letter-spacing: 3px;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 1.2rem;
-  text-transform: uppercase;
 }
 
 .panel-desc {
@@ -762,7 +759,6 @@ canvas {
   letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.35);
   margin-bottom: 0.3rem;
-  text-transform: uppercase;
 }
 
 .stat-value {
@@ -784,7 +780,6 @@ canvas {
   font-size: 0.7rem;
   letter-spacing: 3px;
   color: rgba(255, 255, 255, 0.35);
-  text-transform: uppercase;
   margin-bottom: 0.8rem;
   margin-top: 0.5rem;
   display: flex;
@@ -1469,7 +1464,6 @@ canvas {
   font-size: clamp(0.6rem, 1.5vw, 0.9rem);
   color: #4fc3f7;
   letter-spacing: 0.4em;
-  text-transform: uppercase;
   margin-top: 0.2rem;
   opacity: 0.8;
 }
@@ -1516,7 +1510,6 @@ canvas {
   font-size: clamp(0.7rem, 1.5vw, 1rem);
   color: rgba(79, 195, 247, 0.7);
   letter-spacing: 0.5em;
-  text-transform: uppercase;
   pointer-events: none;
   display: none;
 }
@@ -2518,7 +2511,6 @@ canvas {
   letter-spacing: 3px;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 1.2rem;
-  text-transform: uppercase;
 }
 
 .about-bio {
@@ -3409,5 +3401,5 @@ canvas {
 .moon-count::first-letter,
 .temp-value::first-letter,
 .wh-dest-name::first-letter {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Great Vibes', cursive;
 }
