@@ -1059,6 +1059,28 @@ renderer.domElement.style.opacity = '0';
 renderer.domElement.style.filter = 'blur(16px)';
 renderer.domElement.style.willChange = 'transform, opacity, filter';
 
+// UI overlays start hidden
+const uiOverlays = [
+  document.getElementById('header'),
+  document.getElementById('controls-panel'),
+  document.getElementById('hint'),
+  document.getElementById('planet-nav'),
+  document.getElementById('controls-hint'),
+  document.getElementById('planet-panel'),
+  document.getElementById('about-btn'),
+  document.getElementById('header-game-btn'),
+  document.getElementById('zoom-indicator'),
+  document.getElementById('ship-hud'),
+  document.getElementById('minimap'),
+];
+uiOverlays.forEach(el => {
+  if (el) {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.6s ease';
+    el.style.pointerEvents = 'none';
+  }
+});
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.005, 5000);
 camera.position.set(0, 40, 120);
@@ -4212,6 +4234,15 @@ function launchExperience() {
       canvas.style.filter = 'blur(0)';
       cinematicIntro();
       setTimeout(() => { if (!musicPlaying && typeof toggleMusic === 'function') toggleMusic(); }, 800);
+      // Reveal UI overlays after entrance animation
+      setTimeout(() => {
+        uiOverlays.forEach(el => {
+          if (el) {
+            el.style.opacity = '1';
+            el.style.pointerEvents = '';
+          }
+        });
+      }, 1200);
     }, 600);
   }
 }
