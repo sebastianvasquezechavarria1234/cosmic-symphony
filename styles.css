@@ -19,8 +19,21 @@ body {
   user-select: none;
 }
 
+
+
 canvas {
   display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+a,
+p {
+  font-size: 18px;
+  opacity: .8;
+  font-weight: 200;
 }
 
 /* ── LOADING ── */
@@ -70,7 +83,6 @@ canvas {
 }
 
 .loader-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: clamp(1.5rem, 4vw, 3rem);
   font-weight: 900;
   background: linear-gradient(90deg, #4fc3f7, #ab47bc, #ef5350, #ff8f00);
@@ -138,7 +150,6 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: #4fc3f7;
@@ -162,7 +173,6 @@ canvas {
 }
 
 .loader-step-counter {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.65rem;
   color: rgba(255, 255, 255, 0.25);
   letter-spacing: 2px;
@@ -258,13 +268,15 @@ canvas {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.95) 50%, #000 100%);
+  background: radial-gradient(ellipse at center, transparent 20%, rgba(0, 0, 0, 0.95) 50%, #000 100%);
   pointer-events: none;
-  transition: background 0.8s ease-out; /* Añadimos una transición suave */
+  transition: background 0.8s ease-out;
+  /* Añadimos una transición suave */
 }
 
 .welcome-bg-gradient:hover {
-  background: transparent; /* El fondo se vuelve transparente al pasar el cursor */
+  background: transparent;
+  /* El fondo se vuelve transparente al pasar el cursor */
 }
 
 .welcome-spotlight {
@@ -317,7 +329,6 @@ canvas {
 }
 
 .welcome-title {
-  font-family: 'Exo 2', sans-serif;
   font-size: clamp(4.5rem, 10vw, 7rem);
   font-weight: 200;
   color: #fff;
@@ -357,7 +368,6 @@ canvas {
   padding: 0.15rem 0.4rem;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 4px;
-  font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.6rem;
   color: rgba(255, 255, 255, 0.4);
   min-width: 1.4rem;
@@ -365,7 +375,6 @@ canvas {
 }
 
 .welcome-launch-btn {
-  font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
   display: inline-flex;
@@ -440,7 +449,6 @@ canvas {
 }
 
 .site-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: clamp(1rem, 2.5vw, 1.6rem);
   font-weight: 900;
   letter-spacing: 4px;
@@ -513,7 +521,6 @@ canvas {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
   padding: 0.4rem 0.9rem;
-  font-family: 'Exo 2', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.7);
@@ -661,7 +668,6 @@ canvas {
 }
 
 .panel-name {
-  font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 3px;
@@ -724,7 +730,6 @@ canvas {
 }
 
 .stat-value {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--planet-color, #4fc3f7);
@@ -734,11 +739,9 @@ canvas {
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.4);
   font-weight: 400;
-  font-family: 'Exo 2', sans-serif;
 }
 
 .section-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 3px;
   color: rgba(255, 255, 255, 0.35);
@@ -780,7 +783,6 @@ canvas {
 .atmo-pct {
   font-size: 0.75rem;
   color: var(--planet-color, #4fc3f7);
-  font-family: 'Orbitron', sans-serif;
 }
 
 .atmo-bar {
@@ -837,7 +839,6 @@ canvas {
 }
 
 .moon-count {
-  font-family: 'Orbitron', sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   color: var(--planet-color, #4fc3f7);
@@ -866,7 +867,6 @@ canvas {
 }
 
 .temp-value {
-  font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   font-weight: 900;
   margin-bottom: 0.3rem;
@@ -900,7 +900,6 @@ canvas {
 }
 
 .temp-range-val {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.82rem;
 }
 
@@ -924,7 +923,6 @@ canvas {
 }
 
 .mission-year {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: var(--planet-color, #4fc3f7);
   flex-shrink: 0;
@@ -962,7 +960,6 @@ canvas {
 }
 
 .speed-val {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   color: var(--planet-color, #4fc3f7);
 }
@@ -989,7 +986,6 @@ canvas {
 #controls-hint::before {
   content: 'Solaryn';
   display: block;
-  font-family: 'Exo 2', sans-serif;
   font-weight: 200;
   font-size: 0.95rem;
   letter-spacing: -0.02em;
@@ -1004,7 +1000,6 @@ canvas {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.85rem;
   letter-spacing: 2px;
   padding: 0.5rem 1.5rem;
@@ -1040,7 +1035,7 @@ canvas {
 .ctrl-row-icon {
   width: 14px;
   height: 14px;
-  stroke: rgba(255,255,255,0.4);
+  stroke: rgba(255, 255, 255, 0.4);
   stroke-width: 2;
   flex-shrink: 0;
 }
@@ -1080,25 +1075,22 @@ canvas {
 }
 
 .ctrl-label {
-  font-size: 0.6rem;
-  letter-spacing: 1.5px;
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.3);
-  font-family: 'Orbitron', sans-serif;
-  text-transform: uppercase;
   min-width: 3rem;
 }
 
 .ctrl-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.55);
+  color: #fff;
   transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   padding: 0;
   flex-shrink: 0;
@@ -1113,29 +1105,23 @@ canvas {
 }
 
 .ctrl-btn:hover {
-  background: rgba(79, 195, 247, 0.15);
-  border-color: rgba(79, 195, 247, 0.5);
-  color: #4fc3f7;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
   transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(79, 195, 247, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 .ctrl-btn.active {
-  background: rgba(79, 195, 247, 0.18);
-  border-color: rgba(79, 195, 247, 0.7);
-  color: #4fc3f7;
-  box-shadow: 0 0 12px rgba(79, 195, 247, 0.35);
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 /* ── HIGHLIGHTED GAME BUTTON (Sidebar) ── */
 #game-btn {
-  background: rgba(255, 165, 0, 0.2);
-  border-color: rgba(255, 165, 0, 0.55);
-  color: #ffcc00;
-  box-shadow: 0 0 10px rgba(255, 165, 0, 0.25);
+  width: 34px;
+  height: 34px;
   animation: gameBtnPulse 2.2s ease-in-out infinite;
-  width: 32px;
-  height: 32px;
 }
 
 #game-btn svg {
@@ -1143,23 +1129,19 @@ canvas {
   height: 15px;
 }
 
-#game-btn:hover {
-  background: rgba(255, 165, 0, 0.38);
-  border-color: #ffcc00;
-  color: #fff;
-  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5), 0 0 40px rgba(255, 165, 0, 0.2);
-}
-
 .ctrl-row:has(#game-btn) .ctrl-label {
-  color: rgba(255, 200, 0, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 700;
 }
 
 @keyframes gameBtnPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 10px rgba(255, 165, 0, 0.25), 0 0 22px rgba(255, 165, 0, 0.1);
     transform: scale(1);
   }
+
   50% {
     box-shadow: 0 0 18px rgba(255, 165, 0, 0.45), 0 0 36px rgba(255, 165, 0, 0.2);
     transform: scale(1.08);
@@ -1174,48 +1156,30 @@ canvas {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 80, 0, 0.15));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 165, 0, 0.5);
-  border-radius: 20px;
-  padding: 0.4rem 1rem;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  color: #ffcc00;
+  background: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #000;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   z-index: 12;
-  animation: headerGamePulse 2.5s ease-in-out infinite;
 }
 
 #header-game-btn svg {
   width: 13px;
   height: 13px;
-  stroke: currentColor;
+  stroke: #000;
   stroke-width: 2;
   flex-shrink: 0;
 }
 
 #header-game-btn:hover {
-  background: linear-gradient(135deg, rgba(255, 165, 0, 0.35), rgba(255, 80, 0, 0.25));
-  border-color: #ffcc00;
-  color: #fff;
-  box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
-  transform: scale(1.05);
-}
-
-@keyframes headerGamePulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 20px rgba(255, 165, 0, 0.4), 0 0 40px rgba(255, 165, 0, 0.15);
-  }
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(1.03);
 }
 
 #speed-slider {
@@ -1241,7 +1205,6 @@ canvas {
 }
 
 #speed-val {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.6rem;
   color: #4fc3f7;
   min-width: 28px;
@@ -1364,7 +1327,6 @@ canvas {
   bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: rgba(79, 195, 247, 0.7);
   letter-spacing: 2px;
@@ -1394,7 +1356,6 @@ canvas {
   top: 12%;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.6rem;
   color: rgba(79, 195, 247, 0.5);
   letter-spacing: 3px;
@@ -1444,7 +1405,6 @@ canvas {
   position: absolute;
   bottom: 20%;
   right: 8%;
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.6rem;
   color: rgba(79, 195, 247, 0.5);
   text-align: right;
@@ -1480,7 +1440,6 @@ canvas {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font-family: 'Courier New', monospace;
 }
 
 #wormhole-speed-hud.active {
@@ -1542,7 +1501,6 @@ canvas {
   left: 50%;
   transform: translateX(-50%);
   z-index: 52;
-  font-family: 'Courier New', monospace;
   font-size: clamp(0.7rem, 1.5vw, 1rem);
   color: rgba(79, 195, 247, 0.7);
   letter-spacing: 0.5em;
@@ -1643,7 +1601,6 @@ canvas {
 }
 
 .tour-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;
   color: #4fc3f7;
   margin-bottom: 0.5rem;
@@ -1689,7 +1646,6 @@ canvas {
   color: #4fc3f7;
   padding: 0.4rem 1.2rem;
   border-radius: 20px;
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.65rem;
   letter-spacing: 1px;
   cursor: pointer;
@@ -1742,7 +1698,6 @@ canvas {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.6rem;
   color: rgba(255, 255, 255, 0.4);
   letter-spacing: 2px;
@@ -1779,7 +1734,6 @@ canvas {
 .ach-text {}
 
 .ach-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: #FFD700;
   letter-spacing: 2px;
@@ -1822,7 +1776,6 @@ canvas {
   transform: translateY(-50%);
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.55rem;
   color: rgba(79, 195, 247, 0.35);
   letter-spacing: 3px;
@@ -1885,7 +1838,6 @@ canvas {
 }
 
 .ghud-score {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.4rem;
   color: #4fc3f7;
   letter-spacing: 3px;
@@ -1893,7 +1845,6 @@ canvas {
 }
 
 .ghud-distance {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 2px;
@@ -1919,7 +1870,6 @@ canvas {
 }
 
 .ghud-health-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.55rem;
   color: rgba(255, 255, 255, 0.4);
   letter-spacing: 2px;
@@ -1931,7 +1881,6 @@ canvas {
 }
 
 .ghud-speed-val {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.8rem;
   color: #ff8f00;
   letter-spacing: 2px;
@@ -1939,7 +1888,6 @@ canvas {
 }
 
 .ghud-speed-unit {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.55rem;
   color: rgba(255, 255, 255, 0.4);
   letter-spacing: 2px;
@@ -1950,7 +1898,6 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   color: #ef5350;
   letter-spacing: 5px;
@@ -2009,7 +1956,6 @@ canvas {
 }
 
 .ghud-boost-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.5rem;
   color: rgba(171, 71, 188, 0.6);
   letter-spacing: 2px;
@@ -2022,7 +1968,6 @@ canvas {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.2rem;
   color: #FFD700;
   opacity: 0;
@@ -2066,7 +2011,6 @@ canvas {
 }
 
 .game-title {
-  font-family: 'Orbitron', sans-serif;
   font-weight: 900;
   font-size: clamp(1.8rem, 5vw, 3.5rem);
   letter-spacing: 6px;
@@ -2088,7 +2032,6 @@ canvas {
 }
 
 .game-start-btn {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 3px;
   padding: 0.9rem 3rem;
@@ -2108,7 +2051,6 @@ canvas {
 }
 
 .game-final-score {
-  font-family: 'Orbitron', sans-serif;
   font-size: 2.5rem;
   color: #FFD700;
   letter-spacing: 4px;
@@ -2124,7 +2066,6 @@ canvas {
 }
 
 .game-final-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.65rem;
   color: rgba(255, 255, 255, 0.3);
   letter-spacing: 4px;
@@ -2132,7 +2073,6 @@ canvas {
 }
 
 .game-high-score {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: rgba(171, 71, 188, 0.7);
   letter-spacing: 2px;
@@ -2145,7 +2085,6 @@ canvas {
 }
 
 .game-exit-btn {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 2px;
   padding: 0.7rem 2rem;
@@ -2175,7 +2114,6 @@ canvas {
 }
 
 .game-mission-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.65rem;
   color: #4fc3f7;
   letter-spacing: 3px;
@@ -2200,7 +2138,6 @@ canvas {
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: 'Courier New', monospace;
   font-size: 0.7rem;
   color: #fff;
   margin: 0 2px;
@@ -2216,7 +2153,6 @@ canvas {
 }
 
 .ghud-level-name {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: #ab47bc;
   letter-spacing: 3px;
@@ -2242,7 +2178,6 @@ canvas {
 }
 
 .ghud-level-dist {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.5rem;
   color: rgba(255, 255, 255, 0.35);
   letter-spacing: 1px;
@@ -2267,7 +2202,6 @@ canvas {
 }
 
 .glvl-title {
-  font-family: 'Orbitron', sans-serif;
   font-size: clamp(1rem, 3vw, 2rem);
   color: #69f0ae;
   letter-spacing: 6px;
@@ -2275,7 +2209,6 @@ canvas {
 }
 
 .glvl-sub {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 3px;
@@ -2324,7 +2257,6 @@ canvas {
 }
 
 .gvic-title {
-  font-family: 'Orbitron', sans-serif;
   font-weight: 900;
   font-size: clamp(1.5rem, 4vw, 3rem);
   letter-spacing: 6px;
@@ -2355,7 +2287,6 @@ canvas {
 }
 
 .gvic-stat-val {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
   color: #FFD700;
   letter-spacing: 2px;
@@ -2363,7 +2294,6 @@ canvas {
 }
 
 .gvic-stat-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.55rem;
   color: rgba(255, 255, 255, 0.35);
   letter-spacing: 2px;
@@ -2379,7 +2309,6 @@ canvas {
 }
 
 .game-speed-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.6rem;
   color: rgba(255, 255, 255, 0.4);
   letter-spacing: 2px;
@@ -2391,7 +2320,6 @@ canvas {
 }
 
 .game-speed-opt {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.6rem;
   padding: 0.4rem 0.8rem;
   border-radius: 15px;
@@ -2448,34 +2376,30 @@ canvas {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 0.4rem 1rem;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.6);
+  background: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #000;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   z-index: 12;
 }
 
 #about-btn svg {
   width: 13px;
   height: 13px;
-  stroke: currentColor;
+  stroke: #000;
   stroke-width: 2;
   flex-shrink: 0;
 }
 
 #about-btn:hover {
-  background: rgba(79, 195, 247, 0.15);
-  border-color: rgba(79, 195, 247, 0.5);
-  color: #4fc3f7;
-  box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(1.03);
 }
 
 #about-overlay {
@@ -2550,7 +2474,6 @@ canvas {
 }
 
 .about-name {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 3px;
@@ -2700,7 +2623,6 @@ canvas {
 }
 
 .touch-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.5rem;
   letter-spacing: 1px;
   color: rgba(79, 195, 247, 0.4);
@@ -2781,14 +2703,12 @@ canvas {
 }
 
 .cockpit-gauge-label {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.45rem;
   color: rgba(79, 195, 247, 0.5);
   letter-spacing: 2px;
 }
 
 .cockpit-gauge-val {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.8rem;
   color: #4fc3f7;
   letter-spacing: 1px;
@@ -2867,13 +2787,11 @@ canvas {
 }
 
 .star-pickup-type {
-  font-family: 'Orbitron', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 3px;
 }
 
 .star-pickup-points {
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.8rem;
   margin-top: 0.2rem;
   letter-spacing: 2px;
@@ -2956,7 +2874,6 @@ canvas {
   color: #4fc3f7;
   padding: 0.4rem 0.8rem;
   border-radius: 15px;
-  font-family: 'Orbitron', sans-serif;
   font-size: 0.55rem;
   letter-spacing: 2px;
   cursor: pointer;
@@ -3430,9 +3347,8 @@ canvas {
 .stat-value,
 .moon-count,
 .temp-value,
-.wh-dest-name {
-  font-family: 'Exo 2', sans-serif;
-}
+.wh-dest-name {}
+
 .loader-title::first-letter,
 .welcome-title::first-letter,
 .site-title::first-letter,
