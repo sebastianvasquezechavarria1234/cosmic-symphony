@@ -4220,24 +4220,40 @@ function showWelcomeScreen() {
 
 function launchExperience() {
   const ws = document.getElementById('welcome-screen');
-  if (ws) {
-    if (ws._parallaxCleanup) ws._parallaxCleanup();
-    // Welcome exits with scale + blur — revealing planetarium underneath
-    ws.style.transition = 'transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease, filter 0.8s ease';
-    ws.style.transform = 'scale(1.8)';
-    ws.style.opacity = '0';
-    ws.style.filter = 'blur(20px)';
+  if (!ws) return;
+  if (ws._parallaxCleanup) ws._parallaxCleanup();
+
+  // Phase 1: welcome scales up fast (0.3s)
+  ws.style.transition = 'transform 0.3s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease, filter 0.3s ease';
+  ws.style.transform = 'scale(1.8)';
+  ws.style.opacity = '0';
+  ws.style.filter = 'blur(20px)';
+
+  setTimeout(() => {
+    ws.remove();
+
+    // Phase 2: warp star effect
+    const warpEl = document.createElement('div');
+    warpEl.id = 'warp-overlay';
+    warpEl.style.cssText = 'position:fixed;inset:0;z-index:100;background:#000;overflow:hidden';
+    document.body.appendChild(warpEl);
+    const warpCtx = startWarpStars(warpEl);
+
+    // Phase 3: after warp, reveal planetarium
     setTimeout(() => {
-      ws.remove();
-      // Planetarium entrance: already visible, just a subtle scale polish
+      if (warpCtx) warpCtx.stop();
+      warpEl.style.transition = 'opacity 0.5s ease';
+      warpEl.style.opacity = '0';
+      setTimeout(() => warpEl.remove(), 500);
+
       const canvas = renderer.domElement;
-      canvas.style.transition = 'transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease';
+      canvas.style.transition = 'transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease, filter 0.8s ease';
       canvas.style.transform = 'scale(1)';
       canvas.style.opacity = '1';
       canvas.style.filter = 'blur(0)';
       cinematicIntro();
       setTimeout(() => { if (!musicPlaying && typeof toggleMusic === 'function') toggleMusic(); }, 800);
-      // Reveal UI overlays after transition
+
       setTimeout(() => {
         uiOverlays.forEach(el => {
           if (el) {
@@ -4246,8 +4262,73 @@ function launchExperience() {
           }
         });
       }, 1000);
-    }, 800);
+    }, 1200);
+  }, 300);
+}
+
+// ── WARP STAR EFFECT ──
+function startWarpStars(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+  container.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const stars = [];
+  const numStars = 300;
+
+  for (let i = 0; i < numStars; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = Math.random() * canvas.width * 0.8;
+    stars.push({
+      x: cx + Math.cos(angle) * radius,
+      y: cy + Math.sin(angle) * radius,
+      angle,
+      speed: 4 + Math.random() * 12,
+      len: 2 + Math.random() * 8,
+      bright: 0.3 + Math.random() * 0.7,
+    });
   }
+
+  let running = true;
+
+  function draw() {
+    if (!running) return;
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (const s of stars) {
+      const dx = Math.cos(s.angle);
+      const dy = Math.sin(s.angle);
+      s.x += dx * s.speed;
+      s.y += dy * s.speed;
+
+      // Reset star when it goes off screen
+      const dist = Math.hypot(s.x - cx, s.y - cy);
+      if (dist > canvas.width * 0.7) {
+        s.angle = Math.random() * Math.PI * 2;
+        s.x = cx + Math.cos(s.angle) * 10;
+        s.y = cy + Math.sin(s.angle) * 10;
+        s.speed = 6 + Math.random() * 18;
+        s.len = 2 + Math.random() * 8;
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - dx * s.len, s.y - dy * s.len);
+      ctx.strokeStyle = `rgba(255,255,255,${s.bright})`;
+      ctx.lineWidth = 1 + Math.random() * 2;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  return { stop: () => { running = false; } };
 }
 
 // ── CINEMATIC INTRO FLYTHROUGH ──
