@@ -4139,7 +4139,6 @@ function showWelcomeScreen() {
   const content = document.querySelector('.welcome-content');
   const stars = document.querySelector('.welcome-bg-stars');
   const spotlight = document.querySelector('.welcome-spotlight');
-  const features = document.querySelectorAll('.welcome-feature');
 
   let targetX = 0, targetY = 0;
   let currentX = 0, currentY = 0;
@@ -4177,12 +4176,6 @@ function showWelcomeScreen() {
       spotlight.style.background = `radial-gradient(600px circle at ${px}% ${py}%, rgba(79, 195, 247, 0.08), transparent 60%)`;
     }
 
-    // Depth cards — each at different speed
-    features.forEach((card, i) => {
-      const depth = 1 + i * 0.3;
-      card.style.transform = `translate3d(${currentX * -15 * depth}px, ${currentY * -15 * depth}px, 0)`;
-    });
-
     rafId = requestAnimationFrame(animate);
   };
 
@@ -4195,7 +4188,6 @@ function showWelcomeScreen() {
     if (content) content.style.transform = '';
     if (stars) stars.style.transform = '';
     if (spotlight) spotlight.style.background = '';
-    features.forEach(card => { card.style.transform = ''; });
   };
 }
 
