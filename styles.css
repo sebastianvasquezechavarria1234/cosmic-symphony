@@ -719,19 +719,27 @@ p {
   z-index: 100;
   perspective: 1200px;
   transform-style: preserve-3d;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 3rem 1rem;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 #planet-modal.active {
   opacity: 1;
   pointer-events: auto;
+}
+
+.modal-scroll-area {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+  transform-style: preserve-3d;
 }
 
 .modal-close {
@@ -761,7 +769,6 @@ p {
 
 .modal-content {
   position: relative;
-  z-index: 5;
   max-width: 640px;
   width: 100%;
   padding-bottom: 3rem;
