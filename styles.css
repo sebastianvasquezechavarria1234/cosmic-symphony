@@ -598,17 +598,10 @@ p {
   padding: 1.2rem 1.5rem 1rem;
   z-index: 30;
   opacity: 0;
-  transform: translateY(40px) scale(0.92);
   pointer-events: none;
-  will-change: opacity, transform;
-  transition:
-    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #planet-panel.open {
-  opacity: 1;
-  transform: translateY(0) scale(1);
   pointer-events: auto;
 }
 

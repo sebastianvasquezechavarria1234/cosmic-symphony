@@ -2287,18 +2287,41 @@ function showPlanetPanel(name) {
   // Store current planet name for the modal
   panel.dataset.planet = name;
 
-  // Force reflow so the browser registers the initial blurred state before animating
-  void panel.offsetHeight;
+  // Kill any ongoing animation
+  gsap.killTweensOf(panel);
 
-  panel.classList.add('open');
+  // Set initial state
+  gsap.set(panel, { opacity: 0, y: 40, scale: 0.92, filter: 'blur(8px)' });
+
+  // Animate in
+  gsap.to(panel, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    duration: 0.7,
+    ease: 'power3.out',
+    onStart: () => { panel.classList.add('open'); }
+  });
   panelOpen = true;
 }
 
 window.closePanel = function() {
-  panel.classList.remove('open');
   panelOpen = false;
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   currentFocus = null;
+  gsap.killTweensOf(panel);
+  gsap.to(panel, {
+    opacity: 0,
+    y: 30,
+    scale: 0.95,
+    filter: 'blur(8px)',
+    duration: 0.4,
+    ease: 'power2.in',
+    onComplete: () => {
+      panel.classList.remove('open');
+    }
+  });
 };
 
 // ── PLANET MODAL (full-screen details) ──
