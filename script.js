@@ -1655,6 +1655,7 @@ function buildNebulaBackground() {
 // ── BUILD THE SUN ──
 function buildSun() {
   const group = new THREE.Group();
+  group.userData = { planetName: 'Sun' };
   const tex = realTextures.sun_map || createTexture('sun');
   const geo = new THREE.SphereGeometry(5, 128, 128);
   const mat = new THREE.MeshBasicMaterial({ map: tex });
@@ -1728,6 +1729,7 @@ function buildPlanet(key) {
   if (!data || key === 'Sun') return;
 
   const group = new THREE.Group();
+  group.userData = { planetName: key };
   scene.add(group);
 
   // Luminous orbit line
@@ -2104,9 +2106,14 @@ const hint = document.getElementById('hint');
 const panel = document.getElementById('planet-panel');
 
 function getClickableMeshes() {
-  return Object.values(planetObjects)
-    .filter(p => p && p.mesh)
-    .map(p => p.mesh);
+  const meshes = [];
+  Object.values(planetObjects).forEach(p => {
+    if (!p || !p.group) return;
+    p.group.traverse(child => {
+      if (child.isMesh) meshes.push(child);
+    });
+  });
+  return meshes;
 }
 
 renderer.domElement.addEventListener('mousemove', (e) => {
@@ -2141,12 +2148,21 @@ renderer.domElement.addEventListener('click', (e) => {
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
   const hits = raycaster.intersectObjects(getClickableMeshes());
-  if (hits.length > 0 && hits[0].object.userData.name) {
-    const name = hits[0].object.userData.name;
-    if (name === 'Moon') {
-      showPlanetPanel('Moon');
-    } else {
-      focusPlanet(name);
+  if (hits.length > 0) {
+    let name = hits[0].object.userData.name;
+    if (!name) {
+      let obj = hits[0].object;
+      while (obj) {
+        if (obj.userData && obj.userData.planetName) { name = obj.userData.planetName; break; }
+        obj = obj.parent;
+      }
+    }
+    if (name) {
+      if (name === 'Moon') {
+        showPlanetPanel('Moon');
+      } else {
+        focusPlanet(name);
+      }
     }
   }
 });

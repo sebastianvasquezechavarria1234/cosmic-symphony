@@ -638,11 +638,12 @@ p {
 }
 
 .panel-body .panel-name {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 0.15rem;
-  color: var(--planet-color, #4fc3f7);
+  color: #fff;
+  font-family: 'Playfair Display', serif;
 }
 
 .panel-body .panel-type {
@@ -654,7 +655,7 @@ p {
 }
 
 .panel-body .panel-desc {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.55);
   margin-bottom: 0.6rem;
@@ -666,19 +667,24 @@ p {
 
 /* Saber más button */
 .panel-footer-btn {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--planet-color, #4fc3f7);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #000;
   cursor: pointer;
-  padding: 0.35rem 0;
-  transition: opacity 0.2s;
+  padding: 0.5rem 1.2rem;
+  background: #fff;
+  border: none;
+  border-radius: 100px;
+  transition: all 0.2s;
 }
 
 .panel-footer-btn:hover {
-  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(1.02);
 }
 
 /* ── PLANET MODAL (full-screen) ── */
@@ -982,8 +988,6 @@ p {
   .modal-content .modal-name {
     font-size: 1.5rem;
   }
-}
-  margin-bottom: 1.2rem;
 }
 
 .panel-desc {
@@ -3667,7 +3671,6 @@ p {
 .loader-title,
 .welcome-title,
 .site-title,
-.panel-name,
 .section-title,
 .tour-title,
 .ach-title,
@@ -3691,7 +3694,6 @@ p {
 .loader-title::first-letter,
 .welcome-title::first-letter,
 .site-title::first-letter,
-.panel-name::first-letter,
 .tour-title::first-letter,
 .ach-title::first-letter,
 .game-title::first-letter,
