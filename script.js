@@ -1376,12 +1376,11 @@ function createTextSprite(text, opts) {
   ctx.font = `italic ${fontSize}px 'Playfair Display', Georgia, serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  // Glow effect
-  ctx.shadowColor = opts.glowColor || 'rgba(79,195,247,0.9)';
-  ctx.shadowBlur = 16;
+  // No shadow/glow — clean text
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
   ctx.fillStyle = color;
   ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2); // double-draw for stronger glow
   const tex = new THREE.CanvasTexture(canvas);
   const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, sizeAttenuation: true });
   const sprite = new THREE.Sprite(mat);

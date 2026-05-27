@@ -86,8 +86,10 @@ p {
 }
 
 .loader-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: clamp(1.5rem, 4vw, 3rem);
-  font-weight: 900;
+  font-weight: 400;
   background: linear-gradient(90deg, #4fc3f7, #ab47bc, #ef5350, #ff8f00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -342,8 +344,10 @@ p {
 }
 
 .welcome-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: clamp(4.5rem, 10vw, 7rem);
-  font-weight: 200;
+  font-weight: 400;
   color: #fff;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
@@ -1372,44 +1376,47 @@ p {
 .ctrl-row {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+}
+
+.ctrl-row--speed {
   gap: 0.55rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 40px;
-  padding: 0.28rem 0.75rem 0.28rem 0.45rem;
+  padding: 0.28rem 0.75rem;
   transition: border-color 0.25s, background 0.25s;
 }
 
-.ctrl-row:hover {
+.ctrl-row--speed:hover {
   border-color: rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.15);
 }
 
-.ctrl-row--speed {
-  padding: 0.28rem 0.75rem;
-}
-
 .ctrl-label {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
-  min-width: 3rem;
+  display: none;
 }
 
 .ctrl-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1.4rem;
+  background: #fff;
+  border: none;
+  color: #000;
+  border-radius: 100px;
   cursor: pointer;
-  color: #fff;
-  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
@@ -1419,36 +1426,24 @@ p {
   stroke: currentColor;
   stroke-width: 2;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
 .ctrl-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.88);
+  transform: scale(1.03);
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.2);
 }
 
 .ctrl-btn.active {
   background: #fff;
   color: #000;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
 /* ── HIGHLIGHTED GAME BUTTON (Sidebar) ── */
 #game-btn {
-  width: 34px;
-  height: 34px;
   animation: gameBtnPulse 2.2s ease-in-out infinite;
-}
-
-#game-btn svg {
-  width: 15px;
-  height: 15px;
-}
-
-.ctrl-row:has(#game-btn) .ctrl-label {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 700;
 }
 
 @keyframes gameBtnPulse {
