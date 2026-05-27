@@ -13,7 +13,7 @@ const PLANET_DATA = {
     radius: 5, distance: 0, orbitalSpeed: 0, rotationSpeed: 0.001,
     color: '#FDB813', emissive: '#F97C0A',
     glowColor: '#FF8C00',
-    description: 'El Sol es la estrella en el centro de nuestro Sistema Solar — una esfera casi perfecta de plasma caliente, incandescente por reacciones de fusión nuclear en su núcleo. Contiene el 99.86% de toda la masa del Sistema Solar.<br><br><b>🧬 Potencial de vida:</b> Ningún ser vivo puede existir en el Sol. Con temperaturas superficiales de 5,500°C y temperaturas en el núcleo de 15 millones°C, ninguna molécula conocida — mucho menos un organismo — podría sobrevivir. La intensa radiación y el entorno de plasma lo convierten en el lugar más hostil del Sistema Solar para la biología.',
+    description: 'El preludio de fuego que ilumina el vacío. Nuestro Sol es el faro cálido que guía la danza eterna de los mundos, derramando su abrazo dorado sobre cada rincón de nuestra existencia.<br><br><b>🧬 Chispa de origen:</b> Aunque el fuego ardiente en su corazón no permite que la vida eche raíces allí, es su luz la que teje el milagro de la biología. Un recordatorio humilde del poder necesario para sostener la vida, brillando con una serenidad inquebrantable a pesar de su caos interior.',
     diameter: '1,392,684 km', mass: '1.989 × 10³⁰ kg',
     distanceFromSun: '0 km', gravity: '274 m/s²',
     dayLength: '25 Earth days (equatorial)', yearLength: 'N/A',
@@ -46,7 +46,7 @@ const PLANET_DATA = {
     radius: 0.6, distance: 14, orbitalSpeed: 0.0041, rotationSpeed: 0.003,
     color: '#b5b5b5', emissive: '#333',
     glowColor: '#888',
-    description: 'El planeta más pequeño del Sistema Solar y el más cercano al Sol. Mercurio tiene cambios extremos de temperatura, sin atmósfera significativa y una superficie llena de cráteres similar a la Luna terrestre.<br><br><b>🧬 Potencial de vida:</b> Mercurio se considera sin vida. Sin atmósfera que proteja de la radiación solar, temperaturas superficiales que oscilan entre -180°C y 430°C, y sin agua líquida, no puede albergar ninguna forma de vida conocida. Sin embargo, los cráteres permanentemente sombreados en los polos contienen hielo de agua — un débil destello de un ingrediente clave para la vida, aunque demasiado hostil para la biología.',
+    description: 'El silencioso centinela de ceniza que se atreve a rozar el Sol. Mercurio baila en la frontera de las sombras y el fuego, con cicatrices marcadas por la historia primordial de nuestro sistema cósmico.<br><br><b>🧬 Susurro del vacío:</b> En su soledad extrema, donde el calor derrite y el frío congela, el silencio es absoluto. Es un lienzo austero de roca y polvo, una nota muda en el gran concierto, esperando eternamente un aliento que jamás llegará.',
     diameter: '4,879 km', mass: '3.30 × 10²³ kg',
     distanceFromSun: '57.9 million km', gravity: '3.7 m/s²',
     dayLength: '1,408 hours', yearLength: '88 Earth days',
@@ -79,7 +79,7 @@ const PLANET_DATA = {
     radius: 0.95, distance: 20, orbitalSpeed: 0.0016, rotationSpeed: -0.0007,
     color: '#E8B96F', emissive: '#7a4a00',
     glowColor: '#D4A843',
-    description: 'El planeta más caliente del Sistema Solar y el vecino más cercano de la Tierra. Venus está envuelto en gruesas nubes de ácido sulfúrico y tiene un efecto invernadero descontrolado que hace su superficie más caliente que Mercurio.<br><br><b>🧬 Potencial de vida:</b> La superficie abrasadora de Venus a 465°C es demasiado extrema para la vida conocida, pero su atmósfera superior (50–60 km de altitud) es sorprendentemente similar a la Tierra — temperaturas de 30°C y presiones similares al nivel del mar. En 2020, se detectó fosfina (un posible bioindicador) en las nubes de Venus, generando debate sobre posible vida microbiana aérea — bacterias extremófilas o arqueas flotando en gotas de ácido sulfúrico. Si existe vida, sería diferente a todo lo conocido en la Tierra.',
+    description: 'Una belleza velada por misterios ardientes, flotando en el cielo como la estrella del alba. Venus es el espejo turbulento de la Tierra, un poema sobre los delicados equilibrios de la naturaleza y la furia contenida de sus nubes doradas.<br><br><b>🧬 Vientos de misterio:</b> Su abrazo sofocante parece descartar cualquier semilla de vida, pero en los mares de nubes muy por encima de la superficie ardiente, la imaginación nos permite soñar con ecos sutiles de vida flotante, recordándonos que el universo siempre guarda secretos impredecibles.',
     diameter: '12,104 km', mass: '4.87 × 10²⁴ kg',
     distanceFromSun: '108.2 million km', gravity: '8.87 m/s²',
     dayLength: '5,832 hours (retrograde)', yearLength: '225 Earth days',
@@ -112,7 +112,7 @@ const PLANET_DATA = {
     radius: 1, distance: 28, orbitalSpeed: 0.001, rotationSpeed: 0.01,
     color: '#2E86C1', emissive: '#0a3055',
     glowColor: '#4fc3f7',
-    description: 'Nuestro hogar — el tercero desde el Sol y el único mundo conocido en el Universo que alberga vida. Los océanos de agua líquida, la atmósfera rica en oxígeno y el campo magnético protector hacen de la Tierra un lugar únicamente habitable.<br><br><b>🧬 Formas de vida:</b> La Tierra rebosa de una diversidad extraordinaria de vida — se estiman <b>8.7 millones de especies</b>. Desde bacterias microscópicas y arqueas en respiraderos hidrotermales de aguas profundas, hasta ballenas azules gigantes en los océanos; desde tardígrados (osos de agua) que sobreviven en condiciones extremas, hasta redes de hongos que se extienden kilómetros bajo tierra. La vida incluye: <em>Bacterias, Arqueas, Protistas, Hongos, Plantas y Animales</em> — desde criaturas bioluminiscentes de aguas profundas y microbios extremófilos en manantiales ácidos hirvientes, hasta ecosistemas de selvas tropicales, arrecifes de coral y la especie inteligente Homo sapiens. La vida ha existido aquí por ~3.8 mil millones de años.',
+    description: 'Un oasis azul y verde, nuestro querido hogar, suspendido como una joya frágil y vibrante en la oscuridad del espacio. Aquí es donde los ecos del cosmos tomaron forma, floreciendo bajo el abrazo suave del Sol y las caricias del agua.<br><br><b>🧬 El poema de la vida:</b> En este pequeño refugio, cada grano de arena y cada criatura microscópica es un verso vital. La vida se entrelaza de manera inseparable y majestuosa, un vasto coro donde la Tierra entera respira y siente, albergando en su seno la consciencia misma del universo.',
     diameter: '12,742 km', mass: '5.97 × 10²⁴ kg',
     distanceFromSun: '149.6 million km', gravity: '9.81 m/s²',
     dayLength: '24 hours', yearLength: '365.25 days',
@@ -145,7 +145,7 @@ const PLANET_DATA = {
     radius: 0.75, distance: 37, orbitalSpeed: 0.00053, rotationSpeed: 0.0097,
     color: '#C0392B', emissive: '#5a0000',
     glowColor: '#E74C3C',
-    description: 'El Planeta Rojo — nombrado así por el óxido de hierro que colorea su superficie. Marte es el planeta más explorado más allá de la Tierra, con evidencia de ríos antiguos, volcanes y el potencial de vida microbiana pasada.<br><br><b>🧬 Potencial de vida:</b> Marte es el candidato más fuerte para vida extraterrestre pasada. Hace miles de millones de años, Marte tenía océanos de agua líquida, una atmósfera más densa y temperaturas más cálidas — condiciones favorables para la vida microbiana. Los rovers Curiosity y Perseverance de la NASA han encontrado moléculas orgánicas, picos estacionales de metano (un posible bioindicador) y lechos de lagos antiguos. Si existió vida, probablemente fueron <em>bacterias quimiolitotróficas</em> — microbios que se alimentan de minerales rocosos. Hoy, la vida podría potencialmente sobrevivir bajo tierra en acuíferos subterráneos, protegida de la intensa radiación UV, similar a las bacterias de rocas profundas de la Tierra.',
+    description: 'El guardián rojo del silencio, marcado por el tiempo y el viento. Marte duerme en polvo rojizo y antiguas memorias de agua, una ensoñación de mundos pasados que aguarda pacientemente por nuevas historias bajo su cielo rosado.<br><br><b>🧬 Ecos de vida pasada:</b> Entre sus valles silenciosos y sus vastos desiertos, escuchamos el eco melancólico de la posibilidad. Quizás, hace incontables eras, la vida despertó aquí, dejando su leve susurro grabado en las frías rocas, como una promesa susurrada desde un pasado lejano.',
     diameter: '6,779 km', mass: '6.39 × 10²³ kg',
     distanceFromSun: '227.9 million km', gravity: '3.72 m/s²',
     dayLength: '24.6 hours', yearLength: '687 Earth days',
@@ -177,7 +177,7 @@ const PLANET_DATA = {
     radius: 2.5, distance: 55, orbitalSpeed: 0.000084, rotationSpeed: 0.04,
     color: '#C88B3A', emissive: '#3a1a00',
     glowColor: '#D4A843',
-    description: 'El rey de los planetas — el más grande de nuestro Sistema Solar. Júpiter es un gigante gaseoso masivo con icónicas bandas de nubes, una Gran Mancha Roja mayor que la Tierra y un potente campo magnético que atrapa radiación mortal.<br><br><b>🧬 Potencial de vida:</b> Júpiter mismo — con sus presiones aplastantes, radiación extrema y sin superficie sólida — es poco probable que albergue vida. Sin embargo, su luna <b>Europa</b> es uno de los lugares más prometedores para vida alienígena en el Sistema Solar. Bajo la corteza helada de Europa hay un océano global de agua salada con más agua que todos los océanos de la Tierra combinados — calentado por calentamiento de marea. Los respiraderos hidrotermales en el fondo oceánico de Europa podrían albergar <em>microorganismos quimiosintéticos</em> similares a los encontrados cerca de los respiraderos de aguas profundas de la Tierra. La luna de Júpiter <b>Ganímedes</b> también tiene un océano subterráneo. La próxima misión Europa Clipper buscará signos de habitabilidad.',
+    description: 'El majestuoso gigante, una colosal pintura al óleo que remolina con fuerza eterna. Júpiter es el director de la orquesta celestial, su inmenso abrazo gravitacional protege los mundos interiores mientras canta su antigua canción de tormentas.<br><br><b>🧬 Mares de esperanza:</b> Mientras el soberano mismo es una tormenta interminable e indomable, sus hijos más amados, las lunas, esconden océanos subterráneos, un abrazo acuático y misterioso que nos invita a soñar con reinos donde un nuevo aliento vital podría florecer en la cálida oscuridad de sus profundidades.',
     diameter: '139,820 km', mass: '1.898 × 10²⁷ kg',
     distanceFromSun: '778.5 million km', gravity: '24.8 m/s²',
     dayLength: '9.93 hours', yearLength: '11.86 Earth years',
@@ -210,7 +210,7 @@ const PLANET_DATA = {
     radius: 2.1, distance: 75, orbitalSpeed: 0.0000339, rotationSpeed: 0.038,
     color: '#E4C07A', emissive: '#5a3d00',
     glowColor: '#F0D090',
-    description: 'La joya del Sistema Solar. El espectacular sistema de anillos de Saturno — hecho de miles de millones de partículas de hielo y roca — se extiende 282,000 km de ancho pero solo tiene unos 10 metros de grosor en algunos lugares. Saturno es tan ligero que flotaría en el agua.<br><br><b>🧬 Potencial de vida:</b> La luna de Saturno <b>Encélado</b> es un candidato principal para vida extraterrestre. La sonda Cassini descubrió géiseres que disparan vapor de agua que contiene moléculas orgánicas, hidrógeno molecular y nanopartículas de sílice — fuerte evidencia de actividad hidrotermal en un océano subterráneo. Estas condiciones podrían albergar <em>arqueas metanógenas</em> (microbios productores de metano). La luna más grande de Saturno, <b>Titán</b>, tiene lagos de metano y etano líquidos, una atmósfera espesa de nitrógeno y química orgánica compleja. Si existe vida en Titán, sería radicalmente alienígena — posiblemente <em>organismos basados en metano</em> que usan hidrocarburos líquidos como solvente en lugar de agua. El dron Dragonfly de la NASA explorará Titán en la década de 2030.',
+    description: 'La corona del cielo, adornada con alas de luz que giran en perfecta armonía. Saturno flota sereno, una obra maestra de cristal y belleza que nos recuerda la perfección matemática y el delicado arte escondido en el silencio espacial.<br><br><b>🧬 Sueños distantes:</b> Sus anillos brillan como un faro para los corazones inquietos. Y allá, entre sus lunas lejanas, el rocío cósmico y los ríos de metano susurran historias de química misteriosa, posibilidades tan maravillosas como exóticas, un testimonio de que la creación siempre encuentra un camino nuevo.',
     diameter: '116,460 km', mass: '5.68 × 10²⁶ kg',
     distanceFromSun: '1.43 billion km', gravity: '10.4 m/s²',
     dayLength: '10.7 hours', yearLength: '29.46 Earth years',
@@ -244,7 +244,7 @@ const PLANET_DATA = {
     radius: 1.6, distance: 94, orbitalSpeed: 0.0000119, rotationSpeed: -0.022,
     color: '#7DE8E8', emissive: '#003a3a',
     glowColor: '#5DADE2',
-    description: 'El gigante de hielo inclinado. Urano rota de lado con una inclinación axial de 98 grados — probablemente debido a una colisión masiva hace miles de millones de años. Su color azul-verdoso proviene del gas metano que absorbe la luz roja en su atmósfera.<br><br><b>🧬 Potencial de vida:</b> Urano es generalmente considerado inhóspito para la vida tal como la conocemos. El frío extremo (-224°C), la falta de superficie sólida y el interior de alta presión de hielos de agua, metano y amoníaco lo convierten en un entorno hostil. Sin embargo, algunos astrobiólogos especulan que en lo profundo de su atmósfera, donde las presiones y temperaturas son más moderadas, <em>microorganismos extremófilos</em> exóticos podrían existir hipotéticamente en capas de nubes de agua y amoníaco. Su luna <b>Ariel</b> muestra signos de actividad geológica pasada, y la superficie fracturada de <b>Miranda</b> sugiere calentamiento interno — pero ambas siguen siendo posibilidades remotas para la vida.',
+    description: 'El lánguido soñador turquesa, que reposa de lado bajo la tranquila luz lejana. Urano guarda secretos azules en sus hielos profundos, una suave y serena presencia que gira lentamente en una órbita melancólica y solitaria.<br><br><b>🧬 Serenidad escarchada:</b> Un mundo de hielo pacífico y enigmático donde la frialdad es suprema. Lejos de la vibrante calidez, es un lugar de inmovilidad sagrada. Si existe algún pulso oculto, debe ser tan tenue y silencioso como una plegaria exhalada en el silencio de una catedral de cristal.',
     diameter: '50,724 km', mass: '8.68 × 10²⁵ kg',
     distanceFromSun: '2.87 billion km', gravity: '8.87 m/s²',
     dayLength: '17.2 hours (retrograde)', yearLength: '84 Earth years',
@@ -277,7 +277,7 @@ const PLANET_DATA = {
     radius: 1.55, distance: 112, orbitalSpeed: 0.000006, rotationSpeed: 0.023,
     color: '#3455DB', emissive: '#000a3a',
     glowColor: '#5D6CC0',
-    description: 'El planeta más ventoso — las tormentas de Neptuno producen los vientos más rápidos del Sistema Solar. A pesar de estar tan lejos del Sol, Neptuno irradia más calor internamente del que recibe, sugiriendo un interior cálido.<br><br><b>🧬 Potencial de vida:</b> Las temperaturas gélidas de Neptuno (-218°C), los vientos de 2,100 km/h y la falta de superficie sólida lo hacen extremadamente hostil. Sin embargo, su luna <b>Tritón</b> — un objeto capturado del Cinturón de Kuiper — es intrigante. Tritón tiene géiseres activos de nitrógeno, una atmósfera delgada y posiblemente un océano subterráneo de agua líquida mantenido caliente por el calentamiento de marea de Neptuno. Si existe tal océano, podría albergar <em>microorganismos psicrófilos (amantes del frío)</em> similares a los extremófilos encontrados en los lagos subglaciales de la Antártida. Tritón sigue siendo uno de los mundos más misteriosos y menos explorados del Sistema Solar exterior.',
+    description: 'El centinela místico del abismo índigo. Neptuno danza en los confines de la noche, un fiero espíritu del viento en los límites de lo conocido, envuelto en nubes celestes donde la imaginación humana apenas se asoma.<br><br><b>🧬 Misterios del abismo:</b> Aunque sus vientos cantan la furia de lo inaccesible, es en sus gélidos dominios donde reside un eco solemne del infinito. Tritón, capturado en la danza, promete mares ocultos que quizás sostengan latidos frágiles que se esconden en la más íntima sombra cósmica.',
     diameter: '49,244 km', mass: '1.02 × 10²⁶ kg',
     distanceFromSun: '4.5 billion km', gravity: '11.15 m/s²',
     dayLength: '16.1 hours', yearLength: '164.8 Earth years',
@@ -309,7 +309,7 @@ const PLANET_DATA = {
     radius: 0.22, distance: 1.8, orbitalSpeed: 0, rotationSpeed: 0.001,
     color: '#cccccc', emissive: '#222222',
     glowColor: '#888888',
-    description: 'El único satélite natural de la Tierra y la quinta luna más grande del Sistema Solar. La Luna influye profundamente en la vida en la Tierra — estabilizando la inclinación axial de nuestro planeta, generando las mareas oceánicas y alargando los días terrestres durante miles de millones de años. Es el único cuerpo celeste más allá de la Tierra que los humanos han visitado en persona.<br><br><b>🧬 Potencial de vida:</b> La Luna no tiene atmósfera, ni campo magnético, y es bombardeada por radiación solar y micrometeoritos. Las temperaturas superficiales oscilan entre 127°C a la luz del sol y -173°C en la sombra. Estas condiciones son incompatibles con la vida conocida. Sin embargo, se ha confirmado hielo de agua en cráteres permanentemente sombreados en los polos (por LCROSS y Chandrayaan-1), que podría ser un recurso para futura habitación humana más que biología nativa.',
+    description: 'La eterna confidente de nuestros sueños y vigilante plateada de la noche. La Luna ilumina los caminos inciertos y guía el ritmo de los mares, una presencia constante que conecta a la humanidad bajo un mismo firmamento compartido.<br><br><b>🧬 Reflejo del espíritu:</b> Silenciosa e inerte, la Luna es la memoria intocable de nuestro pasado. Aunque carezca de un latido propio, su brillo ha servido como la cuna de los sueños, la luz que siempre nos susurra que, más allá de la soledad y la esterilidad, siempre aguarda un nuevo horizonte iluminado.',
     diameter: '3,474 km', mass: '7.34 × 10²² kg',
     distanceFromSun: '384,400 km (from Earth)', gravity: '1.62 m/s²',
     dayLength: '29.5 Earth days', yearLength: '27.3 Earth days (orbit)',
@@ -2337,42 +2337,42 @@ window.openPlanetModal = function() {
     <div class="modal-type">${d.type}</div>
     <div class="modal-desc">${d.description}</div>
 
-    <div class="section-title">Propiedades físicas</div>
+    <div class="section-title">Esencia física</div>
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Diámetro</div>
+        <div class="stat-label">Amplitud</div>
         <div class="stat-value">${d.diameter}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Masa</div>
+        <div class="stat-label">Peso del ser (Masa)</div>
         <div class="stat-value" style="font-size:0.75rem">${d.mass}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Gravedad</div>
+        <div class="stat-label">Abrazo gravitatorio</div>
         <div class="stat-value">${d.gravity}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Distancia del Sol</div>
+        <div class="stat-label">Distancia de la luz</div>
         <div class="stat-value" style="font-size:0.72rem">${d.distanceFromSun}</div>
       </div>
     </div>
 
-    <div class="section-title">Tiempo</div>
+    <div class="section-title">El latido del tiempo</div>
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Duración del día</div>
+        <div class="stat-label">Alba y Ocaso (Día)</div>
         <div class="stat-value" style="font-size:0.75rem">${d.dayLength}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Duración del año</div>
+        <div class="stat-label">Ciclo eterno (Año)</div>
         <div class="stat-value" style="font-size:0.75rem">${d.yearLength}</div>
       </div>
     </div>
 
-    <div class="section-title">Temperatura</div>
+    <div class="section-title">Clima del alma</div>
     <div class="temp-gauge">
       <div class="temp-value" style="color:${d.cssColor}">${d.avgTemp}</div>
-      <div class="temp-label">TEMPERATURA MEDIA SUPERFICIAL</div>
+      <div class="temp-label">CALIDEZ MEDIA SUPERFICIAL</div>
       <div class="temp-range">
         <div class="temp-range-item">
           <div class="temp-range-label">Mín</div>
@@ -2389,24 +2389,24 @@ window.openPlanetModal = function() {
     <div class="orbital-speed">
       <div class="speed-icon">🚀</div>
       <div class="speed-text">
-        <div class="speed-label">VELOCIDAD ORBITAL</div>
+        <div class="speed-label">RITMO DE LA DANZA (ÓRBITA)</div>
         <div class="speed-val">${d.orbitalVelocity}</div>
       </div>
     </div>` : ''}
 
-    <div class="section-title">Lunas</div>
+    <div class="section-title">Hijos celestiales</div>
     <div class="moon-info">
       <div>
         <div class="moon-count">${d.moons}</div>
       </div>
       <div>
-        <div class="moon-label">Lunas conocidas</div>
-        <div class="moon-names">${d.moonNames || 'Ninguna descubierta'}</div>
+        <div class="moon-label">Compañeros descubiertos</div>
+        <div class="moon-names">${d.moonNames || 'Silencio absoluto'}</div>
       </div>
     </div>
 
     ${d.atmosphere ? `
-    <div class="section-title">Atmósfera</div>
+    <div class="section-title">Aliento vital (Atmósfera)</div>
     <div class="atmo-list">
       ${d.atmosphere.map(a => `
         <div class="atmo-item">
@@ -4430,20 +4430,20 @@ const loaderStepsList = document.getElementById('loader-steps-list');
 })();
 
 const buildQueue = [
-  { label: 'Descargando imágenes satelitales...', fn: () => loadRealTextures() },
-  { label: 'Pintando el cosmos...', fn: () => buildNebulaBackground() },
-  { label: 'Encendiendo el sol...', fn: () => buildSun() },
-  { label: 'Generando mercurio...', fn: () => buildPlanet('Mercury') },
-  { label: 'Generando venus...', fn: () => buildPlanet('Venus') },
-  { label: 'Generando la tierra...', fn: () => buildPlanet('Earth') },
-  { label: 'Generando marte...', fn: () => buildPlanet('Mars') },
-  { label: 'Generando júpiter...', fn: () => buildPlanet('Jupiter') },
-  { label: 'Generando saturno...', fn: () => buildPlanet('Saturn') },
-  { label: 'Generando urano...', fn: () => buildPlanet('Uranus') },
-  { label: 'Generando neptuno...', fn: () => buildPlanet('Neptune') },
-  { label: 'Sembrando asteroides...', fn: () => buildAsteroidBelt() },
-  { label: 'Sembrando el cinturón de kuiper...', fn: () => buildKuiperBelt() },
-  { label: 'Lanzando cometa...', fn: () => buildComet() },
+  { label: 'Tejiendo el velo estelar...', fn: () => loadRealTextures() },
+  { label: 'Pintando el lienzo del cosmos...', fn: () => buildNebulaBackground() },
+  { label: 'Encendiendo el fuego primordial...', fn: () => buildSun() },
+  { label: 'Despertando a Mercurio...', fn: () => buildPlanet('Mercury') },
+  { label: 'Coronando a Venus...', fn: () => buildPlanet('Venus') },
+  { label: 'Dando aliento a la Tierra...', fn: () => buildPlanet('Earth') },
+  { label: 'Esculpiendo los desiertos de Marte...', fn: () => buildPlanet('Mars') },
+  { label: 'Invocando las tormentas de Júpiter...', fn: () => buildPlanet('Jupiter') },
+  { label: 'Cristalizando los anillos de Saturno...', fn: () => buildPlanet('Saturn') },
+  { label: 'Silenciando los hielos de Urano...', fn: () => buildPlanet('Uranus') },
+  { label: 'Sumérgiendose en el abismo de Neptuno...', fn: () => buildPlanet('Neptune') },
+  { label: 'Sembrando reliquias rocosas...', fn: () => buildAsteroidBelt() },
+  { label: 'Esparciendo ecos en el cinturón oscuro...', fn: () => buildKuiperBelt() },
+  { label: 'Liberando al cometa solitario...', fn: () => buildComet() },
 ];
 
 // Populate step list in loading screen
