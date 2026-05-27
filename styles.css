@@ -591,8 +591,6 @@ p {
   left: 1rem;
   width: min(340px, 80vw);
   background: transparent;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: none;
   border-radius: 16px;
   padding: 1.2rem 1.5rem 1rem;
@@ -639,13 +637,14 @@ p {
 }
 
 .panel-body .panel-name {
-  font-size: 2.6rem;
+  font-size: 3rem;
   font-weight: 400;
   margin-bottom: 0.1rem;
   color: #fff;
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  line-height: 1.1;
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .panel-body .panel-type {
@@ -657,7 +656,7 @@ p {
 }
 
 .panel-body .panel-desc {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.55);
   margin-bottom: 0.6rem;
@@ -1000,12 +999,10 @@ p {
 }
 
 .panel-desc {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1.5rem;
-  border-left: 2px solid var(--planet-color, #4fc3f7);
-  padding-left: 0.8rem;
 }
 
 .panel-desc b {
