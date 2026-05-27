@@ -3443,7 +3443,7 @@ p {
   position: absolute;
   right: 8%;
   top: 38%;
-  width: 150px;
+  width: 100px;
   height: auto;
   z-index: 2;
   pointer-events: none;
@@ -3468,9 +3468,9 @@ p {
 
 .welcome-telescope {
   position: absolute;
-  right: 12%;
-  top: 55%;
-  width: 50px;
+  right: 3%;
+  top: 26%;
+  width: 40px;
   height: auto;
   z-index: 2;
   pointer-events: none;
