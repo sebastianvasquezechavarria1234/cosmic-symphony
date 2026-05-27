@@ -1112,7 +1112,25 @@ scene.add(ambientLight);
 const sunLight = new THREE.PointLight(0xfff4e0, 3.5, 1000);
 sunLight.position.set(0, 0, 0);
 sunLight.castShadow = true;
+sunLight.shadow.mapSize.width = 2048;
+sunLight.shadow.mapSize.height = 2048;
+sunLight.shadow.bias = -0.00005;
+sunLight.shadow.normalBias = 0.02;
+if (sunLight.shadow.camera) {
+  // PointLight uses PerspectiveCamera for each face
+  sunLight.shadow.camera.near = 0.5;
+  sunLight.shadow.camera.far = 300;
+}
 scene.add(sunLight);
+
+// Secondary fill light to soften shadows
+const fillLight = new THREE.DirectionalLight(0x446688, 0.3);
+fillLight.position.set(-50, 30, -50);
+scene.add(fillLight);
+
+// Hemisphere light for ambient sky color
+const hemiLight = new THREE.HemisphereLight(0x223366, 0x000000, 0.4);
+scene.add(hemiLight);
 
 // ── REAL SATELLITE TEXTURES (NASA Blue Marble via Three.js CDN) ──
 const textureLoader = new THREE.TextureLoader();
@@ -1235,16 +1253,90 @@ const planetObjects = {};
 const orbitLines = [];
 let animationTime = 0;
 
-// Orbit path helper
-function createOrbitLine(radius, color) {
+// Orbit path helper — luminous pulsating lines with direction comet head
+function createOrbitLine(radius, color, planetKey) {
   const pts = [];
-  for (let i = 0; i <= 128; i++) {
-    const a = (i / 128) * Math.PI * 2;
+  const segments = 256;
+  for (let i = 0; i <= segments; i++) {
+    const a = (i / segments) * Math.PI * 2;
     pts.push(new THREE.Vector3(Math.cos(a) * radius, 0, Math.sin(a) * radius));
   }
   const geo = new THREE.BufferGeometry().setFromPoints(pts);
-  const mat = new THREE.LineBasicMaterial({ color: color || 0x334466, transparent: true, opacity: 0.25 });
-  return new THREE.Line(geo, mat);
+  // Add per-vertex alpha for fade effect along the orbit
+  const alphas = new Float32Array(segments + 1);
+  for (let i = 0; i <= segments; i++) {
+    const a = i / segments;
+    // Fade out near the planet position for a directional comet-wake look
+    alphas[i] = 1.0;
+  }
+  geo.setAttribute('alpha', new THREE.BufferAttribute(alphas, 1));
+
+  const colorHex = color || 0x4488cc;
+  const c = new THREE.Color(colorHex);
+  const mat = new THREE.LineBasicMaterial({
+    color: colorHex,
+    transparent: true,
+    opacity: 0.3,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const line = new THREE.Line(geo, mat);
+
+  // Direction comet head — a glowing sphere that travels along the orbit
+  const headGeo = new THREE.SphereGeometry(0.25, 8, 8);
+  const headMat = new THREE.MeshBasicMaterial({
+    color: colorHex,
+    transparent: true,
+    opacity: 0.7,
+    blending: THREE.AdditiveBlending,
+  });
+  const head = new THREE.Mesh(headGeo, headMat);
+  head.userData = { isOrbitHead: true, planetKey, radius };
+
+  // Trail glow sprite behind the head
+  const headGlow = createGlowSprite(colorHex, 3);
+  headGlow.material.opacity = 0.4;
+  headGlow.userData = { isOrbitHead: true, planetKey, radius };
+
+  const group = new THREE.Group();
+  group.add(line);
+  group.add(head);
+  group.add(headGlow);
+  group.userData = { isOrbitLine: true, planetKey, radius, line, head, headGlow, color: colorHex };
+
+  orbitLines.push(group);
+  return group;
+}
+
+// Update orbit line glow and head position
+function updateOrbitLines(time) {
+  orbitLines.forEach(og => {
+    if (!og.userData || !og.visible) return;
+    const { planetKey, radius, line, head, headGlow } = og.userData;
+    if (!planetKey) return;
+    const po = planetObjects[planetKey];
+    if (!po) return;
+
+    // Pulsate orbit line opacity
+    const pulse = Math.sin(time * 1.5 + radius * 0.1) * 0.15 + 0.25;
+    line.material.opacity = pulse;
+
+    // Move comet head to planet's current position (ahead of the planet)
+    const angle = po.angle || 0;
+    // Head positioned at the planet's location with slight leading offset
+    const leadAngle = angle + 0.04; // slightly ahead
+    const hx = Math.cos(leadAngle) * radius;
+    const hz = Math.sin(leadAngle) * radius;
+    head.position.set(hx, 0, hz);
+    headGlow.position.set(hx, 0, hz);
+
+    // Head pulse
+    const headPulse = Math.sin(time * 3 + radius) * 0.2 + 0.6;
+    head.material.opacity = headPulse * 0.8;
+    const s = 0.8 + Math.sin(time * 2 + radius) * 0.2;
+    head.scale.set(s, s, s);
+    headGlow.scale.set(s * 2, s * 2, 1);
+  });
 }
 
 // Glow sprite helper
@@ -1338,7 +1430,64 @@ function createAtmosphere(radius, color, intensity) {
   return new THREE.Mesh(geo, mat);
 }
 
+// ── RAYLEIGH SCATTERING ATMOSPHERE SHADER (realistic) ──
+function createAtmosphereScattering(radius, color, intensity) {
+  const c = new THREE.Color(color);
+  const R = c.r, G = c.g, B = c.b;
+  const geo = new THREE.SphereGeometry(radius * 1.12, 64, 64);
+  const mat = new THREE.ShaderMaterial({
+    vertexShader: `
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      varying vec3 vWorldPos;
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vec4 worldPos = modelMatrix * vec4(position, 1.0);
+        vWorldPos = worldPos.xyz;
+        vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 scatterColor;
+      uniform float intensity;
+      uniform vec3 sunDir;
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      varying vec3 vWorldPos;
+      void main() {
+        vec3 viewDir = normalize(-vPosition);
+        vec3 normal = normalize(vNormal);
+        float rim = 1.0 - max(dot(viewDir, normal), 0.0);
+        float rimPow = pow(rim, 4.0);
+        // Wavelength-dependent Rayleigh scattering
+        vec3 scattering = scatterColor * rimPow * intensity;
+        // Sun-facing glow (front scattering)
+        float sunDot = max(dot(normal, normalize(sunDir)), 0.0);
+        float forwardScatter = pow(sunDot, 8.0) * intensity * 0.5;
+        scattering += vec3(forwardScatter * 0.8, forwardScatter * 0.6, forwardScatter);
+        // Multiple scattering approximation - blue tint
+        float multiScatter = rimPow * rim * intensity * 0.3;
+        scattering += vec3(multiScatter * 0.3, multiScatter * 0.5, multiScatter);
+        float alpha = max(length(scattering), rimPow * intensity * 0.5);
+        gl_FragColor = vec4(scattering, alpha * 0.65);
+      }
+    `,
+    uniforms: {
+      scatterColor: { value: new THREE.Color(color) },
+      intensity: { value: intensity || 1.5 },
+      sunDir: { value: new THREE.Vector3(0, 0, 0) },
+    },
+    transparent: true,
+    side: THREE.BackSide,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+  return new THREE.Mesh(geo, mat);
+}
+
 // ── NEBULA BACKGROUND ──
+const nebulaParticles = [];
 function buildNebulaBackground() {
   const canvas = document.createElement('canvas');
   canvas.width = 2048; canvas.height = 1024;
@@ -1380,6 +1529,128 @@ function buildNebulaBackground() {
   const geo = new THREE.SphereGeometry(900, 32, 32);
   const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide, depthWrite: false });
   scene.add(new THREE.Mesh(geo, mat));
+
+  // ── 3D NEBULA DUST PARTICLES (volumetric star dust) ──
+  const dustCount = 3000;
+  const dustGeo = new THREE.BufferGeometry();
+  const dustPos = new Float32Array(dustCount * 3);
+  const dustSizes = new Float32Array(dustCount);
+  const dustColors = new Float32Array(dustCount * 3);
+  const dustAlphas = new Float32Array(dustCount);
+  for (let i = 0; i < dustCount; i++) {
+    const r = 100 + Math.random() * 600;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    dustPos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+    dustPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta) * 0.4;
+    dustPos[i*3+2] = r * Math.cos(phi);
+    dustSizes[i] = Math.random() * 8 + 2;
+    dustAlphas[i] = Math.random() * 0.15 + 0.02;
+    const hue = 200 + Math.random() * 60;
+    const c = new THREE.Color().setHSL(hue / 360, 0.4, 0.15 + Math.random() * 0.15);
+    dustColors[i*3] = c.r; dustColors[i*3+1] = c.g; dustColors[i*3+2] = c.b;
+  }
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  dustGeo.setAttribute('aSize', new THREE.BufferAttribute(dustSizes, 1));
+  dustGeo.setAttribute('color', new THREE.BufferAttribute(dustColors, 3));
+  dustGeo.setAttribute('aAlpha', new THREE.BufferAttribute(dustAlphas, 1));
+
+  const dustMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      attribute float aSize;
+      attribute float aAlpha;
+      varying float vAlpha;
+      varying vec3 vColor;
+      void main() {
+        vColor = color;
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = aSize * (200.0 / -mvPos.z);
+        vAlpha = aAlpha;
+        gl_Position = projectionMatrix * mvPos;
+      }
+    `,
+    fragmentShader: `
+      varying float vAlpha;
+      varying vec3 vColor;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float glow = 1.0 - smoothstep(0.0, 0.5, d);
+        gl_FragColor = vec4(vColor, vAlpha * glow * 0.6);
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexColors: true,
+  });
+  const dustPoints = new THREE.Points(dustGeo, dustMat);
+  dustPoints.userData = { isNebulaDust: true };
+  scene.add(dustPoints);
+  nebulaParticles.push(dustPoints);
+
+  // ── BRIGHT GLOWING STARDUST (sparkle particles) ──
+  const sparkleCount = 800;
+  const sparkleGeo = new THREE.BufferGeometry();
+  const sparklePos = new Float32Array(sparkleCount * 3);
+  const sparkleSizes = new Float32Array(sparkleCount);
+  const sparklePhase = new Float32Array(sparkleCount);
+  const sparkleColors = new Float32Array(sparkleCount * 3);
+  for (let i = 0; i < sparkleCount; i++) {
+    const r = 200 + Math.random() * 500;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    sparklePos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+    sparklePos[i*3+1] = r * Math.sin(phi) * Math.sin(theta) * 0.5;
+    sparklePos[i*3+2] = r * Math.cos(phi);
+    sparkleSizes[i] = Math.random() * 3 + 0.5;
+    sparklePhase[i] = Math.random() * Math.PI * 2;
+    const hue = 180 + Math.random() * 100;
+    const c = new THREE.Color().setHSL(hue / 360, 0.7, 0.5 + Math.random() * 0.3);
+    sparkleColors[i*3] = c.r; sparkleColors[i*3+1] = c.g; sparkleColors[i*3+2] = c.b;
+  }
+  sparkleGeo.setAttribute('position', new THREE.BufferAttribute(sparklePos, 3));
+  sparkleGeo.setAttribute('aSize', new THREE.BufferAttribute(sparkleSizes, 1));
+  sparkleGeo.setAttribute('aPhase', new THREE.BufferAttribute(sparklePhase, 1));
+  sparkleGeo.setAttribute('color', new THREE.BufferAttribute(sparkleColors, 3));
+
+  const sparkleMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      attribute float aSize;
+      attribute float aPhase;
+      uniform float uTime;
+      varying vec3 vColor;
+      varying float vAlpha;
+      void main() {
+        vColor = color;
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        float twinkle = sin(uTime * 2.0 + aPhase) * 0.5 + 0.5;
+        gl_PointSize = aSize * (250.0 / -mvPos.z) * (0.3 + twinkle * 0.7);
+        vAlpha = 0.1 + twinkle * 0.4;
+        gl_Position = projectionMatrix * mvPos;
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vColor;
+      varying float vAlpha;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float glow = 1.0 - smoothstep(0.0, 0.5, d);
+        gl_FragColor = vec4(vColor, vAlpha * glow);
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexColors: true,
+  });
+  const sparklePoints = new THREE.Points(sparkleGeo, sparkleMat);
+  sparklePoints.userData = { isNebulaSparkle: true };
+  scene.add(sparklePoints);
+  nebulaParticles.push(sparklePoints);
 }
 
 // ── BUILD THE SUN ──
@@ -1460,10 +1731,10 @@ function buildPlanet(key) {
   const group = new THREE.Group();
   scene.add(group);
 
-  // Orbit line
-  const orbitLine = createOrbitLine(data.distance);
-  scene.add(orbitLine);
-  orbitLines.push(orbitLine);
+  // Luminous orbit line
+  const hexColor = data.cssColor ? parseInt(data.cssColor.replace('#',''), 16) : 0x334466;
+  const orbitGroup = createOrbitLine(data.distance, hexColor, key);
+  scene.add(orbitGroup);
 
   // Planet mesh — prefer real satellite textures, fallback to procedural
   const _realTexKeys = { Mercury:'mercury_map', Venus:'venus_map', Earth:'earth_map', Mars:'mars_map', Jupiter:'jupiter_map', Saturn:'saturn_map', Uranus:'uranus_map', Neptune:'neptune_map' };
@@ -1519,11 +1790,11 @@ function buildPlanet(key) {
   }
   const mat = new THREE.MeshPhongMaterial(matOpts);
 
-  // Fresnel atmosphere glow (all planets with significant atmospheres)
-  const _atmoColors = { Venus:0xE8B96F, Earth:0x4fc3f7, Mars:0xC06030, Jupiter:0xD4A843, Saturn:0xF0D090, Uranus:0x7DE8E8, Neptune:0x5D6CC0 };
+  // Rayleigh scattering atmosphere (realistic)
+  const _atmoColors = { Venus:'#E8B96F', Earth:'#4fc3f7', Mars:'#C06030', Jupiter:'#D4A843', Saturn:'#F0D090', Uranus:'#7DE8E8', Neptune:'#5D6CC0' };
   if (_atmoColors[key]) {
-    const atmoIntensity = (key === 'Mars') ? 0.6 : (key === 'Earth') ? 2.0 : 1.2;
-    group.add(createAtmosphere(data.radius, _atmoColors[key], atmoIntensity));
+    const atmoIntensity = (key === 'Mars') ? 0.5 : (key === 'Earth') ? 1.8 : (key === 'Venus') ? 1.5 : (key === 'Jupiter') ? 1.0 : (key === 'Saturn') ? 0.9 : 1.2;
+    group.add(createAtmosphereScattering(data.radius, _atmoColors[key], atmoIntensity));
   }
   // Earth cloud layer (separate rotating sphere)
   if (key === 'Earth') {
@@ -1622,6 +1893,8 @@ function buildPlanet(key) {
       map: ringTex, side: THREE.DoubleSide, transparent: true, depthWrite: false,
     });
     const rings = new THREE.Mesh(ringGeo, ringMat);
+    rings.castShadow = true;
+    rings.receiveShadow = true;
     rings.rotation.x = Math.PI / 2;
     if (key === 'Uranus') rings.rotation.x = Math.PI / 8;
     group.add(rings);
@@ -2218,6 +2491,16 @@ function animate() {
   // Twinkling stars
   if (starUniforms) starUniforms.uTime.value = animationTime;
 
+  // Update luminous orbit lines
+  updateOrbitLines(animationTime);
+
+  // Update nebula dust particles
+  nebulaParticles.forEach(p => {
+    if (p.material.uniforms && p.material.uniforms.uTime) {
+      p.material.uniforms.uTime.value = animationTime;
+    }
+  });
+
   // Shooting stars
   updateShootingStars();
 
@@ -2241,6 +2524,14 @@ function animate() {
     po.angle = (po.angle || 0) + d.orbitalSpeed * speedMul;
     po.group.position.x = Math.cos(po.angle) * d.distance;
     po.group.position.z = Math.sin(po.angle) * d.distance;
+
+    // Update atmosphere shader sun direction
+    po.group.children.forEach(child => {
+      if (child.isMesh && child.material.type === 'ShaderMaterial' && child.material.uniforms && child.material.uniforms.sunDir) {
+        const sunDir = new THREE.Vector3(-po.group.position.x, -po.group.position.y, -po.group.position.z).normalize();
+        child.material.uniforms.sunDir.value.copy(sunDir);
+      }
+    });
 
     // Rotate planet
     if (po.mesh) po.mesh.rotation.y += d.rotationSpeed * speedMul;
@@ -2486,7 +2777,10 @@ if (speedSlider) {
 let orbitsVisible = true;
 window.toggleOrbits = function() {
   orbitsVisible = !orbitsVisible;
-  orbitLines.forEach(l => l.visible = orbitsVisible);
+  orbitLines.forEach(g => {
+    g.visible = orbitsVisible;
+    g.traverse(child => { if (child.isLine || child.isMesh) child.visible = orbitsVisible; });
+  });
   const btn = document.getElementById('orbit-btn');
   if (btn) btn.classList.toggle('active', orbitsVisible);
 };
