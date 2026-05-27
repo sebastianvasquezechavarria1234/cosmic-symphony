@@ -597,13 +597,15 @@ p {
   z-index: 30;
   transform: translateY(30px);
   opacity: 0;
+  filter: blur(10px);
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #planet-panel.open {
   transform: translateY(0);
   opacity: 1;
+  filter: blur(0);
   pointer-events: auto;
 }
 
@@ -637,7 +639,7 @@ p {
 }
 
 .panel-body .panel-name {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 400;
   margin-bottom: 0.1rem;
   color: #fff;
@@ -649,7 +651,7 @@ p {
 
 .panel-body .panel-type {
   font-size: 0.6rem;
-  letter-spacing: 2px;
+  letter-spacing: 0;
   color: rgba(255, 255, 255, 0.3);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -682,6 +684,8 @@ p {
   transition: all 0.2s;
   letter-spacing: -0.01em;
   margin-top: 0.3rem;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
 }
 
 .panel-footer-btn svg {
