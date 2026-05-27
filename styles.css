@@ -590,8 +590,8 @@ p {
   bottom: 6rem;
   left: 1rem;
   width: auto;
-  min-width: 280px;
-  max-width: 420px;
+  min-width: 320px;
+  max-width: 600px;
   background: transparent;
   border: none;
   border-radius: 16px;
@@ -599,9 +599,9 @@ p {
   z-index: 30;
   transform: translateY(30px);
   opacity: 0;
-  filter: blur(10px);
+  filter: blur(15px);
   pointer-events: none;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #planet-panel.open {
@@ -641,8 +641,8 @@ p {
 }
 
 .panel-body .panel-name {
-  font-size: 4.5rem !important;
-  font-weight: 300;
+  font-size: 6rem !important;
+  font-weight: 200;
   margin-bottom: 0.4rem;
   color: #fff;
   font-family: 'Playfair Display', serif;
@@ -661,7 +661,8 @@ p {
 }
 
 .panel-body .panel-desc {
-  font-size: 0.95rem;
+  font-size: 1.2rem;
+  font-weight: 200;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.55);
   margin-bottom: 1rem;
