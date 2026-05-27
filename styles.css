@@ -715,8 +715,7 @@ p {
 #planet-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(12px);
+  background: #000;
   z-index: 100;
   display: flex;
   align-items: flex-start;
@@ -759,9 +758,13 @@ p {
 }
 
 .modal-content {
+  position: relative;
+  z-index: 5;
   max-width: 640px;
   width: 100%;
   padding-bottom: 3rem;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .modal-content .modal-name {

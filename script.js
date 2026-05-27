@@ -2459,6 +2459,59 @@ window.closePlanetModal = function() {
   document.getElementById('planet-modal').classList.remove('active');
 };
 
+function initPlanetModalEffects() {
+  const pm = document.getElementById('planet-modal');
+  const container = document.getElementById('modal-stars');
+  if (container && container.children.length === 0) {
+    for (let i = 0; i < 120; i++) {
+      const star = document.createElement('div');
+      star.className = 'welcome-star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.width = star.style.height = (Math.random() * 2.5 + 0.5) + 'px';
+      star.style.animationDelay = (Math.random() * 4) + 's';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      container.appendChild(star);
+    }
+  }
+
+  const spotlight = pm.querySelector('.welcome-spotlight');
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+
+  pm.addEventListener('mousemove', (e) => {
+    const rect = pm.getBoundingClientRect();
+    targetX = (e.clientX - rect.left) / rect.width - 0.5;
+    targetY = (e.clientY - rect.top) / rect.height - 0.5;
+  });
+
+  const animate = () => {
+    if (pm.classList.contains('active')) {
+      currentX += (targetX - currentX) * 0.06;
+      currentY += (targetY - currentY) * 0.06;
+      const px = (currentX + 0.5) * 100;
+      const py = (currentY + 0.5) * 100;
+
+      if (spotlight) {
+        spotlight.style.background = `radial-gradient(600px circle at ${px}% ${py}%, rgba(79, 195, 247, 0.08), transparent 60%)`;
+      }
+      
+      const content = document.getElementById('modal-content');
+      if (content) {
+        content.style.transform = `translate3d(${currentX * -20}px, ${currentY * -20}px, 0) rotateX(${currentY * -2}deg) rotateY(${currentX * 2}deg)`;
+      }
+      
+      if (container) {
+        container.style.transform = `translate3d(${currentX * -40}px, ${currentY * -40}px, 0)`;
+      }
+    }
+    requestAnimationFrame(animate);
+  };
+  requestAnimationFrame(animate);
+}
+// Init globally when script runs
+setTimeout(initPlanetModalEffects, 1000);
+
 function hexToRgba(hex, a) {
   const r = parseInt(hex.slice(1,3),16);
   const g = parseInt(hex.slice(3,5),16);
