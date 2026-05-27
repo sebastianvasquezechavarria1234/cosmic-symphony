@@ -9,7 +9,7 @@
 // ═══════════════════════════════════════════════════════
 const PLANET_DATA = {
   Sun: {
-    name: 'Sun', type: 'G-Type Main Sequence Star',
+    name: 'Sol', type: 'Estrella tipo G (Secuencia Principal)',
     radius: 5, distance: 0, orbitalSpeed: 0, rotationSpeed: 0.001,
     color: '#FDB813', emissive: '#F97C0A',
     glowColor: '#FF8C00',
@@ -42,7 +42,7 @@ const PLANET_DATA = {
     axialTilt: 0.1265,
   },
   Mercury: {
-    name: 'Mercury', type: 'Terrestrial Planet',
+    name: 'Mercurio', type: 'Planeta terrestre',
     radius: 0.6, distance: 14, orbitalSpeed: 0.0041, rotationSpeed: 0.003,
     color: '#b5b5b5', emissive: '#333',
     glowColor: '#888',
@@ -75,7 +75,7 @@ const PLANET_DATA = {
     axialTilt: 0.034,
   },
   Venus: {
-    name: 'Venus', type: 'Terrestrial Planet',
+    name: 'Venus', type: 'Planeta terrestre',
     radius: 0.95, distance: 20, orbitalSpeed: 0.0016, rotationSpeed: -0.0007,
     color: '#E8B96F', emissive: '#7a4a00',
     glowColor: '#D4A843',
@@ -108,7 +108,7 @@ const PLANET_DATA = {
     axialTilt: 3.096,
   },
   Earth: {
-    name: 'Earth', type: 'Terrestrial Planet',
+    name: 'Tierra', type: 'Planeta terrestre',
     radius: 1, distance: 28, orbitalSpeed: 0.001, rotationSpeed: 0.01,
     color: '#2E86C1', emissive: '#0a3055',
     glowColor: '#4fc3f7',
@@ -141,7 +141,7 @@ const PLANET_DATA = {
     axialTilt: 0.4091,
   },
   Mars: {
-    name: 'Mars', type: 'Terrestrial Planet',
+    name: 'Marte', type: 'Planeta terrestre',
     radius: 0.75, distance: 37, orbitalSpeed: 0.00053, rotationSpeed: 0.0097,
     color: '#C0392B', emissive: '#5a0000',
     glowColor: '#E74C3C',
@@ -173,7 +173,7 @@ const PLANET_DATA = {
     textureType: 'rocky_red',
   },
   Jupiter: {
-    name: 'Jupiter', type: 'Gas Giant',
+    name: 'Júpiter', type: 'Gigante gaseoso',
     radius: 2.5, distance: 55, orbitalSpeed: 0.000084, rotationSpeed: 0.04,
     color: '#C88B3A', emissive: '#3a1a00',
     glowColor: '#D4A843',
@@ -206,7 +206,7 @@ const PLANET_DATA = {
     axialTilt: 0.0546,
   },
   Saturn: {
-    name: 'Saturn', type: 'Gas Giant',
+    name: 'Saturno', type: 'Gigante gaseoso',
     radius: 2.1, distance: 75, orbitalSpeed: 0.0000339, rotationSpeed: 0.038,
     color: '#E4C07A', emissive: '#5a3d00',
     glowColor: '#F0D090',
@@ -240,7 +240,7 @@ const PLANET_DATA = {
     axialTilt: 0.4665,
   },
   Uranus: {
-    name: 'Uranus', type: 'Ice Giant',
+    name: 'Urano', type: 'Gigante de hielo',
     radius: 1.6, distance: 94, orbitalSpeed: 0.0000119, rotationSpeed: -0.022,
     color: '#7DE8E8', emissive: '#003a3a',
     glowColor: '#5DADE2',
@@ -273,7 +273,7 @@ const PLANET_DATA = {
     axialTilt: 1.7064,
   },
   Neptune: {
-    name: 'Neptune', type: 'Ice Giant',
+    name: 'Neptuno', type: 'Gigante de hielo',
     radius: 1.55, distance: 112, orbitalSpeed: 0.000006, rotationSpeed: 0.023,
     color: '#3455DB', emissive: '#000a3a',
     glowColor: '#5D6CC0',
@@ -305,7 +305,7 @@ const PLANET_DATA = {
     axialTilt: 0.4943,
   },
   Moon: {
-    name: 'Moon', type: 'Natural Satellite',
+    name: 'Luna', type: 'Satélite natural',
     radius: 0.22, distance: 1.8, orbitalSpeed: 0, rotationSpeed: 0.001,
     color: '#cccccc', emissive: '#222222',
     glowColor: '#888888',
@@ -1827,7 +1827,8 @@ function buildPlanet(key) {
   group.add(glow);
 
   // Floating name label
-  const nameLabel = createTextSprite(key, {
+  const esName = { Sun:'Sol', Mercury:'Mercurio', Venus:'Venus', Earth:'Tierra', Mars:'Marte', Jupiter:'Júpiter', Saturn:'Saturno', Uranus:'Urano', Neptune:'Neptuno', Moon:'Luna' }[key] || key;
+  const nameLabel = createTextSprite(esName, {
     fontSize: 36,
     color: data.cssColor,
     glowColor: data.cssColor,
@@ -2277,7 +2278,10 @@ function showPlanetPanel(name) {
     <div class="panel-name">${d.name}</div>
     <div class="panel-type">${d.type}</div>
     <div class="panel-desc">${shortDesc}</div>
-    <div class="panel-footer-btn" onclick="openPlanetModal()">Saber más</div>
+    <div class="panel-footer-btn" onclick="openPlanetModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><g clip-path="url(#clip0_1460_2346)"><path d="M31.7261 15.9148C25.2964 15.9148 20.0781 10.5769 20.0781 3.99988" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path><path d="M31.7261 15.9149C25.2964 15.9149 20.0781 21.2528 20.0781 27.8298" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path><path d="M32 15.9147L0 15.9147" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path></g><defs><clipPath id="clip0_1460_2346"><rect width="32" height="32" fill="white"></rect></clipPath></defs></svg>
+      Saber más
+    </div>
   `;
 
   // Store current planet name for the modal
@@ -2309,76 +2313,76 @@ window.openPlanetModal = function() {
     <div class="modal-type">${d.type}</div>
     <div class="modal-desc">${d.description}</div>
 
-    <div class="section-title">Physical Properties</div>
+    <div class="section-title">Propiedades físicas</div>
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Diameter</div>
+        <div class="stat-label">Diámetro</div>
         <div class="stat-value">${d.diameter}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Mass</div>
+        <div class="stat-label">Masa</div>
         <div class="stat-value" style="font-size:0.75rem">${d.mass}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Surface Gravity</div>
+        <div class="stat-label">Gravedad</div>
         <div class="stat-value">${d.gravity}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Distance from Sun</div>
+        <div class="stat-label">Distancia del Sol</div>
         <div class="stat-value" style="font-size:0.72rem">${d.distanceFromSun}</div>
       </div>
     </div>
 
-    <div class="section-title">Time</div>
+    <div class="section-title">Tiempo</div>
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Day Length</div>
+        <div class="stat-label">Duración del día</div>
         <div class="stat-value" style="font-size:0.75rem">${d.dayLength}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Year Length</div>
+        <div class="stat-label">Duración del año</div>
         <div class="stat-value" style="font-size:0.75rem">${d.yearLength}</div>
       </div>
     </div>
 
-    <div class="section-title">Temperature</div>
+    <div class="section-title">Temperatura</div>
     <div class="temp-gauge">
       <div class="temp-value" style="color:${d.cssColor}">${d.avgTemp}</div>
-      <div class="temp-label">AVERAGE SURFACE TEMPERATURE</div>
+      <div class="temp-label">TEMPERATURA MEDIA SUPERFICIAL</div>
       <div class="temp-range">
         <div class="temp-range-item">
-          <div class="temp-range-label">Min</div>
+          <div class="temp-range-label">Mín</div>
           <div class="temp-range-val" style="color:#5DADE2">${d.minTemp}</div>
         </div>
         <div class="temp-range-item">
-          <div class="temp-range-label">Max</div>
+          <div class="temp-range-label">Máx</div>
           <div class="temp-range-val" style="color:#E74C3C">${d.maxTemp}</div>
         </div>
       </div>
     </div>
 
-    ${d.name !== 'Sun' ? `
+    ${d.name !== 'Sol' ? `
     <div class="orbital-speed">
       <div class="speed-icon">🚀</div>
       <div class="speed-text">
-        <div class="speed-label">ORBITAL VELOCITY</div>
+        <div class="speed-label">VELOCIDAD ORBITAL</div>
         <div class="speed-val">${d.orbitalVelocity}</div>
       </div>
     </div>` : ''}
 
-    <div class="section-title">Moons</div>
+    <div class="section-title">Lunas</div>
     <div class="moon-info">
       <div>
         <div class="moon-count">${d.moons}</div>
       </div>
       <div>
-        <div class="moon-label">Known Moons</div>
-        <div class="moon-names">${d.moonNames || 'None discovered'}</div>
+        <div class="moon-label">Lunas conocidas</div>
+        <div class="moon-names">${d.moonNames || 'Ninguna descubierta'}</div>
       </div>
     </div>
 
     ${d.atmosphere ? `
-    <div class="section-title">Atmosphere</div>
+    <div class="section-title">Atmósfera</div>
     <div class="atmo-list">
       ${d.atmosphere.map(a => `
         <div class="atmo-item">
@@ -2391,7 +2395,7 @@ window.openPlanetModal = function() {
       `).join('')}
     </div>` : ''}
 
-    <div class="section-title">Fascinating Facts</div>
+    <div class="section-title">Datos fascinantes</div>
     <div class="fact-list">
       ${d.facts.map(f => `
         <div class="fact-item">
@@ -2402,7 +2406,7 @@ window.openPlanetModal = function() {
     </div>
 
     ${d.missions ? `
-    <div class="section-title">Space Missions</div>
+    <div class="section-title">Misiones espaciales</div>
     <div class="mission-list">
       ${d.missions.map(m => `
         <div class="mission-item">
