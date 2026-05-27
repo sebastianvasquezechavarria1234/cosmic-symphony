@@ -3468,8 +3468,8 @@ p {
 
 .welcome-telescope {
   position: absolute;
-  right: 3%;
-  top: 26%;
+  right: 4%;
+  top: 31%;
   width: 40px;
   height: auto;
   z-index: 2;
@@ -3478,20 +3478,6 @@ p {
   border-radius: 12px;
   filter: drop-shadow(0 0 30px rgba(200, 180, 255, 0.15));
   animation: welcomeFadeIn 1s ease-out 0.6s both;
-}
-
-.welcome-sun {
-  position: absolute;
-  top: 2%;
-  right: 3%;
-  width: min(140px, 12vw);
-  height: auto;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.35;
-  border-radius: 50%;
-  filter: drop-shadow(0 0 50px rgba(255, 200, 50, 0.3));
-  animation: welcomeFadeIn 1s ease-out 0.7s both;
 }
 
 .welcome-images {
