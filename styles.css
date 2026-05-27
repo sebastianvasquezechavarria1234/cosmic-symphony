@@ -589,7 +589,9 @@ p {
   position: fixed;
   bottom: 6rem;
   left: 1rem;
-  width: min(340px, 80vw);
+  width: auto;
+  min-width: 280px;
+  max-width: 420px;
   background: transparent;
   border: none;
   border-radius: 16px;
@@ -639,14 +641,15 @@ p {
 }
 
 .panel-body .panel-name {
-  font-size: 3.5rem;
-  font-weight: 400;
-  margin-bottom: 0.1rem;
+  font-size: 4.5rem !important;
+  font-weight: 300;
+  margin-bottom: 0.4rem;
   color: #fff;
   font-family: 'Playfair Display', serif;
   font-style: italic;
   line-height: 1;
   letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .panel-body .panel-type {
@@ -661,7 +664,7 @@ p {
   font-size: 0.95rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -994,7 +997,7 @@ p {
   #planet-panel {
     bottom: 5rem;
     left: 0.5rem;
-    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
   }
 
   .modal-content .modal-name {
