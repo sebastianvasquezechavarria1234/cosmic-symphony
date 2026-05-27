@@ -777,11 +777,14 @@ p {
 }
 
 .modal-content .modal-name {
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 3px;
-  margin-bottom: 0.3rem;
-  color: var(--planet-color, #4fc3f7);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  line-height: 1;
 }
 
 .modal-content .modal-type {
