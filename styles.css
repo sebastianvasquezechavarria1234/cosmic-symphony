@@ -3302,14 +3302,16 @@ p {
   }
 
   .ctrl-btn {
-    width: 24px;
-    height: 24px;
-    font-size: 0.7rem;
+    width: auto;
+    height: auto;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+    gap: 0.35rem;
   }
 
   #game-btn {
-    width: 28px;
-    height: 28px;
+    width: auto;
+    height: auto;
   }
 
   #speed-slider {
