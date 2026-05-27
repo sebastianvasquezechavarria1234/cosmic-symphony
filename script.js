@@ -1099,16 +1099,16 @@ const composer = new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene, camera));
 const bloomPass = new THREE.UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.6,   // strength
+  0.3,   // strength
   0.5,   // radius
-  0.82   // threshold — only sun + bright highlights bloom
+  0.85   // threshold — only sun + bright highlights bloom
 );
 composer.addPass(bloomPass);
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0x111122, 1.2);
 scene.add(ambientLight);
-const sunLight = new THREE.PointLight(0xfff4e0, 3.5, 1000);
+const sunLight = new THREE.PointLight(0xfff4e0, 2.0, 1000);
 sunLight.position.set(0, 0, 0);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 2048;
@@ -1664,14 +1664,14 @@ function buildSun() {
 
   // Corona layers
   for (let i = 0; i < 4; i++) {
-    const s = 6 + i * 3;
-    const sprite = createGlowSprite(0xFF8C00, s * 2.5);
-    sprite.material.opacity = 0.12 - i * 0.025;
+    const s = 6 + i * 2;
+    const sprite = createGlowSprite(0xFF8C00, s * 2);
+    sprite.material.opacity = 0.07 - i * 0.015;
     group.add(sprite);
   }
   // Outer bright glow
-  const bright = createGlowSprite(0xFFEE88, 18);
-  bright.material.opacity = 0.25;
+  const bright = createGlowSprite(0xFFEE88, 14);
+  bright.material.opacity = 0.12;
   group.add(bright);
 
   // ── LENS FLARE ──
