@@ -716,21 +716,33 @@
         });
       }
 
-      btns.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-          hoveredBtn = btn;
-          updateCenterScale();
+      // Hover on track container — no gap breaks
+      track.addEventListener('mousemove', (e) => {
+        const trackRect = track.getBoundingClientRect();
+        let closest = null;
+        let closestDist = Infinity;
+        btns.forEach(btn => {
+          const rect = btn.getBoundingClientRect();
+          const btnCenter = rect.left + rect.width / 2;
+          const dist = Math.abs(e.clientX - btnCenter);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = btn;
+          }
         });
-        btn.addEventListener('mouseleave', () => {
+        if (closestDist < 80) {
+          hoveredBtn = closest;
+        } else {
           hoveredBtn = null;
-          updateCenterScale();
-        });
+        }
+        updateCenterScale();
       });
 
-      track.addEventListener('scroll', updateCenterScale);
-      updateCenterScale();
+      track.addEventListener('mouseleave', () => {
+        hoveredBtn = null;
+        updateCenterScale();
+      });
 
-      // Click on btn centers it smoothly
       btns.forEach(btn => {
         btn.addEventListener('click', () => {
           setTimeout(() => {
