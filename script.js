@@ -1249,17 +1249,14 @@ scene.add(createStarfield());
 
 // ── MILKY WAY BACKGROUND ──
 textureLoader.load('img/textures/8k_stars_milky_way.jpg', (milkyTex) => {
-  milkyTex.mapping = THREE.EquirectangularReflectionMapping;
-  const skyGeo = new THREE.SphereGeometry(900, 64, 64);
+  const skyGeo = new THREE.SphereGeometry(800, 64, 64);
   const skyMat = new THREE.MeshBasicMaterial({
     map: milkyTex,
     side: THREE.BackSide,
-    transparent: true,
-    opacity: 0.35,
     depthWrite: false,
   });
   const sky = new THREE.Mesh(skyGeo, skyMat);
-  sky.rotation.y = Math.PI * 0.3;
+  sky.renderOrder = -1;
   scene.add(sky);
 });
 
@@ -1856,13 +1853,15 @@ function buildPlanet(key) {
   if (data.axialTilt) mesh.rotation.z = data.axialTilt;
   group.add(mesh);
 
-  // Border ring (visible from far, hidden on focus)
-  const borderGeo = new THREE.SphereGeometry(data.radius + 0.2, 48, 48);
+  // Border shell (visible from far, hidden on focus)
+  const borderThickness = data.radius * 0.12 + 0.15;
+  const borderGeo = new THREE.SphereGeometry(data.radius + borderThickness, 48, 48);
   const borderMat = new THREE.MeshBasicMaterial({
     color: parseInt(data.glowColor.replace('#', ''), 16),
     transparent: true,
-    opacity: 0.15,
-    side: THREE.BackSide,
+    opacity: 0.25,
+    side: THREE.DoubleSide,
+    depthWrite: false,
   });
   const border = new THREE.Mesh(borderGeo, borderMat);
   border.userData.isBorderRing = true;
