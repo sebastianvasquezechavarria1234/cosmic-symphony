@@ -4672,14 +4672,6 @@ function showWelcomeScreen() {
   if (!ws) return;
   ws.classList.add('active');
 
-  // Load milky way background in background
-  textureLoader.load('img/textures/8k_stars_milky_way.jpg', (milkyTex) => {
-    const skyGeo = new THREE.SphereGeometry(800, 64, 64);
-    const skyMat = new THREE.MeshBasicMaterial({ map: milkyTex, side: THREE.BackSide, depthWrite: false });
-    const sky = new THREE.Mesh(skyGeo, skyMat);
-    sky.renderOrder = -1;
-    scene.add(sky);
-  });
 
   // Generate background stars for welcome screen
   const container = document.getElementById('welcome-stars');
