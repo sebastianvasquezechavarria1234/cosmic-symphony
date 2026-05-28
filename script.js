@@ -2846,6 +2846,15 @@ window.addEventListener('resize', () => {
 //  KEYBOARD — arrows cycle planets, numbers jump, M = music
 // ═══════════════════════════════════════════════════════
 const planetOrder = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+
+window.navPlanet = function (dir) {
+  const idx = currentFocus ? planetOrder.indexOf(currentFocus) : -1;
+  let nIdx;
+  if (dir > 0) nIdx = idx < planetOrder.length - 1 ? idx + 1 : 0;
+  else nIdx = idx > 0 ? idx - 1 : planetOrder.length - 1;
+  focusPlanet(planetOrder[nIdx]);
+};
+
 window.addEventListener('keydown', e => {
   if (shipMode) return; // Ship mode has its own keydown handler
   if (e.key === 'Escape') {

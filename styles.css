@@ -493,7 +493,7 @@ p {
 /* ── PLANET NAV BAR ── */
 #planet-nav {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 3.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -579,6 +579,48 @@ p {
   border-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   filter: grayscale(0%);
+}
+
+.nav-controls {
+  position: fixed;
+  bottom: 0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.nav-ctrl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.nav-ctrl-btn:active {
+  transform: scale(0.95);
+}
+
+.nav-ctrl-reset {
+  width: 40px;
+  height: 40px;
 }
 
 /* ── TOOLTIP ── */
