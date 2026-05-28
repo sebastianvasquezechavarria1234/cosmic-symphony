@@ -2332,8 +2332,11 @@ window.openPlanetModal = function () {
   currentPlanetData = d;
 
   const content = document.getElementById('modal-content');
+  const chars = d.name.split('').map((c, i) =>
+    c === ' ' ? ' ' : `<span class="modal-name-char" style="animation-delay:${i * 0.06}s">${c}</span>`
+  ).join('');
   content.innerHTML = `
-    <div class="modal-name" style="--planet-color:${d.cssColor}">${d.name}</div>
+    <div class="modal-name" style="--planet-color:${d.cssColor}">${chars}</div>
     <div class="modal-type">${d.type}</div>
     <div class="modal-desc">${d.description}</div>
 
@@ -2445,50 +2448,21 @@ window.openPlanetModal = function () {
     <div style="height:2rem"></div>
   `;
 
-  const canvas = renderer.domElement;
   const modal = document.getElementById('planet-modal');
 
-  canvas.style.transition = 'transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), filter 0.4s ease';
-  canvas.style.transform = 'scale(2.5)';
-  canvas.style.filter = 'blur(20px)';
-
-  setTimeout(() => {
-    modal.style.opacity = '1';
-    modal.style.pointerEvents = 'auto';
-  }, 400);
-
-  setTimeout(() => {
-    modal.classList.remove('active');
-    modal.offsetHeight;
-    modal.classList.add('active');
-  }, 1400);
+  modal.classList.remove('active');
+  modal.offsetHeight;
+  modal.classList.add('active');
 
   setTimeout(() => {
     document.querySelectorAll('#modal-content .atmo-fill').forEach(el => {
       el.style.width = el.dataset.pct + '%';
     });
-  }, 1800);
+  }, 400);
 };
 
 window.closePlanetModal = function () {
-  const modal = document.getElementById('planet-modal');
-  const canvas = renderer.domElement;
-
-  modal.classList.remove('active');
-
-  setTimeout(() => {
-    canvas.style.transition = 'none';
-    canvas.style.transform = 'scale(0.4)';
-    canvas.style.filter = 'blur(20px)';
-    canvas.style.opacity = '0';
-
-    canvas.offsetHeight;
-
-    canvas.style.transition = 'transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), filter 0.4s ease, opacity 0.4s ease';
-    canvas.style.transform = 'scale(1)';
-    canvas.style.filter = 'blur(0)';
-    canvas.style.opacity = '1';
-  }, 350);
+  document.getElementById('planet-modal').classList.remove('active');
 };
 
 function initPlanetModalEffects() {
