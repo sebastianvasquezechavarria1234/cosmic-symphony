@@ -2255,10 +2255,13 @@ window.focusPlanet = function (name) {
   Object.keys(planetObjects).forEach(key => {
     if (key === 'Sun' || key === 'Moon' || key.includes('_clouds')) return;
     const po = planetObjects[key];
-    if (!po) return;
+    if (!po || !po.group) return;
     const isFocused = (key === name);
-    if (po.border) po.border.visible = !isFocused;
-    if (po.mesh) po.mesh.material.emissiveIntensity = isFocused ? 0.02 : (po.data.emissiveIntensity || 0.08);
+    po.group.traverse(child => {
+      if (child.userData && child.userData.isBorderRing) {
+        child.visible = !isFocused;
+      }
+    });
   });
 
   // Particle burst at planet position
@@ -2299,9 +2302,12 @@ window.resetView = function () {
   Object.keys(planetObjects).forEach(key => {
     if (key === 'Sun' || key === 'Moon' || key.includes('_clouds')) return;
     const po = planetObjects[key];
-    if (!po) return;
-    if (po.border) po.border.visible = true;
-    if (po.mesh) po.mesh.material.emissiveIntensity = po.data.emissiveIntensity || 0.08;
+    if (!po || !po.group) return;
+    po.group.traverse(child => {
+      if (child.userData && child.userData.isBorderRing) {
+        child.visible = true;
+      }
+    });
   });
 
   cameraStartPos.copy(camera.position);
