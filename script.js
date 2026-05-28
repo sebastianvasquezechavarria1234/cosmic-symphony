@@ -1099,9 +1099,9 @@ const composer = new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene, camera));
 const bloomPass = new THREE.UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.03,  // strength
-  0.4,   // radius
-  0.94   // threshold
+  0.05,  // strength
+  0.5,   // radius
+  0.92   // threshold
 );
 composer.addPass(bloomPass);
 
@@ -1113,12 +1113,12 @@ sunLight.position.set(0, 0, 0);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 2048;
 sunLight.shadow.mapSize.height = 2048;
-sunLight.shadow.bias = -0.00003;
-sunLight.shadow.normalBias = 0.015;
+sunLight.shadow.bias = -0.00005;
+sunLight.shadow.normalBias = 0.02;
 if (sunLight.shadow.camera) {
   // PointLight uses PerspectiveCamera for each face
   sunLight.shadow.camera.near = 0.5;
-  sunLight.shadow.camera.far = 400;
+  sunLight.shadow.camera.far = 300;
 }
 scene.add(sunLight);
 
@@ -1184,7 +1184,7 @@ function loadRealTextures() {
 let starUniforms;
 function createStarfield() {
   const geo = new THREE.BufferGeometry();
-  const count = 10000;
+  const count = 15000;
   const pos = new Float32Array(count * 3);
   const sizes = new Float32Array(count);
   const phase = new Float32Array(count);
@@ -1261,7 +1261,6 @@ function createOrbitLine(radius, color, planetKey) {
     pts.push(new THREE.Vector3(Math.cos(a) * radius, 0, Math.sin(a) * radius));
   }
   const geo = new THREE.BufferGeometry().setFromPoints(pts);
-  // Per-vertex alpha for gradient trail effect
   const alphas = new Float32Array(segments + 1);
   for (let i = 0; i <= segments; i++) {
     alphas[i] = 1.0;
@@ -1270,70 +1269,34 @@ function createOrbitLine(radius, color, planetKey) {
 
   const colorHex = color || 0x4488cc;
   const c = new THREE.Color(colorHex);
-  const mat = new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uColor: { value: new THREE.Color(colorHex) },
-      uAlpha: { value: 0.3 },
-    },
-    vertexShader: `
-      attribute float alpha;
-      varying float vAlpha;
-      void main() {
-        vAlpha = alpha;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      uniform vec3 uColor;
-      uniform float uTime;
-      uniform float uAlpha;
-      varying float vAlpha;
-      void main() {
-        float pulse = sin(uTime * 1.5 + vAlpha * 6.28) * 0.15 + 0.85;
-        float a = uAlpha * vAlpha * pulse;
-        gl_FragColor = vec4(uColor * (0.8 + pulse * 0.2), a);
-      }
-    `,
+  const mat = new THREE.LineBasicMaterial({
+    color: colorHex,
     transparent: true,
+    opacity: 0.3,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
   const line = new THREE.Line(geo, mat);
 
-  // Direction comet head — glowing sphere traveling along the orbit
-  const headGeo = new THREE.SphereGeometry(0.3, 12, 12);
+  const headGeo = new THREE.SphereGeometry(0.25, 8, 8);
   const headMat = new THREE.MeshBasicMaterial({
     color: colorHex,
     transparent: true,
-    opacity: 0.8,
+    opacity: 0.7,
     blending: THREE.AdditiveBlending,
   });
   const head = new THREE.Mesh(headGeo, headMat);
   head.userData = { isOrbitHead: true, planetKey, radius };
 
-  // Trail glow sprites behind the head (comet tail)
-  const trailCount = 5;
-  const trails = [];
-  for (let i = 0; i < trailCount; i++) {
-    const tSize = 2.5 - i * 0.3;
-    const tGlow = createGlowSprite(colorHex, tSize);
-    tGlow.material.opacity = 0.35 - i * 0.06;
-    tGlow.userData = { isOrbitHead: true, planetKey, radius };
-    trails.push(tGlow);
-  }
-
-  // Main head glow
-  const headGlow = createGlowSprite(colorHex, 4);
-  headGlow.material.opacity = 0.5;
+  const headGlow = createGlowSprite(colorHex, 3);
+  headGlow.material.opacity = 0.4;
   headGlow.userData = { isOrbitHead: true, planetKey, radius };
 
   const group = new THREE.Group();
   group.add(line);
   group.add(head);
   group.add(headGlow);
-  trails.forEach(t => group.add(t));
-  group.userData = { isOrbitLine: true, planetKey, radius, line, head, headGlow, trails, color: colorHex };
+  group.userData = { isOrbitLine: true, planetKey, radius, line, head, headGlow, color: colorHex };
 
   orbitLines.push(group);
   return group;
@@ -1343,17 +1306,14 @@ function createOrbitLine(radius, color, planetKey) {
 function updateOrbitLines(time) {
   orbitLines.forEach(og => {
     if (!og.userData || !og.visible) return;
-    const { planetKey, radius, line, head, headGlow, trails } = og.userData;
+    const { planetKey, radius, line, head, headGlow } = og.userData;
     if (!planetKey) return;
     const po = planetObjects[planetKey];
     if (!po) return;
 
-    // Update orbit line shader time
-    if (line.material.uniforms && line.material.uniforms.uTime) {
-      line.material.uniforms.uTime.value = time;
-    }
+    const pulse = Math.sin(time * 1.5 + radius * 0.1) * 0.15 + 0.25;
+    line.material.opacity = pulse;
 
-    // Move comet head to planet's current position
     const angle = po.angle || 0;
     const leadAngle = angle + 0.04;
     const hx = Math.cos(leadAngle) * radius;
@@ -1361,25 +1321,11 @@ function updateOrbitLines(time) {
     head.position.set(hx, 0, hz);
     headGlow.position.set(hx, 0, hz);
 
-    // Head pulse
-    const headPulse = Math.sin(time * 3 + radius) * 0.2 + 0.7;
-    head.material.opacity = headPulse;
+    const headPulse = Math.sin(time * 3 + radius) * 0.2 + 0.6;
+    head.material.opacity = headPulse * 0.8;
     const s = 0.8 + Math.sin(time * 2 + radius) * 0.2;
     head.scale.set(s, s, s);
-    headGlow.scale.set(s * 2.5, s * 2.5, 1);
-
-    // Trail — position behind the head along the orbit
-    if (trails) {
-      trails.forEach((t, i) => {
-        const trailAngle = leadAngle - (i + 1) * 0.06;
-        const tx = Math.cos(trailAngle) * radius;
-        const tz = Math.sin(trailAngle) * radius;
-        t.position.set(tx, 0, tz);
-        const ts = (1.8 - i * 0.25) * s;
-        t.scale.set(ts, ts, 1);
-        t.material.opacity = (0.3 - i * 0.05) * headPulse;
-      });
-    }
+    headGlow.scale.set(s * 2, s * 2, 1);
   });
 }
 
@@ -1477,7 +1423,7 @@ function createAtmosphere(radius, color, intensity) {
 function createAtmosphereScattering(radius, color, intensity) {
   const c = new THREE.Color(color);
   const R = c.r, G = c.g, B = c.b;
-  const geo = new THREE.SphereGeometry(radius * 1.14, 64, 64);
+  const geo = new THREE.SphereGeometry(radius * 1.12, 64, 64);
   const mat = new THREE.ShaderMaterial({
     vertexShader: `
       varying vec3 vNormal;
@@ -1498,53 +1444,19 @@ function createAtmosphereScattering(radius, color, intensity) {
       varying vec3 vNormal;
       varying vec3 vPosition;
       varying vec3 vWorldPos;
-
-      // Optical depth along view ray
-      float opticalDepth(vec3 rayOrigin, vec3 rayDir, float rayLen) {
-        float sampled = 0.0;
-        float steps = 4.0;
-        for (float i = 0.0; i < 4.0; i++) {
-          vec3 samplePos = rayOrigin + rayDir * (rayLen * (i + 0.5) / steps);
-          float h = length(samplePos) - 1.0;
-          sampled += exp(-h * 3.5);
-        }
-        return sampled * (rayLen / steps);
-      }
-
       void main() {
         vec3 viewDir = normalize(-vPosition);
         vec3 normal = normalize(vNormal);
-        vec3 sunN = normalize(sunDir);
-
         float rim = 1.0 - max(dot(viewDir, normal), 0.0);
-
-        // Optical depth for view ray
-        float viewDepth = opticalDepth(vWorldPos, viewDir, 1.5);
-        float sunDepth = opticalDepth(vWorldPos, sunN, 2.0);
-
-        // Wavelength-dependent Rayleigh (RGB channels scatter differently)
-        float rayleighR = exp(-viewDepth * 0.3) * exp(-sunDepth * 0.3);
-        float rayleighG = exp(-viewDepth * 0.5) * exp(-sunDepth * 0.5);
-        float rayleighB = exp(-viewDepth * 0.8) * exp(-sunDepth * 0.8);
-
-        // Final scatter color — blue dominates (shorter wavelength scatters more)
-        vec3 scatter = vec3(
-          scatterColor.r * rayleighR * 0.4 + rim * 0.3,
-          scatterColor.g * rayleighG * 0.6 + rim * 0.5,
-          scatterColor.b * rayleighB * 1.0 + rim * 0.8
-        );
-
-        // Sun-facing forward scattering (Mie approximation)
-        float sunDot = max(dot(normal, sunN), 0.0);
-        float mie = pow(sunDot, 12.0) * intensity * 0.6;
-        scatter += vec3(mie * 0.9, mie * 0.7, mie) * 0.5;
-
-        // Limb darkening — brighter at the edges
-        float limb = pow(rim, 2.5) * intensity;
-        scatter *= 0.4 + limb * 0.6;
-
-        float alpha = clamp(length(scatter) * intensity * 0.55, 0.0, 0.85);
-        gl_FragColor = vec4(scatter * intensity, alpha);
+        float rimPow = pow(rim, 4.0);
+        vec3 scattering = scatterColor * rimPow * intensity;
+        float sunDot = max(dot(normal, normalize(sunDir)), 0.0);
+        float forwardScatter = pow(sunDot, 8.0) * intensity * 0.5;
+        scattering += vec3(forwardScatter * 0.8, forwardScatter * 0.6, forwardScatter);
+        float multiScatter = rimPow * rim * intensity * 0.3;
+        scattering += vec3(multiScatter * 0.3, multiScatter * 0.5, multiScatter);
+        float alpha = max(length(scattering), rimPow * intensity * 0.5);
+        gl_FragColor = vec4(scattering, alpha * 0.65);
       }
     `,
     uniforms: {
@@ -1567,16 +1479,14 @@ function buildNebulaBackground() {
   canvas.width = 2048; canvas.height = 1024;
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#000003'; ctx.fillRect(0, 0, 2048, 1024);
-  // Colorful nebula clouds — richer colors
+  // Colorful nebula clouds
   const nebulae = [
-    { x: 500, y: 350, rx: 450, ry: 280, color: [60, 20, 110], op: 0.14 },
-    { x: 1500, y: 250, rx: 500, ry: 320, color: [110, 20, 45], op: 0.11 },
-    { x: 1050, y: 750, rx: 400, ry: 220, color: [20, 55, 110], op: 0.12 },
-    { x: 250, y: 800, rx: 350, ry: 200, color: [90, 25, 100], op: 0.09 },
-    { x: 1800, y: 550, rx: 300, ry: 380, color: [30, 65, 100], op: 0.1 },
-    { x: 800, y: 150, rx: 280, ry: 180, color: [100, 40, 75], op: 0.08 },
-    { x: 1200, y: 400, rx: 380, ry: 260, color: [40, 80, 60], op: 0.07 },
-    { x: 300, y: 200, rx: 320, ry: 240, color: [80, 30, 50], op: 0.06 },
+    { x: 500, y: 350, rx: 450, ry: 280, color: [50, 15, 90], op: 0.12 },
+    { x: 1500, y: 250, rx: 500, ry: 320, color: [90, 15, 35], op: 0.09 },
+    { x: 1050, y: 750, rx: 400, ry: 220, color: [15, 45, 90], op: 0.1 },
+    { x: 250, y: 800, rx: 350, ry: 200, color: [70, 20, 80], op: 0.07 },
+    { x: 1800, y: 550, rx: 300, ry: 380, color: [25, 50, 80], op: 0.08 },
+    { x: 800, y: 150, rx: 280, ry: 180, color: [80, 30, 60], op: 0.06 },
   ];
   nebulae.forEach(n => {
     const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, Math.max(n.rx, n.ry));
@@ -1586,8 +1496,8 @@ function buildNebulaBackground() {
     ctx.fillStyle = grd;
     ctx.beginPath(); ctx.ellipse(n.x, n.y, n.rx, n.ry, Math.random() * 0.5, 0, Math.PI * 2); ctx.fill();
   });
-  // Dust wisps — more and varied
-  for (let i = 0; i < 200; i++) {
+  // Dust wisps
+  for (let i = 0; i < 150; i++) {
     const x = Math.random() * 2048, y = Math.random() * 1024, r = 15 + Math.random() * 80;
     const hue = 180 + Math.random() * 120;
     const grd = ctx.createRadialGradient(x, y, 0, x, y, r);
@@ -1595,7 +1505,7 @@ function buildNebulaBackground() {
     ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
   }
   // Bright distant star clusters
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < 300; i++) {
     const x = Math.random() * 2048, y = Math.random() * 1024;
     const s = Math.random() * 1.5 + 0.3;
     ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.5 + 0.1})`;
@@ -1607,7 +1517,7 @@ function buildNebulaBackground() {
   scene.add(new THREE.Mesh(geo, mat));
 
   // ── 3D NEBULA DUST CLOUDS (volumetric gas) ──
-  const dustCount = 2500;
+  const dustCount = 3000;
   const dustGeo = new THREE.BufferGeometry();
   const dustPos = new Float32Array(dustCount * 3);
   const dustSizes = new Float32Array(dustCount);
@@ -1674,7 +1584,7 @@ function buildNebulaBackground() {
   nebulaParticles.push(dustPoints);
 
   // ── BRIGHT GLOWING STARDUST (sparkle particles) ──
-  const sparkleCount = 600;
+  const sparkleCount = 800;
   const sparkleGeo = new THREE.BufferGeometry();
   const sparklePos = new Float32Array(sparkleCount * 3);
   const sparkleSizes = new Float32Array(sparkleCount);
@@ -2044,8 +1954,6 @@ function buildPlanet(key) {
     const moonMat = new THREE.MeshPhongMaterial(moonMatOpts);
     const moonMesh = new THREE.Mesh(moonGeo, moonMat);
     moonMesh.userData = { isMoon: true, name: 'Moon' };
-    moonMesh.castShadow = true;
-    moonMesh.receiveShadow = true;
     group.add(moonMesh);
     planetObjects['Earth_moon'] = moonMesh;
     // Store Moon as a clickable planet object for panel display
