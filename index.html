@@ -191,20 +191,21 @@
   <div id="controls-hint">
     <div class="hint-project-name">Sinfonía Cósmica</div>
     <p>
-      Arrastrar — Contemplar &nbsp;|&nbsp; SCROLL — Acercarse
+      Arrastrar — Contemplar | SCROLL — Acercarse
     </p>
     <p>
-      CLICK — Descubrir &nbsp;|&nbsp; Doble clic — Viaje estelar
+      CLICK — Descubrir | Doble clic — Viaje estelar
     </p>
     <p>
-      ← → — Fluir &nbsp;|&nbsp; 1-9 — Trascender
+      ← → — Fluir | 1-9 — Trascender
     </p>
     <p>
-      F — Navegar &nbsp;|&nbsp; T — Sinfonía<br>
-
+      F — Navegar | T — Sinfonía<br>
+    </p>
+    <p>
+      P — Capturar | M — Melodía
     </p>
   </div>
-  P — Capturar &nbsp;|&nbsp; M — Melodía
   </div>
 
   <!-- ZOOM INDICATOR -->
@@ -278,58 +279,47 @@
   <!-- TOOLTIP -->
   <div id="tooltip"></div>
 
-<!-- PLANET NAV -->
-<div id="planet-nav">
-  <div class="nav-track">
-    <button class="nav-btn" data-planet="Sun" onclick="focusPlanet('Sun')">
-      <span class="nav-planet-name">Sol</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Sun"></span>
-    </button>
-    <button class="nav-btn" data-planet="Mercury" onclick="focusPlanet('Mercury')">
-      <span class="nav-planet-name">Mercurio</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Mercury"></span>
-    </button>
-    <button class="nav-btn" data-planet="Venus" onclick="focusPlanet('Venus')">
-      <span class="nav-planet-name">Venus</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Venus"></span>
-    </button>
-    <button class="nav-btn" data-planet="Earth" onclick="focusPlanet('Earth')">
-      <span class="nav-planet-name">Tierra</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Earth"></span>
-    </button>
-    <button class="nav-btn" data-planet="Mars" onclick="focusPlanet('Mars')">
-      <span class="nav-planet-name">Marte</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Mars"></span>
-    </button>
-    <button class="nav-btn" data-planet="Jupiter" onclick="focusPlanet('Jupiter')">
-      <span class="nav-planet-name">Jupiter</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Jupiter"></span>
-    </button>
-    <button class="nav-btn" data-planet="Saturn" onclick="focusPlanet('Saturn')">
-      <span class="nav-planet-name">Saturno</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Saturn"></span>
-    </button>
-    <button class="nav-btn" data-planet="Uranus" onclick="focusPlanet('Uranus')">
-      <span class="nav-planet-name">Urano</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Uranus"></span>
-    </button>
-    <button class="nav-btn" data-planet="Neptune" onclick="focusPlanet('Neptune')">
-      <span class="nav-planet-name">Neptuno</span>
-      <span class="nav-orb"><img src="img/earth.png" alt="Neptune"></span>
-    </button>
+  <!-- PLANET NAV -->
+  <div id="planet-nav">
+    <div class="nav-track">
+      <button class="nav-btn" data-planet="Sun" onclick="focusPlanet('Sun')">
+        <span class="nav-planet-name">Sol</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Sun"></span>
+      </button>
+      <button class="nav-btn" data-planet="Mercury" onclick="focusPlanet('Mercury')">
+        <span class="nav-planet-name">Mercurio</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Mercury"></span>
+      </button>
+      <button class="nav-btn" data-planet="Venus" onclick="focusPlanet('Venus')">
+        <span class="nav-planet-name">Venus</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Venus"></span>
+      </button>
+      <button class="nav-btn" data-planet="Earth" onclick="focusPlanet('Earth')">
+        <span class="nav-planet-name">Tierra</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Earth"></span>
+      </button>
+      <button class="nav-btn" data-planet="Mars" onclick="focusPlanet('Mars')">
+        <span class="nav-planet-name">Marte</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Mars"></span>
+      </button>
+      <button class="nav-btn" data-planet="Jupiter" onclick="focusPlanet('Jupiter')">
+        <span class="nav-planet-name">Jupiter</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Jupiter"></span>
+      </button>
+      <button class="nav-btn" data-planet="Saturn" onclick="focusPlanet('Saturn')">
+        <span class="nav-planet-name">Saturno</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Saturn"></span>
+      </button>
+      <button class="nav-btn" data-planet="Uranus" onclick="focusPlanet('Uranus')">
+        <span class="nav-planet-name">Urano</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Uranus"></span>
+      </button>
+      <button class="nav-btn" data-planet="Neptune" onclick="focusPlanet('Neptune')">
+        <span class="nav-planet-name">Neptuno</span>
+        <span class="nav-orb"><img src="img/earth.png" alt="Neptune"></span>
+      </button>
+    </div>
   </div>
-</div>
-<div class="nav-controls">
-  <button class="nav-ctrl-btn" onclick="navPlanet(-1)" title="Anterior">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" fill="none" style="transform:scaleX(-1)"><path d="M31.7261 15.9148C25.2964 15.9148 20.0781 10.5769 20.0781 3.99988" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/><path d="M31.7261 15.9149C25.2964 15.9149 20.0781 21.2528 20.0781 27.8298" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/><path d="M32 15.9147L0 15.9147" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/></svg>
-  </button>
-  <button class="nav-ctrl-btn nav-ctrl-reset" onclick="resetView()" title="Reiniciar">
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-  </button>
-  <button class="nav-ctrl-btn" onclick="navPlanet(1)" title="Siguiente">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" fill="none"><path d="M31.7261 15.9148C25.2964 15.9148 20.0781 10.5769 20.0781 3.99988" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/><path d="M31.7261 15.9149C25.2964 15.9149 20.0781 21.2528 20.0781 27.8298" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/><path d="M32 15.9147L0 15.9147" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/></svg>
-  </button>
-</div>
 
   <!-- PLANET PANEL (compact) -->
   <div id="planet-panel">
@@ -673,34 +663,58 @@
         track.scrollLeft = scrollLeft - (x - startX) * 1.5;
       }, { passive: true });
 
-      // Center scale — planet in the middle is bigger, smooth Apple-style
+      // Center scale — wave effect from focused planet
+      let hoveredBtn = null;
+
       function updateCenterScale() {
         const trackRect = track.getBoundingClientRect();
         const center = trackRect.left + trackRect.width / 2;
-        const hasActive = track.querySelector('.nav-btn.active');
+        const activeBtn = track.querySelector('.nav-btn.active');
+        const focusBtn = hoveredBtn || activeBtn;
 
         btns.forEach(btn => {
           const rect = btn.getBoundingClientRect();
           const btnCenter = rect.left + rect.width / 2;
-          const dist = Math.abs(btnCenter - center);
+          const distFromCenter = Math.abs(btnCenter - center);
           const maxDist = trackRect.width / 2;
-          const norm = Math.min(dist / maxDist, 1);
-          const isActive = btn.classList.contains('active');
-          const orb = btn.querySelector('.nav-orb');
+          const normFromCenter = Math.min(distFromCenter / maxDist, 1);
 
+          const orb = btn.querySelector('.nav-orb');
           let size;
-          if (isActive) {
-            size = 68;
-          } else if (hasActive) {
-            size = 30 + (1 - norm) * 8;
+
+          if (focusBtn) {
+            const focusIdx = Array.from(btns).indexOf(focusBtn);
+            const btnIdx = Array.from(btns).indexOf(btn);
+            const dist = Math.abs(btnIdx - focusIdx);
+
+            if (dist === 0) {
+              size = 72;
+            } else if (dist === 1) {
+              size = 48;
+            } else if (dist === 2) {
+              size = 34;
+            } else {
+              size = 26;
+            }
           } else {
-            size = 36 + (1 - norm) * 20;
+            size = 36 + (1 - normFromCenter) * 20;
           }
 
           orb.style.width = `${size}px`;
           orb.style.height = `${size}px`;
         });
       }
+
+      btns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          hoveredBtn = btn;
+          updateCenterScale();
+        });
+        btn.addEventListener('mouseleave', () => {
+          hoveredBtn = null;
+          updateCenterScale();
+        });
+      });
 
       track.addEventListener('scroll', updateCenterScale);
       updateCenterScale();
