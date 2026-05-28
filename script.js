@@ -1135,7 +1135,7 @@ scene.add(hemiLight);
 const textureLoader = new THREE.TextureLoader();
 const REAL_TEXTURE_URLS = {
   // Sun
-  sun_map: 'https://cdn.jsdelivr.net/gh/jeromeetienne/threex.planets@master/images/sunmap.jpg',
+  sun_map: 'img/textures/sol.jpg',
   // Mercury
   mercury_map: 'https://cdn.jsdelivr.net/gh/jeromeetienne/threex.planets@master/images/mercurymap.jpg',
   mercury_bump: 'https://cdn.jsdelivr.net/gh/jeromeetienne/threex.planets@master/images/mercurybump.jpg',
@@ -1662,16 +1662,27 @@ function buildSun() {
   mesh.userData = { name: 'Sun', isSun: true };
   group.add(mesh);
 
-  // Corona layers
+  // Inner corona (hot white)
+  for (let i = 0; i < 3; i++) {
+    const sprite = createGlowSprite(0xFFF4E0, 7 + i * 1.2);
+    sprite.material.opacity = 0.08 - i * 0.015;
+    group.add(sprite);
+  }
+  // Mid corona (orange)
   for (let i = 0; i < 4; i++) {
-    const s = 6 + i * 1.5;
-    const sprite = createGlowSprite(0xFF8C00, s * 1.5);
-    sprite.material.opacity = 0.04 - i * 0.008;
+    const sprite = createGlowSprite(0xFF8C00, 9 + i * 2);
+    sprite.material.opacity = 0.05 - i * 0.008;
+    group.add(sprite);
+  }
+  // Outer corona (deep red)
+  for (let i = 0; i < 3; i++) {
+    const sprite = createGlowSprite(0xFF4500, 14 + i * 3);
+    sprite.material.opacity = 0.03 - i * 0.007;
     group.add(sprite);
   }
   // Outer bright glow
-  const bright = createGlowSprite(0xFFEE88, 10);
-  bright.material.opacity = 0.06;
+  const bright = createGlowSprite(0xFFEE88, 12);
+  bright.material.opacity = 0.08;
   group.add(bright);
 
   // ── LENS FLARE ──
@@ -1679,14 +1690,15 @@ function buildSun() {
   flareCanvas.width = flareCanvas.height = 256;
   const fctx = flareCanvas.getContext('2d');
   const fgrd = fctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-  fgrd.addColorStop(0, 'rgba(255,248,220,0.6)');
-  fgrd.addColorStop(0.15, 'rgba(255,220,150,0.3)');
-  fgrd.addColorStop(0.4, 'rgba(255,180,80,0.06)');
-  fgrd.addColorStop(1, 'rgba(255,100,0,0)');
+  fgrd.addColorStop(0, 'rgba(255,248,220,0.7)');
+  fgrd.addColorStop(0.1, 'rgba(255,230,170,0.4)');
+  fgrd.addColorStop(0.3, 'rgba(255,180,80,0.1)');
+  fgrd.addColorStop(0.6, 'rgba(255,120,20,0.03)');
+  fgrd.addColorStop(1, 'rgba(255,80,0,0)');
   fctx.fillStyle = fgrd;
   fctx.fillRect(0, 0, 256, 256);
   const flareTex = new THREE.CanvasTexture(flareCanvas);
-  // Secondary flare element (smaller)
+  // Secondary flare element
   const flare2Canvas = document.createElement('canvas');
   flare2Canvas.width = flare2Canvas.height = 64;
   const f2ctx = flare2Canvas.getContext('2d');
@@ -1698,12 +1710,21 @@ function buildSun() {
   f2ctx.fillRect(0, 0, 64, 64);
   const flare2Tex = new THREE.CanvasTexture(flare2Canvas);
   const lensflare = new THREE.Lensflare();
-  lensflare.addElement(new THREE.LensflareElement(flareTex, 300, 0, new THREE.Color(0xFFF8DC)));
-  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 40, 0.3));
-  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 60, 0.4));
-  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 30, 0.5));
-  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 60, 0.6));
+  lensflare.addElement(new THREE.LensflareElement(flareTex, 350, 0, new THREE.Color(0xFFF8DC)));
+  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 50, 0.3));
+  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 80, 0.4));
+  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 35, 0.5));
+  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 70, 0.6));
+  lensflare.addElement(new THREE.LensflareElement(flare2Tex, 40, 0.7));
   group.add(lensflare);
+
+  // ── PULSE ANIMATION ──
+  group.userData._pulsePhase = 0;
+  group.userData._pulse = (dt) => {
+    group.userData._pulsePhase += dt * 0.8;
+    const s = 1 + Math.sin(group.userData._pulsePhase) * 0.015;
+    mesh.scale.set(s, s, s);
+  };
 
   scene.add(group);
   planetObjects['Sun'] = { group, mesh, data: PLANET_DATA['Sun'] };
@@ -2605,6 +2626,11 @@ function animate() {
 
   // Twinkling stars
   if (starUniforms) starUniforms.uTime.value = animationTime;
+
+  // Sun pulse
+  if (planetObjects.Sun && planetObjects.Sun.group.userData._pulse) {
+    planetObjects.Sun.group.userData._pulse(0.016 * speedMul);
+  }
 
   // Update luminous orbit lines
   updateOrbitLines(animationTime);
