@@ -1862,9 +1862,6 @@ function buildPlanet(key) {
 
   // Floating name label
   const esName = { Sun: 'Sol', Mercury: 'Mercurio', Venus: 'Venus', Earth: 'Tierra', Mars: 'Marte', Jupiter: 'Júpiter', Saturn: 'Saturno', Uranus: 'Urano', Neptune: 'Neptuno', Moon: 'Luna' }[key] || key;
-
-  // Floating name label
-  const esName = { Sun: 'Sol', Mercury: 'Mercurio', Venus: 'Venus', Earth: 'Tierra', Mars: 'Marte', Jupiter: 'Júpiter', Saturn: 'Saturno', Uranus: 'Urano', Neptune: 'Neptuno', Moon: 'Luna' }[key] || key;
   const nameLabel = createTextSprite(esName, {
     fontSize: 36,
     color: '#ffffff',
