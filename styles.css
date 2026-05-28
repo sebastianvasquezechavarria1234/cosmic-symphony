@@ -722,6 +722,7 @@ p {
   opacity: 0;
   pointer-events: none;
   filter: blur(20px);
+  transition: opacity 0.8s ease, filter 0.8s ease;
   overflow: hidden;
 }
 
@@ -729,7 +730,6 @@ p {
   opacity: 1;
   pointer-events: auto;
   filter: blur(0);
-  transition: opacity 0.8s ease, filter 0.8s ease;
 }
 
 .modal-scroll-area {
@@ -797,23 +797,11 @@ p {
   animation: charIn 0.5s ease forwards;
 }
 
-.modal.closing .modal-name-char {
-  animation: charOut 0.4s ease forwards;
-}
-
 @keyframes charIn {
   to {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0);
-  }
-}
-
-@keyframes charOut {
-  to {
-    opacity: 0;
-    filter: blur(10px);
-    transform: translateY(20px);
   }
 }
 
