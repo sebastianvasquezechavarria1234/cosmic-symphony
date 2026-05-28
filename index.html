@@ -674,51 +674,72 @@
         track.scrollLeft = scrollLeft - (x - startX) * 1.5;
       }, { passive: true });
 
-      // Center scale — wave effect from focused planet
+      // Center scale — smooth wave effect with lerp
       let hoveredBtn = null;
+      let rafId = null;
+      const currentSizes = new Map();
+      const targetSizes = new Map();
 
-      function updateCenterScale() {
-        const trackRect = track.getBoundingClientRect();
-        const center = trackRect.left + trackRect.width / 2;
+      btns.forEach(btn => currentSizes.set(btn, 36));
+      btns.forEach(btn => targetSizes.set(btn, 36));
+
+      function computeTargets() {
         const activeBtn = track.querySelector('.nav-btn.active');
         const focusBtn = hoveredBtn || activeBtn;
+        const trackRect = track.getBoundingClientRect();
+        const center = trackRect.left + trackRect.width / 2;
 
         btns.forEach(btn => {
-          const rect = btn.getBoundingClientRect();
-          const btnCenter = rect.left + rect.width / 2;
-          const distFromCenter = Math.abs(btnCenter - center);
-          const maxDist = trackRect.width / 2;
-          const normFromCenter = Math.min(distFromCenter / maxDist, 1);
-
-          const orb = btn.querySelector('.nav-orb');
           let size;
-
           if (focusBtn) {
             const focusIdx = Array.from(btns).indexOf(focusBtn);
             const btnIdx = Array.from(btns).indexOf(btn);
             const dist = Math.abs(btnIdx - focusIdx);
-
-            if (dist === 0) {
-              size = 72;
-            } else if (dist === 1) {
-              size = 48;
-            } else if (dist === 2) {
-              size = 34;
-            } else {
-              size = 26;
-            }
+            if (dist === 0) size = 72;
+            else if (dist === 1) size = 48;
+            else if (dist === 2) size = 34;
+            else size = 26;
           } else {
-            size = 36 + (1 - normFromCenter) * 20;
+            const rect = btn.getBoundingClientRect();
+            const btnCenter = rect.left + rect.width / 2;
+            const distFromCenter = Math.abs(btnCenter - center);
+            const maxDist = trackRect.width / 2;
+            const norm = Math.min(distFromCenter / maxDist, 1);
+            size = 36 + (1 - norm) * 20;
           }
-
-          orb.style.width = `${size}px`;
-          orb.style.height = `${size}px`;
+          targetSizes.set(btn, size);
         });
       }
 
-      // Hover on track container — no gap breaks
+      function animate() {
+        let needsUpdate = false;
+        btns.forEach(btn => {
+          const current = currentSizes.get(btn);
+          const target = targetSizes.get(btn);
+          const next = current + (target - current) * 0.18;
+          if (Math.abs(next - current) > 0.3) {
+            currentSizes.set(btn, next);
+            needsUpdate = true;
+          } else {
+            currentSizes.set(btn, target);
+          }
+          const orb = btn.querySelector('.nav-orb');
+          orb.style.width = `${currentSizes.get(btn)}px`;
+          orb.style.height = `${currentSizes.get(btn)}px`;
+        });
+        if (needsUpdate) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          rafId = null;
+        }
+      }
+
+      function startAnimation() {
+        computeTargets();
+        if (!rafId) rafId = requestAnimationFrame(animate);
+      }
+
       track.addEventListener('mousemove', (e) => {
-        const trackRect = track.getBoundingClientRect();
         let closest = null;
         let closestDist = Infinity;
         btns.forEach(btn => {
@@ -730,17 +751,13 @@
             closest = btn;
           }
         });
-        if (closestDist < 80) {
-          hoveredBtn = closest;
-        } else {
-          hoveredBtn = null;
-        }
-        updateCenterScale();
+        hoveredBtn = closestDist < 80 ? closest : null;
+        startAnimation();
       });
 
       track.addEventListener('mouseleave', () => {
         hoveredBtn = null;
-        updateCenterScale();
+        startAnimation();
       });
 
       btns.forEach(btn => {
@@ -750,13 +767,13 @@
             const btnRect = btn.getBoundingClientRect();
             const scrollTarget = btnRect.left - trackRect.left + track.scrollLeft - (trackRect.width / 2 - btnRect.width / 2);
             track.scrollTo({ left: scrollTarget, behavior: 'smooth' });
-            setTimeout(updateCenterScale, 400);
+            setTimeout(startAnimation, 400);
           }, 50);
         });
       });
 
-      window.updateNavScale = updateCenterScale;
-      window.addEventListener('resize', updateCenterScale);
+      window.updateNavScale = startAnimation;
+      window.addEventListener('resize', startAnimation);
     });
   </script>
 </body>
