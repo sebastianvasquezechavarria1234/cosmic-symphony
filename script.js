@@ -2212,6 +2212,7 @@ window.focusPlanet = function (name) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   const activeBtn = document.querySelector(`.nav-btn[data-planet="${name}"]`);
   if (activeBtn) activeBtn.classList.add('active');
+  if (window.updateNavScale) window.updateNavScale();
 
   // Particle burst at planet position
   const pObj = planetObjects[name];

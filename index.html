@@ -677,6 +677,7 @@
       function updateCenterScale() {
         const trackRect = track.getBoundingClientRect();
         const center = trackRect.left + trackRect.width / 2;
+        const hasActive = track.querySelector('.nav-btn.active');
 
         btns.forEach(btn => {
           const rect = btn.getBoundingClientRect();
@@ -684,10 +685,20 @@
           const dist = Math.abs(btnCenter - center);
           const maxDist = trackRect.width / 2;
           const norm = Math.min(dist / maxDist, 1);
-          const scale = 1 - norm * 0.35;
+          const isActive = btn.classList.contains('active');
           const orb = btn.querySelector('.nav-orb');
-          orb.style.width = `${36 + scale * 20}px`;
-          orb.style.height = `${36 + scale * 20}px`;
+
+          let size;
+          if (isActive) {
+            size = 68;
+          } else if (hasActive) {
+            size = 30 + (1 - norm) * 8;
+          } else {
+            size = 36 + (1 - norm) * 20;
+          }
+
+          orb.style.width = `${size}px`;
+          orb.style.height = `${size}px`;
         });
       }
 
@@ -707,6 +718,7 @@
         });
       });
 
+      window.updateNavScale = updateCenterScale;
       window.addEventListener('resize', updateCenterScale);
     });
   </script>
