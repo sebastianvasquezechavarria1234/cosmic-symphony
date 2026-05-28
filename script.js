@@ -1994,6 +1994,20 @@ function buildPlanet(key) {
 // Planets built via deferred queue below
 
 // ── ASTEROID BELT ──
+function createDotTexture() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 32;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.3, 'rgba(255,255,255,0.6)');
+  g.addColorStop(0.7, 'rgba(255,255,255,0.1)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 32, 32);
+  return new THREE.CanvasTexture(c);
+}
+
 function buildAsteroidBelt() {
   const count = 2500;
   const geo = new THREE.BufferGeometry();
@@ -2007,7 +2021,8 @@ function buildAsteroidBelt() {
     pos[i * 3 + 2] = Math.sin(a) * r;
   }
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const mat = new THREE.PointsMaterial({ color: 0x887766, size: 0.25, sizeAttenuation: true, transparent: true, opacity: 0.6 });
+  const dot = createDotTexture();
+  const mat = new THREE.PointsMaterial({ color: 0x887766, map: dot, size: 0.25, sizeAttenuation: true, transparent: true, opacity: 0.6 });
   scene.add(new THREE.Points(geo, mat));
 }
 // Asteroid belt built via deferred queue below
@@ -2026,7 +2041,8 @@ function buildKuiperBelt() {
     pos[i * 3 + 2] = Math.sin(a) * r;
   }
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const mat = new THREE.PointsMaterial({ color: 0x445566, size: 0.2, sizeAttenuation: true, transparent: true, opacity: 0.4 });
+  const dot = createDotTexture();
+  const mat = new THREE.PointsMaterial({ color: 0x445566, map: dot, size: 0.2, sizeAttenuation: true, transparent: true, opacity: 0.4 });
   scene.add(new THREE.Points(geo, mat));
 }
 // Kuiper belt built via deferred queue below
