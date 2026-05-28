@@ -2619,7 +2619,6 @@ function drawHeroBg(d) {
 let selectionParticles = null;
 function spawnSelectionParticles(position, color) {
   if (selectionParticles) { scene.remove(selectionParticles); selectionParticles.geometry.dispose(); selectionParticles.material.dispose(); }
-  if (selectionRing) { scene.remove(selectionRing); selectionRing.geometry.dispose(); selectionRing.material.dispose(); selectionRing = null; }
 
   // Circular particle texture
   const pCanvas = document.createElement('canvas');
@@ -2655,50 +2654,24 @@ function spawnSelectionParticles(position, color) {
   selectionParticles = new THREE.Points(geo, mat);
   selectionParticles.userData = { vel, life: 0, maxLife: 50 };
   scene.add(selectionParticles);
-
-  // Shockwave ring
-  const ringGeo = new THREE.RingGeometry(0.1, 0.3, 64);
-  const ringMat = new THREE.MeshBasicMaterial({
-    color: color || 0x4fc3f7, transparent: true, opacity: 0.8,
-    side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false,
-  });
-  selectionRing = new THREE.Mesh(ringGeo, ringMat);
-  selectionRing.position.copy(position);
-  selectionRing.lookAt(camera.position);
-  selectionRing.userData = { life: 0, maxLife: 30 };
-  scene.add(selectionRing);
 }
-let selectionRing = null;
 function updateSelectionParticles() {
-  if (selectionParticles) {
-    const sp = selectionParticles;
-    sp.userData.life++;
-    const t = sp.userData.life / sp.userData.maxLife;
-    const posArr = sp.geometry.attributes.position.array;
-    const vel = sp.userData.vel;
-    for (let i = 0; i < posArr.length; i += 3) {
-      posArr[i] += vel[i]; posArr[i + 1] += vel[i + 1]; posArr[i + 2] += vel[i + 2];
-      vel[i] *= 0.96; vel[i + 1] *= 0.96; vel[i + 2] *= 0.96;
-    }
-    sp.geometry.attributes.position.needsUpdate = true;
-    sp.material.opacity = 1 - t;
-    sp.material.size = 0.5 * (1 - t * 0.4);
-    if (sp.userData.life >= sp.userData.maxLife) {
-      scene.remove(sp); sp.geometry.dispose(); sp.material.dispose();
-      selectionParticles = null;
-    }
+  if (!selectionParticles) return;
+  const sp = selectionParticles;
+  sp.userData.life++;
+  const t = sp.userData.life / sp.userData.maxLife;
+  const posArr = sp.geometry.attributes.position.array;
+  const vel = sp.userData.vel;
+  for (let i = 0; i < posArr.length; i += 3) {
+    posArr[i] += vel[i]; posArr[i + 1] += vel[i + 1]; posArr[i + 2] += vel[i + 2];
+    vel[i] *= 0.96; vel[i + 1] *= 0.96; vel[i + 2] *= 0.96;
   }
-  if (selectionRing) {
-    const r = selectionRing;
-    r.userData.life++;
-    const t = r.userData.life / r.userData.maxLife;
-    const s = 1 + t * 8;
-    r.scale.set(s, s, s);
-    r.material.opacity = 0.8 * (1 - t);
-    if (r.userData.life >= r.userData.maxLife) {
-      scene.remove(r); r.geometry.dispose(); r.material.dispose();
-      selectionRing = null;
-    }
+  sp.geometry.attributes.position.needsUpdate = true;
+  sp.material.opacity = 1 - t;
+  sp.material.size = 0.5 * (1 - t * 0.4);
+  if (sp.userData.life >= sp.userData.maxLife) {
+    scene.remove(sp); sp.geometry.dispose(); sp.material.dispose();
+    selectionParticles = null;
   }
 }
 
