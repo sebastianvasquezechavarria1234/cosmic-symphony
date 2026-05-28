@@ -721,17 +721,15 @@ p {
   transform-style: preserve-3d;
   opacity: 0;
   pointer-events: none;
-  transform: scale(1.8);
-  filter: blur(24px);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), filter 0.4s ease;
+  filter: blur(20px);
   overflow: hidden;
 }
 
 #planet-modal.active {
   opacity: 1;
   pointer-events: auto;
-  transform: scale(1);
   filter: blur(0);
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
 .modal-scroll-area {

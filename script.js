@@ -2449,20 +2449,25 @@ window.openPlanetModal = function () {
   const modal = document.getElementById('planet-modal');
 
   canvas.style.transition = 'transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), filter 0.4s ease';
-  canvas.style.transform = 'scale(1.8)';
-  canvas.style.filter = 'blur(12px)';
+  canvas.style.transform = 'scale(2.5)';
+  canvas.style.filter = 'blur(20px)';
+
+  setTimeout(() => {
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+  }, 400);
 
   setTimeout(() => {
     modal.classList.remove('active');
     modal.offsetHeight;
     modal.classList.add('active');
-  }, 350);
+  }, 1400);
 
   setTimeout(() => {
     document.querySelectorAll('#modal-content .atmo-fill').forEach(el => {
       el.style.width = el.dataset.pct + '%';
     });
-  }, 450);
+  }, 1800);
 };
 
 window.closePlanetModal = function () {
@@ -2473,13 +2478,13 @@ window.closePlanetModal = function () {
 
   setTimeout(() => {
     canvas.style.transition = 'none';
-    canvas.style.transform = 'scale(-5)';
-    canvas.style.filter = 'blur(12px)';
+    canvas.style.transform = 'scale(0.4)';
+    canvas.style.filter = 'blur(20px)';
     canvas.style.opacity = '0';
 
-    canvas.offsetHeight; // force reflow
+    canvas.offsetHeight;
 
-    canvas.style.transition = 'transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), filter 0.6s ease, opacity 0.6s ease';
+    canvas.style.transition = 'transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), filter 0.4s ease, opacity 0.4s ease';
     canvas.style.transform = 'scale(1)';
     canvas.style.filter = 'blur(0)';
     canvas.style.opacity = '1';
