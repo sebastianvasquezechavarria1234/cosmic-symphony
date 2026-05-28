@@ -1487,13 +1487,13 @@ p {
   align-items: center;
   gap: 0.55rem;
   padding: 0.65rem 1.4rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
-  color: #000;
+  color: rgba(255, 255, 255, 0.35);
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.12);
+  box-shadow: none;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -1508,9 +1508,9 @@ p {
 }
 
 .ctrl-btn:hover {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.6);
   transform: scale(1.03);
-  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.2);
 }
 
 .ctrl-btn.active {
