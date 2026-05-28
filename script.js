@@ -1247,6 +1247,22 @@ function createStarfield() {
 }
 scene.add(createStarfield());
 
+// ── MILKY WAY BACKGROUND ──
+textureLoader.load('img/textures/8k_stars_milky_way.jpg', (milkyTex) => {
+  milkyTex.mapping = THREE.EquirectangularReflectionMapping;
+  const skyGeo = new THREE.SphereGeometry(900, 64, 64);
+  const skyMat = new THREE.MeshBasicMaterial({
+    map: milkyTex,
+    side: THREE.BackSide,
+    transparent: true,
+    opacity: 0.35,
+    depthWrite: false,
+  });
+  const sky = new THREE.Mesh(skyGeo, skyMat);
+  sky.rotation.y = Math.PI * 0.3;
+  scene.add(sky);
+});
+
 // ── PLANETS & OBJECTS ──
 const planetObjects = {};
 const orbitLines = [];
@@ -2252,9 +2268,13 @@ window.focusPlanet = function (name) {
     if (key === 'Sun' || key === 'Moon' || key.includes('_clouds')) return;
     const po = planetObjects[key];
     if (!po || !po.group) return;
+    const isFocused = (key === name);
     po.group.children.forEach(child => {
       if (child.userData && child.userData.isBorderRing) {
-        child.visible = (key !== name);
+        child.visible = !isFocused;
+      }
+      if (child.isSprite) {
+        child.material.opacity = isFocused ? 0.05 : 0.35;
       }
     });
   });
@@ -2301,6 +2321,9 @@ window.resetView = function () {
     po.group.children.forEach(child => {
       if (child.userData && child.userData.isBorderRing) {
         child.visible = true;
+      }
+      if (child.isSprite) {
+        child.material.opacity = 0.35;
       }
     });
   });
