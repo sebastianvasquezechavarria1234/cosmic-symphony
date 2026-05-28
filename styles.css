@@ -493,92 +493,67 @@ p {
 /* ── PLANET NAV BAR ── */
 #planet-nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.8rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-  z-index: 10;
-  flex-wrap: wrap;
-}
-
-#planet-nav {
-  position: fixed;
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  padding: 0.35rem;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  background: rgba(8, 8, 28, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
-  z-index: 10;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  width: 420px;
   max-width: 90vw;
-  overflow-x: auto;
-  scrollbar-width: none;
-  white-space: nowrap;
+  z-index: 10;
+  overflow: hidden;
 }
 
-#planet-nav::-webkit-scrollbar {
+.nav-track {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+}
+
+.nav-track::-webkit-scrollbar {
   display: none;
+}
+
+.nav-track:active {
+  cursor: grabbing;
 }
 
 .nav-btn {
   background: transparent;
   border: none;
-  border-radius: 100px;
-  padding: 0.45rem 1.1rem;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  color: rgba(255, 255, 255, 0.75);
+  padding: 0;
   cursor: pointer;
-  transition: color 0.25s, transform 0.2s;
-  position: relative;
-  z-index: 2;
   flex-shrink: 0;
   outline: none;
+  transition: transform 0.3s ease;
 }
 
-.nav-btn:hover {
-  color: #fff;
+.nav-orb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-btn.active {
-  color: #fff;
-  font-weight: 500;
+.nav-orb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.nav-indicator {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  z-index: 1;
-  transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    top 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    opacity 0.2s ease,
-    background-color 0.25s ease;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.nav-indicator.is-active {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.12);
+.nav-btn.active .nav-orb {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
 }
 
 /* ── TOOLTIP ── */
@@ -613,10 +588,14 @@ p {
   z-index: 30;
   opacity: 0;
   pointer-events: none;
+  filter: blur(20px);
+  transition: opacity 0.8s ease, filter 0.8s ease;
 }
 
 #planet-panel.open {
   pointer-events: auto;
+  opacity: 1;
+  filter: blur(0);
 }
 
 .panel-close {
@@ -678,6 +657,34 @@ p {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.panel-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(10px);
+  animation: panelCharIn 0.4s ease forwards;
+}
+
+#planet-panel.closing .panel-char {
+  animation: panelCharOut 0.3s ease forwards;
+}
+
+@keyframes panelCharIn {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes panelCharOut {
+  to {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
 }
 
 /* Saber más button */
@@ -3366,24 +3373,12 @@ p {
 
   /* Planet nav — horizontal scroll instead of wrap */
   #planet-nav {
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
-    gap: 0.3rem;
-    padding: 0.4rem 0.5rem;
-    scrollbar-width: none;
+    width: 320px;
   }
 
-  #planet-nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-btn {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.6rem;
-    white-space: nowrap;
-    flex-shrink: 0;
+  .nav-orb {
+    width: 40px;
+    height: 40px;
   }
 
   /* Header */
@@ -3639,12 +3634,13 @@ p {
 
   /* Landscape phone */
   #planet-nav {
-    padding: 0.3rem;
+    width: 280px;
+    bottom: 0.8rem;
   }
 
-  .nav-btn {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.55rem;
+  .nav-orb {
+    width: 34px;
+    height: 34px;
   }
 
   .ghud-top {

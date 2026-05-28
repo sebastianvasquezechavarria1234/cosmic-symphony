@@ -2210,8 +2210,8 @@ window.focusPlanet = function (name) {
   hint.classList.add('hidden');
   currentFocus = name;
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  const btns = document.querySelectorAll('.nav-btn');
-  btns.forEach(b => { if (b.textContent.trim().includes(name) || b.textContent.trim() === '☀ Sun' && name === 'Sun') b.classList.add('active'); });
+  const activeBtn = document.querySelector(`.nav-btn[data-planet="${name}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
 
   // Particle burst at planet position
   const pObj = planetObjects[name];
@@ -2271,12 +2271,19 @@ function showPlanetPanel(name) {
   // Short description (first paragraph before the life section)
   const shortDesc = d.description.split('<br><br>')[0];
 
+  // Wrap characters for animation
+  function wrapChars(text, delay = 0.03) {
+    return text.split('').map((c, i) =>
+      c === ' ' ? ' ' : `<span class="panel-char" style="animation-delay:${i * delay}s">${c}</span>`
+    ).join('');
+  }
+
   // Build panel content
   const body = document.getElementById('panel-body');
   body.innerHTML = `
-    <div class="panel-name">${d.name}</div>
-    <div class="panel-type">${d.type}</div>
-    <div class="panel-desc">${shortDesc}</div>
+    <div class="panel-name">${wrapChars(d.name)}</div>
+    <div class="panel-type">${wrapChars(d.type)}</div>
+    <div class="panel-desc">${wrapChars(shortDesc, 0.008)}</div>
     <div class="panel-footer-btn" onclick="openPlanetModal()">
       Saber más
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><g clip-path="url(#clip0_1460_2346)"><path d="M31.7261 15.9148C25.2964 15.9148 20.0781 10.5769 20.0781 3.99988" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path><path d="M31.7261 15.9149C25.2964 15.9149 20.0781 21.2528 20.0781 27.8298" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path><path d="M32 15.9147L0 15.9147" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path></g><defs><clipPath id="clip0_1460_2346"><rect width="32" height="32" fill="white"></rect></clipPath></defs></svg>
@@ -2286,21 +2293,10 @@ function showPlanetPanel(name) {
   // Store current planet name for the modal
   panel.dataset.planet = name;
 
-  // Kill any ongoing animation
-  gsap.killTweensOf(panel);
-
-  // Set initial state
-  gsap.set(panel, { opacity: 0, scaleX: 0, filter: 'blur(10px)', transformOrigin: '0 50%' });
-
-  // Animate in
-  gsap.to(panel, {
-    opacity: 1,
-    scaleX: 1,
-    filter: 'blur(0px)',
-    duration: 0.8,
-    ease: 'power3.out',
-    onStart: () => { panel.classList.add('open'); }
-  });
+  // Remove closing class if present
+  panel.classList.remove('closing');
+  panel.offsetHeight; // force reflow
+  panel.classList.add('open');
   panelOpen = true;
 }
 
@@ -2308,18 +2304,10 @@ window.closePanel = function () {
   panelOpen = false;
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   currentFocus = null;
-  gsap.killTweensOf(panel);
-  gsap.to(panel, {
-    opacity: 0,
-    y: 30,
-    scale: 0.95,
-    filter: 'blur(8px)',
-    duration: 0.4,
-    ease: 'power2.in',
-    onComplete: () => {
-      panel.classList.remove('open');
-    }
-  });
+  panel.classList.add('closing');
+  setTimeout(() => {
+    panel.classList.remove('open', 'closing');
+  }, 800);
 };
 
 // ── PLANET MODAL (full-screen details) ──

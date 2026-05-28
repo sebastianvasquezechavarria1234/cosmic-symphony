@@ -237,17 +237,35 @@
 
 <!-- PLANET NAV -->
 <div id="planet-nav">
-  <button class="nav-btn" onclick="focusPlanet('Sun')">☀ Sun</button>
-  <button class="nav-btn" onclick="focusPlanet('Mercury')">Mercury</button>
-  <button class="nav-btn" onclick="focusPlanet('Venus')">Venus</button>
-  <button class="nav-btn" onclick="focusPlanet('Earth')">Earth</button>
-  <button class="nav-btn" onclick="focusPlanet('Mars')">Mars</button>
-  <button class="nav-btn" onclick="focusPlanet('Jupiter')">Jupiter</button>
-  <button class="nav-btn" onclick="focusPlanet('Saturn')">Saturn</button>
-  <button class="nav-btn" onclick="focusPlanet('Uranus')">Uranus</button>
-  <button class="nav-btn" onclick="focusPlanet('Neptune')">Neptune</button>
-  <button class="nav-btn" id="btn-reset" onclick="resetView()">↺ Renacer</button>
-  <div class="nav-indicator"></div>
+  <div class="nav-track">
+    <button class="nav-btn" data-planet="Sun" onclick="focusPlanet('Sun')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Sun"></span>
+    </button>
+    <button class="nav-btn" data-planet="Mercury" onclick="focusPlanet('Mercury')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Mercury"></span>
+    </button>
+    <button class="nav-btn" data-planet="Venus" onclick="focusPlanet('Venus')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Venus"></span>
+    </button>
+    <button class="nav-btn" data-planet="Earth" onclick="focusPlanet('Earth')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Earth"></span>
+    </button>
+    <button class="nav-btn" data-planet="Mars" onclick="focusPlanet('Mars')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Mars"></span>
+    </button>
+    <button class="nav-btn" data-planet="Jupiter" onclick="focusPlanet('Jupiter')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Jupiter"></span>
+    </button>
+    <button class="nav-btn" data-planet="Saturn" onclick="focusPlanet('Saturn')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Saturn"></span>
+    </button>
+    <button class="nav-btn" data-planet="Uranus" onclick="focusPlanet('Uranus')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Uranus"></span>
+    </button>
+    <button class="nav-btn" data-planet="Neptune" onclick="focusPlanet('Neptune')">
+      <span class="nav-orb"><img src="img/earth.png" alt="Neptune"></span>
+    </button>
+  </div>
 </div>
 
 <!-- PLANET PANEL (compact) -->
@@ -517,79 +535,80 @@
     if (typeof lucide !== 'undefined') lucide.createIcons();
   };
 
-  // Sliding Planet Nav Highlight Indicator
+  // Planet Nav — Drag scroll + center scale
   document.addEventListener('DOMContentLoaded', function() {
-    const planetNav = document.getElementById('planet-nav');
-    const indicator = planetNav.querySelector('.nav-indicator');
-    const navBtns = planetNav.querySelectorAll('.nav-btn');
+    const track = document.querySelector('.nav-track');
+    if (!track) return;
+    const btns = track.querySelectorAll('.nav-btn');
 
-    function updateIndicator(targetElement, isSolid) {
-      if (!targetElement) {
-        indicator.style.opacity = '0';
-        return;
-      }
-      const rect = targetElement.getBoundingClientRect();
-      const parentRect = planetNav.getBoundingClientRect();
-      
-      const left = rect.left - parentRect.left + planetNav.scrollLeft;
-      const top = rect.top - parentRect.top;
-      
-      indicator.style.left = `${left}px`;
-      indicator.style.width = `${rect.width}px`;
-      indicator.style.top = `${top}px`;
-      indicator.style.height = `${rect.height}px`;
-      indicator.style.opacity = '1';
-      
-      if (isSolid) {
-        indicator.classList.add('is-active');
-      } else {
-        indicator.classList.remove('is-active');
-      }
-    }
+    // Drag to scroll
+    let isDragging = false;
+    let startX, scrollLeft;
 
-    function updateToActive() {
-      const activeBtn = planetNav.querySelector('.nav-btn.active');
-      if (activeBtn) {
-        updateIndicator(activeBtn, true);
-      } else {
-        updateIndicator(null);
-      }
-    }
-
-    // Add event listeners for hover and click
-    navBtns.forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        const isActive = btn.classList.contains('active');
-        updateIndicator(btn, isActive);
-      });
-      btn.addEventListener('mouseleave', () => {
-        updateToActive();
-      });
-      btn.addEventListener('click', () => {
-        // Delay slightly to allow the active class to be swapped by main script.js
-        setTimeout(updateToActive, 50);
-      });
+    track.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+      track.style.cursor = 'grabbing';
+    });
+    track.addEventListener('mouseleave', () => { isDragging = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mouseup', () => { isDragging = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.5;
     });
 
-    // Handle scroll events to maintain indicator position if container scrolls
-    planetNav.addEventListener('scroll', updateToActive);
+    // Touch drag
+    track.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    }, { passive: true });
+    track.addEventListener('touchend', () => { isDragging = false; });
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const x = e.touches[0].pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    }, { passive: true });
 
-    // Watch for class changes (active status swaps) using MutationObserver
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach(mutation => {
-        if (mutation.attributeName === 'class') {
-          updateToActive();
+    // Center scale — planet in the middle is bigger
+    function updateCenterScale() {
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let closest = null;
+      let closestDist = Infinity;
+
+      btns.forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        const btnCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(btnCenter - center);
+        const orb = btn.querySelector('.nav-orb');
+        const scale = Math.max(0.7, 1.3 - dist * 0.004);
+        orb.style.transform = `scale(${scale})`;
+        if (dist < closestDist) {
+          closestDist = dist;
+          closest = btn;
         }
       });
-    });
+    }
 
-    navBtns.forEach(btn => {
-      observer.observe(btn, { attributes: true });
-    });
+    track.addEventListener('scroll', updateCenterScale);
+    updateCenterScale();
 
-    // Set initial position
-    setTimeout(updateToActive, 300);
-    window.addEventListener('resize', updateToActive);
+    // Click on btn centers it
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          const trackRect = track.getBoundingClientRect();
+          const btnRect = btn.getBoundingClientRect();
+          const scrollTarget = btnRect.left - trackRect.left + track.scrollLeft - (trackRect.width / 2 - btnRect.width / 2);
+          track.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+          setTimeout(updateCenterScale, 350);
+        }, 50);
+      });
+    });
   });
 </script>
 </body>
