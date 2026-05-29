@@ -1069,7 +1069,7 @@ const uiOverlays = [
   document.getElementById('planet-panel'),
   document.getElementById('about-btn'),
   document.getElementById('header-game-btn'),
-  document.getElementById('zoom-indicator'),
+
   document.getElementById('ship-hud'),
   document.getElementById('minimap'),
 ];
@@ -2851,7 +2851,7 @@ function animate() {
   }
 
   // ── DYNAMIC LOD: adjust surface detail based on zoom distance ──
-  const zoomIndicator = document.getElementById('zoom-indicator');
+
   ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'].forEach(key => {
     const po = planetObjects[key];
     if (!po || !po.mesh || !po.mesh.material) return;
@@ -2890,24 +2890,37 @@ function animate() {
       controls.minDistance = Math.max(0.15, radius * 0.15);
     }
 
-    // Update zoom indicator
-    if (key === currentFocus && zoomIndicator) {
-      let label, color;
+    // Helper to animate hint text changes
+    window.changeHintText = function(newText) {
+      if (!hint || hint.dataset.currentText === newText) return;
+      hint.dataset.currentText = newText;
+      
+      if (hint.changeTimeout) clearTimeout(hint.changeTimeout);
+      
+      hint.style.opacity = '0';
+      hint.changeTimeout = setTimeout(() => {
+        hint.textContent = newText;
+        hint.style.color = 'rgba(255, 255, 255, 0.6)'; // Always use default color
+        hint.style.opacity = '1';
+      }, 500); // Wait for CSS opacity transition
+    };
+
+    // Update zoom indicator in the hint pill
+    if (key === currentFocus && hint) {
+      let label = '';
       if (zoomRatio < 1.8) {
-        label = '🔬 SURFACE VIEW'; color = '#ff6b35';
+        label = '✦ Vista superficial';
       } else if (zoomRatio < 4) {
-        label = '🛰️ LOW ORBIT'; color = '#4fc3f7';
+        label = '✦ Órbita baja';
       } else if (zoomRatio < 10) {
-        label = '🌍 ORBIT VIEW'; color = '#81c784';
+        label = '✦ Vista orbital';
       } else if (zoomRatio < 25) {
-        label = '🚀 APPROACH'; color = '#ba68c8';
+        label = '✦ Aproximación';
       } else {
-        label = ''; color = 'transparent';
+        label = '✦ Arrastra para navegar · Escribe MURPH para un eco del pasado';
       }
-      zoomIndicator.textContent = label;
-      zoomIndicator.style.color = color;
-      zoomIndicator.style.borderColor = label ? color : 'transparent';
-      zoomIndicator.style.opacity = label ? '1' : '0';
+
+      window.changeHintText(label);
     }
 
     // Fade labels based on distance (hide when very close)
@@ -2963,8 +2976,8 @@ function animate() {
   }
 
   // Reset zoom indicator when no focus
-  if (!currentFocus && zoomIndicator) {
-    zoomIndicator.style.opacity = '0';
+  if (!currentFocus && hint && typeof window.changeHintText === 'function') {
+    window.changeHintText('✦ Arrastra para navegar · Escribe MURPH para un eco del pasado');
   }
 
   composer.render();
