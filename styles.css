@@ -458,20 +458,22 @@ p {
 /* ── HINT ── */
 #hint {
   position: fixed;
-  bottom: 6rem;
+  bottom: 9rem;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 30px;
-  padding: 0.6rem 1.4rem;
-  font-size: 0.8rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.65rem;
+  font-weight: 200;
   color: rgba(255, 255, 255, 0.6);
   animation: pulse-hint 2.5s ease-in-out infinite;
   z-index: 10;
   pointer-events: none;
   transition: opacity 0.5s;
+  white-space: nowrap;
 }
 
 #hint.hidden {
@@ -1683,11 +1685,12 @@ a.ctrl-btn {
   left: 1rem;
   font-size: 0.55rem;
   font-weight: 100;
-  color: rgba(255, 255, 255, 0.2);
-  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0;
   z-index: 10;
-  line-height: 1.8;
+  line-height: 1.5;
   pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* ── PROGRESS BAR ── */
