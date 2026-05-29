@@ -2524,37 +2524,21 @@ window.openPlanetModal = function () {
   const scrollArea = modal.querySelector('.modal-scroll-area');
   if (scrollArea) scrollArea.scrollTop = 0;
 
-  if (window._modalSmoothScroll) {
-    scrollArea.removeEventListener('wheel', window._modalSmoothScroll);
-    window._modalSmoothScroll = null;
-  }
+  if (window._modalLenis) { window._modalLenis.destroy(); window._modalLenis = null; }
 
-  let targetScroll = scrollArea ? scrollArea.scrollTop : 0;
-  let currentScroll = targetScroll;
-  let animating = false;
-
-  function smoothWheel(e) {
-    e.preventDefault();
-    const maxScroll = scrollArea.scrollHeight - scrollArea.clientHeight;
-    targetScroll += e.deltaY * 1.5;
-    targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
-    if (!animating) {
-      animating = true;
-      gsap.to({ val: currentScroll }, {
-        val: targetScroll,
-        duration: 0.6,
-        ease: 'power2.out',
-        onUpdate: function () {
-          scrollArea.scrollTop = this.targets()[0].val;
-          currentScroll = this.targets()[0].val;
-        },
-        onComplete: () => { animating = false; }
-      });
+  if (scrollArea && typeof Lenis !== 'undefined') {
+    window._modalLenis = new Lenis({
+      wrapper: scrollArea,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+    function lenisRaf(time) {
+      window._modalLenis.raf(time);
+      requestAnimationFrame(lenisRaf);
     }
+    requestAnimationFrame(lenisRaf);
   }
-
-  window._modalSmoothScroll = smoothWheel;
-  if (scrollArea) scrollArea.addEventListener('wheel', smoothWheel, { passive: false });
 
   setTimeout(() => {
     document.querySelectorAll('#modal-content .atmo-fill').forEach(el => {
@@ -2564,13 +2548,8 @@ window.openPlanetModal = function () {
 };
 
 window.closePlanetModal = function () {
-  const modal = document.getElementById('planet-modal');
-  modal.classList.remove('active');
-  const scrollArea = modal.querySelector('.modal-scroll-area');
-  if (scrollArea && window._modalSmoothScroll) {
-    scrollArea.removeEventListener('wheel', window._modalSmoothScroll);
-    window._modalSmoothScroll = null;
-  }
+  document.getElementById('planet-modal').classList.remove('active');
+  if (window._modalLenis) { window._modalLenis.destroy(); window._modalLenis = null; }
 };
 
 function initPlanetModalEffects() {

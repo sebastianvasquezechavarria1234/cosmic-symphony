@@ -831,7 +831,6 @@ p {
   justify-content: center;
   padding: 3rem 1rem;
   transform-style: preserve-3d;
-  scroll-behavior: smooth;
 }
 
 .modal-scroll-area::-webkit-scrollbar {
