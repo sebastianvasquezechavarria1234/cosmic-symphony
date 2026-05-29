@@ -679,7 +679,7 @@ p {
 
 .panel-close {
   position: absolute;
-  top: 0.3rem;
+  top: calc(0.3rem + 10px);
   left: 0.8rem;
   width: 28px;
   height: 28px;
@@ -693,7 +693,6 @@ p {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.4);
   transition: all 0.25s;
-  margin-bottom: 10px;
   z-index: 5;
 }
 
