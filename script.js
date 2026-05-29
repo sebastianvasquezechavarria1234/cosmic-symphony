@@ -2157,6 +2157,25 @@ const tooltip = document.getElementById('tooltip');
 const hint = document.getElementById('hint');
 const panel = document.getElementById('planet-panel');
 
+let hintHideTimer = null;
+controls.addEventListener('start', () => {
+  if (hint && !hint.classList.contains('hidden')) {
+    hint.style.opacity = '0';
+    hint.style.filter = 'blur(8px)';
+    hint.style.transform = 'translateX(-50%) scale(0.9)';
+  }
+  clearTimeout(hintHideTimer);
+});
+controls.addEventListener('end', () => {
+  hintHideTimer = setTimeout(() => {
+    if (hint && !hint.classList.contains('hidden')) {
+      hint.style.opacity = '';
+      hint.style.filter = '';
+      hint.style.transform = '';
+    }
+  }, 2000);
+});
+
 function getClickableMeshes() {
   const meshes = [];
   Object.values(planetObjects).forEach(p => {
