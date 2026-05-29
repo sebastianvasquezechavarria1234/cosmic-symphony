@@ -3,6 +3,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
 
+.loader-title::first-letter,
+.welcome-title::first-letter,
+.welcome-launch-btn::first-letter,
+.nav-planet-name::first-letter,
+.planet-label::first-letter,
+.panel-footer-btn::first-letter,
+.modal-content .modal-name::first-letter,
+.hint-project-name::first-letter,
+.speed-label::first-letter,
+.ctrl-btn::first-letter,
+.tour-title::first-letter {
+  font-family: 'Great Vibes', cursive;
+}
+
 *,
 *::before,
 *::after {
