@@ -741,10 +741,6 @@ p {
   animation: panelCharIn 0.4s ease forwards;
 }
 
-#planet-panel.closing .panel-char {
-  animation: panelCharOut 0.3s ease forwards;
-}
-
 @keyframes panelCharIn {
   to {
     opacity: 1;
@@ -753,13 +749,6 @@ p {
   }
 }
 
-@keyframes panelCharOut {
-  to {
-    opacity: 0;
-    filter: blur(8px);
-    transform: translateY(10px);
-  }
-}
 
 /* Saber más button */
 .panel-footer-btn {
