@@ -2193,22 +2193,26 @@ renderer.domElement.addEventListener('mousemove', (e) => {
 });
 
 let hintTimeout;
-renderer.domElement.addEventListener('mousedown', () => {
-  renderer.domElement.style.cursor = 'grabbing';
+function hideHint() {
   hint.classList.add('hidden');
   clearTimeout(hintTimeout);
-});
-renderer.domElement.addEventListener('mousemove', () => {
-  hint.classList.add('hidden');
-  clearTimeout(hintTimeout);
-});
-renderer.domElement.addEventListener('mouseup', () => {
-  renderer.domElement.style.cursor = 'grab';
+}
+function scheduleHintShow() {
   clearTimeout(hintTimeout);
   hintTimeout = setTimeout(() => {
     if (!currentFocus && !panelOpen) hint.classList.remove('hidden');
   }, 3000);
+}
+renderer.domElement.addEventListener('mousedown', () => {
+  renderer.domElement.style.cursor = 'grabbing';
+  hideHint();
 });
+renderer.domElement.addEventListener('mouseup', () => {
+  renderer.domElement.style.cursor = 'grab';
+  scheduleHintShow();
+});
+controls.addEventListener('start', hideHint);
+controls.addEventListener('end', scheduleHintShow);
 
 renderer.domElement.addEventListener('click', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;

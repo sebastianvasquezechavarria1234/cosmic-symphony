@@ -1427,7 +1427,7 @@ p {
 /* Controls hint */
 #controls-hint {
   position: fixed;
-  top: 5rem;
+  top: 1.5rem;
   left: 1rem;
   font-size: 0.85rem;
   color: #fff;
@@ -1502,7 +1502,7 @@ p {
 /* ── CONTROLS PANEL (sidebar) ── */
 #controls-panel {
   position: fixed;
-  bottom: 3.5rem;
+  bottom: 8rem;
   right: 1rem;
   display: flex;
   flex-direction: column;
@@ -1681,7 +1681,7 @@ a.ctrl-btn {
 /* ── KEYBOARD HINTS ── */
 #controls-hint {
   position: fixed;
-  top: 5rem;
+  top: 1.5rem;
   left: 1rem;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.2);
@@ -2057,7 +2057,7 @@ a.ctrl-btn {
 /* ── MINIMAP ── */
 #minimap {
   position: fixed;
-  top: 5rem;
+  top: 1.5rem;
   right: 1rem;
   width: 160px;
   height: 160px;
@@ -3314,7 +3314,8 @@ a.ctrl-btn {
 
   /* Controls panel */
   #controls-panel {
-    bottom: 4rem;
+    bottom: 7rem;
+    top: auto;
     right: 0.3rem;
   }
 
@@ -3535,7 +3536,8 @@ a.ctrl-btn {
   }
 
   #controls-panel {
-    bottom: 3.2rem;
+    bottom: 6.5rem;
+    top: auto;
     right: 0.2rem;
   }
 
