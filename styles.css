@@ -1420,9 +1420,10 @@ p {
 /* Controls hint */
 #controls-hint {
   position: fixed;
-  top: 1.5rem;
+  top: 0.75rem;
   left: 1rem;
   font-size: 0.6rem;
+  font-weight: 200;
   color: rgba(255, 255, 255, 0.75);
   z-index: 10;
   line-height: 1.5;
