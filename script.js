@@ -2360,6 +2360,8 @@ function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
 // ═══════════════════════════════════════════════════════
 //  PLANET INFO PANEL
 // ═══════════════════════════════════════════════════════
+let closePanelTimeout = null;
+
 function showPlanetPanel(name) {
   const d = PLANET_DATA[name];
   if (!d) return;
@@ -2369,19 +2371,12 @@ function showPlanetPanel(name) {
   // Short description (first paragraph before the life section)
   const shortDesc = d.description.split('<br><br>')[0];
 
-  // Wrap characters for animation
-  function wrapChars(text, delay = 0.03) {
-    return text.split('').map((c, i) =>
-      c === ' ' ? ' ' : `<span class="panel-char" style="animation-delay:${i * delay}s">${c}</span>`
-    ).join('');
-  }
-
-  // Build panel content
+  // Build panel content directly, without character wrapping
   const body = document.getElementById('panel-body');
   body.innerHTML = `
-    <div class="panel-name">${wrapChars(d.name)}</div>
-    <div class="panel-type">${wrapChars(d.type)}</div>
-    <div class="panel-desc">${wrapChars(shortDesc, 0.008)}</div>
+    <div class="panel-name">${d.name}</div>
+    <div class="panel-type">${d.type}</div>
+    <div class="panel-desc">${shortDesc}</div>
     <div class="panel-footer-btn" onclick="openPlanetModal()">
       Saber más
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><g clip-path="url(#clip0_1460_2346)"><path d="M31.7261 15.9148C25.2964 15.9148 20.0781 10.5769 20.0781 3.99988" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path><path d="M31.7261 15.9149C25.2964 15.9149 20.0781 21.2528 20.0781 27.8298" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path><path d="M32 15.9147L0 15.9147" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"></path></g><defs><clipPath id="clip0_1460_2346"><rect width="32" height="32" fill="white"></rect></clipPath></defs></svg>
@@ -2393,6 +2388,12 @@ function showPlanetPanel(name) {
 
   // Make sure it is displayed before animating
   panel.style.display = 'block';
+
+  // Cancel any pending close animation
+  if (closePanelTimeout) {
+    clearTimeout(closePanelTimeout);
+    closePanelTimeout = null;
+  }
 
   // Remove closing class if present
   panel.classList.remove('closing');
@@ -2406,11 +2407,15 @@ window.closePanel = function () {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   currentFocus = null;
   panel.classList.add('closing');
-  setTimeout(() => {
-    panel.classList.remove('open', 'closing');
+  
+  if (closePanelTimeout) clearTimeout(closePanelTimeout);
+  
+  closePanelTimeout = setTimeout(() => {
     if (!panelOpen) {
+      panel.classList.remove('open', 'closing');
       panel.style.display = 'none';
     }
+    closePanelTimeout = null;
   }, 800);
 };
 
