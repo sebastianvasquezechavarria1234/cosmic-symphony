@@ -2418,6 +2418,14 @@ window.closePanel = function () {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   currentFocus = null;
   
+  // Freeze animated characters to static text so the parent blur transition doesn't lag
+  document.querySelectorAll('.panel-char').forEach(el => {
+    el.style.opacity = '1';
+    el.style.filter = 'none';
+    el.style.transform = 'none';
+    el.style.animation = 'none';
+  });
+
   // Remove .open immediately so the CSS blur/opacity transition triggers
   panel.classList.remove('open');
   panel.classList.add('closing');
