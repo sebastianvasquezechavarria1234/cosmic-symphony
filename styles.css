@@ -864,7 +864,7 @@ p {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
   transition: all 0.25s;
   z-index: 110;

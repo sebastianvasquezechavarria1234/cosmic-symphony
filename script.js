@@ -2521,6 +2521,41 @@ window.openPlanetModal = function () {
   modal.offsetHeight;
   modal.classList.add('active');
 
+  const scrollArea = modal.querySelector('.modal-scroll-area');
+  if (scrollArea) scrollArea.scrollTop = 0;
+
+  if (window._modalSmoothScroll) {
+    scrollArea.removeEventListener('wheel', window._modalSmoothScroll);
+    window._modalSmoothScroll = null;
+  }
+
+  let targetScroll = scrollArea ? scrollArea.scrollTop : 0;
+  let currentScroll = targetScroll;
+  let animating = false;
+
+  function smoothWheel(e) {
+    e.preventDefault();
+    const maxScroll = scrollArea.scrollHeight - scrollArea.clientHeight;
+    targetScroll += e.deltaY * 1.5;
+    targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+    if (!animating) {
+      animating = true;
+      gsap.to({ val: currentScroll }, {
+        val: targetScroll,
+        duration: 0.6,
+        ease: 'power2.out',
+        onUpdate: function () {
+          scrollArea.scrollTop = this.targets()[0].val;
+          currentScroll = this.targets()[0].val;
+        },
+        onComplete: () => { animating = false; }
+      });
+    }
+  }
+
+  window._modalSmoothScroll = smoothWheel;
+  if (scrollArea) scrollArea.addEventListener('wheel', smoothWheel, { passive: false });
+
   setTimeout(() => {
     document.querySelectorAll('#modal-content .atmo-fill').forEach(el => {
       el.style.width = el.dataset.pct + '%';
@@ -2529,7 +2564,13 @@ window.openPlanetModal = function () {
 };
 
 window.closePlanetModal = function () {
-  document.getElementById('planet-modal').classList.remove('active');
+  const modal = document.getElementById('planet-modal');
+  modal.classList.remove('active');
+  const scrollArea = modal.querySelector('.modal-scroll-area');
+  if (scrollArea && window._modalSmoothScroll) {
+    scrollArea.removeEventListener('wheel', window._modalSmoothScroll);
+    window._modalSmoothScroll = null;
+  }
 };
 
 function initPlanetModalEffects() {
