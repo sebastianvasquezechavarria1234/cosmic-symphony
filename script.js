@@ -3022,7 +3022,11 @@ window.toggleOrbits = function () {
 
 window.toggleMinimap = function () {
   const el = document.getElementById('minimap');
-  if (el) el.style.display = el.style.display === 'none' ? '' : 'none';
+  const btn = document.getElementById('sidebar-map-btn');
+  if (!el) return;
+  const isHidden = el.style.display === 'none';
+  el.style.display = isHidden ? '' : 'none';
+  if (btn) btn.classList.toggle('active', isHidden);
 };
 
 // ═══════════════════════════════════════════════════════
@@ -4095,12 +4099,11 @@ function updateMinimap() {
   const w = 160, h = 160;
   ctx.clearRect(0, 0, w, h);
 
-  // Background
-  ctx.fillStyle = 'rgba(5,5,20,0.8)';
-  ctx.beginPath(); ctx.arc(80, 80, 78, 0, Math.PI * 2); ctx.fill();
+  // Background — transparent so CSS white/10 shows through
+  // No fill: the #minimap CSS handles the background
 
-  // Border
-  ctx.strokeStyle = 'rgba(79,195,247,0.2)';
+  // Border ring
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
   ctx.lineWidth = 1;
   ctx.beginPath(); ctx.arc(80, 80, 78, 0, Math.PI * 2); ctx.stroke();
 

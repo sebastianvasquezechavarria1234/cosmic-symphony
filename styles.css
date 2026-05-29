@@ -2065,9 +2065,10 @@ a.ctrl-btn {
   right: 1rem;
   width: 160px;
   height: 160px;
-  background: rgba(5, 5, 20, 0.9);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   z-index: 15;
   overflow: hidden;
