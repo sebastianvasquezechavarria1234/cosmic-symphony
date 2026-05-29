@@ -1446,9 +1446,9 @@ p {
 /* Controls hint */
 #controls-hint {
   position: fixed;
-  top: 5rem;
+  top: 1.5rem;
   left: 1rem;
-  font-size: 0.85rem;
+  font-size: 0.6rem;
   color: #fff;
   z-index: 10;
   line-height: 1.6;
@@ -1700,13 +1700,13 @@ a.ctrl-btn {
 /* ── KEYBOARD HINTS ── */
 #controls-hint {
   position: fixed;
-  top: 5rem;
+  top: 1.5rem;
   left: 1rem;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.2);
-  letter-spacing: 1px;
+  font-size: 0.6rem;
+  color: #fff;
+  letter-spacing: 0;
   z-index: 10;
-  line-height: 1.8;
+  line-height: 1.6;
   pointer-events: none;
 }
 
@@ -2217,7 +2217,7 @@ a.ctrl-btn {
 /* ── MINIMAP ── */
 #minimap {
   position: fixed;
-  top: 5rem;
+  top: 1.5rem;
   right: 1rem;
   width: 160px;
   height: 160px;
