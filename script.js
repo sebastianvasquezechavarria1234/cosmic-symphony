@@ -2898,10 +2898,12 @@ function animate() {
       if (hint.changeTimeout) clearTimeout(hint.changeTimeout);
       
       hint.style.opacity = '0';
+      hint.style.filter = 'blur(6px)';
       hint.changeTimeout = setTimeout(() => {
         hint.textContent = newText;
         hint.style.color = 'rgba(255, 255, 255, 0.6)'; // Always use default color
         hint.style.opacity = '1';
+        hint.style.filter = 'blur(0px)';
       }, 500); // Wait for CSS opacity transition
     };
 

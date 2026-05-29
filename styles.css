@@ -472,7 +472,7 @@ p {
   animation: pulse-hint 2.5s ease-in-out infinite;
   z-index: 10;
   pointer-events: none;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, filter 0.5s;
   white-space: nowrap;
 }
 
