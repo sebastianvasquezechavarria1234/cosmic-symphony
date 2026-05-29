@@ -2192,8 +2192,19 @@ renderer.domElement.addEventListener('mousemove', (e) => {
   }
 });
 
-renderer.domElement.addEventListener('mousedown', () => { renderer.domElement.style.cursor = 'grabbing'; });
-renderer.domElement.addEventListener('mouseup', () => { renderer.domElement.style.cursor = 'grab'; });
+let hintTimeout;
+renderer.domElement.addEventListener('mousedown', () => {
+  renderer.domElement.style.cursor = 'grabbing';
+  hint.classList.add('hidden');
+  clearTimeout(hintTimeout);
+});
+renderer.domElement.addEventListener('mouseup', () => {
+  renderer.domElement.style.cursor = 'grab';
+  clearTimeout(hintTimeout);
+  hintTimeout = setTimeout(() => {
+    if (!currentFocus && !panelOpen) hint.classList.remove('hidden');
+  }, 3000);
+});
 
 renderer.domElement.addEventListener('click', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
