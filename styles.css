@@ -7,14 +7,33 @@
 .welcome-title::first-letter,
 .welcome-launch-btn::first-letter,
 .nav-planet-name::first-letter,
-.planet-label::first-letter,
+.panel-body .panel-name::first-letter,
 .panel-footer-btn::first-letter,
 .modal-content .modal-name::first-letter,
+.modal-name-char:first-child,
 .hint-project-name::first-letter,
 .speed-label::first-letter,
 .ctrl-btn::first-letter,
-.tour-title::first-letter {
+.tour-title::first-letter,
+.ach-title::first-letter,
+.game-title::first-letter,
+.game-final-score::first-letter,
+.game-final-label::first-letter,
+.game-high-score::first-letter,
+.game-mission-title::first-letter,
+.ghud-level-name::first-letter,
+.glvl-title::first-letter,
+.gvic-title::first-letter,
+.about-name::first-letter,
+.ghud-score::first-letter,
+.gvic-stat-val::first-letter,
+.gvic-stat-label::first-letter,
+.stat-value::first-letter,
+.moon-count::first-letter,
+.temp-value::first-letter,
+.wh-dest-name::first-letter {
   font-family: 'Great Vibes', cursive;
+  margin-right: 0.15em;
 }
 
 *,
@@ -3843,52 +3862,4 @@ a.ctrl-btn {
 .welcome-img:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
-}
-
-/* ── TITLE FIRST-LETTER FONT RULES ── */
-.loader-title,
-.welcome-title,
-.site-title,
-.section-title,
-.tour-title,
-.ach-title,
-.game-title,
-.game-final-score,
-.game-final-label,
-.game-high-score,
-.game-mission-title,
-.ghud-level-name,
-.glvl-title,
-.gvic-title,
-.about-name,
-.ghud-score,
-.gvic-stat-val,
-.gvic-stat-label,
-.stat-value,
-.moon-count,
-.temp-value,
-.wh-dest-name {}
-
-.loader-title::first-letter,
-.welcome-title::first-letter,
-.site-title::first-letter,
-.tour-title::first-letter,
-.ach-title::first-letter,
-.game-title::first-letter,
-.game-final-score::first-letter,
-.game-final-label::first-letter,
-.game-high-score::first-letter,
-.game-mission-title::first-letter,
-.ghud-level-name::first-letter,
-.glvl-title::first-letter,
-.gvic-title::first-letter,
-.about-name::first-letter,
-.ghud-score::first-letter,
-.gvic-stat-val::first-letter,
-.gvic-stat-label::first-letter,
-.stat-value::first-letter,
-.moon-count::first-letter,
-.temp-value::first-letter,
-.wh-dest-name::first-letter {
-  font-family: 'Great Vibes', cursive;
 }
