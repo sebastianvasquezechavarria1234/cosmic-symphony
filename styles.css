@@ -2158,47 +2158,6 @@ a.ctrl-btn {
   z-index: 55;
 }
 
-/* ── ACHIEVEMENTS ── */
-#achievement-popup {
-  position: fixed;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  padding: 0.8rem 1.8rem;
-  z-index: 45;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-#achievement-popup.show {
-  top: 1.5rem;
-}
-
-.ach-icon {
-  display: none;
-}
-
-.ach-text {}
-
-.ach-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  color: #fff;
-  letter-spacing: 1px;
-}
-
-.ach-desc {
-  font-size: 0.7rem;
-  font-weight: 200;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 2px;
-}
-
 /* ── MINIMAP ── */
 #minimap {
   position: fixed;
@@ -3566,12 +3525,6 @@ a.ctrl-btn {
     width: 90%;
     max-width: 500px;
     bottom: 4.5rem;
-  }
-
-  /* Achievement popup */
-  #achievement-popup {
-    max-width: 90vw;
-    padding: 0.6rem 1rem;
   }
 
   /* Hint bar */

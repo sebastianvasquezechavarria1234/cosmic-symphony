@@ -3962,38 +3962,9 @@ let showingAchievement = false;
 function unlockAchievement(id, icon, title, desc) {
   if (achievements[id]) return;
   achievements[id] = true;
-  achievementQueue.push({ icon, title, desc });
-  if (!showingAchievement) showNextAchievement();
 }
 
 function showNextAchievement() {
-  if (achievementQueue.length === 0) { showingAchievement = false; return; }
-  showingAchievement = true;
-  const a = achievementQueue.shift();
-  const popup = document.getElementById('achievement-popup');
-  document.getElementById('ach-icon').textContent = a.icon;
-  document.getElementById('ach-title').textContent = a.title;
-  document.getElementById('ach-desc').textContent = a.desc;
-  popup.classList.add('show');
-
-  // Achievement sound — ascending arpeggio
-  if (audioCtx) {
-    const now = audioCtx.currentTime;
-    [440, 554.37, 659.25, 880].forEach((f, i) => {
-      const o = audioCtx.createOscillator(); o.type = 'sine'; o.frequency.value = f;
-      const g = audioCtx.createGain();
-      g.gain.setValueAtTime(0, now + i * 0.1);
-      g.gain.linearRampToValueAtTime(0.08, now + i * 0.1 + 0.04);
-      g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.5);
-      o.connect(g); g.connect(audioCtx.destination);
-      o.start(now + i * 0.1); o.stop(now + i * 0.1 + 0.6);
-    });
-  }
-
-  setTimeout(() => {
-    popup.classList.remove('show');
-    setTimeout(() => showNextAchievement(), 400);
-  }, 3500);
 }
 
 // Track planet visits for achievements
