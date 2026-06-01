@@ -2293,6 +2293,7 @@ window.focusPlanet = function (name) {
 };
 
 window.resetView = function () {
+  if (screensaverMode) toggleScreensaver();
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   currentFocus = null;
 
