@@ -4461,6 +4461,8 @@ window.toggleMusic = function () {
 //  INTRO + DEFERRED LOADING — build one body per frame to stay responsive
 // ═══════════════════════════════════════════════════════
 const loadingEl = document.getElementById('loading');
+const introTitle = document.getElementById('intro-title');
+splitTextToChars(introTitle, '✦ Sinfonía Cósmica', 0.03);
 const presentsEl = document.getElementById('intro-presents');
 const presentsText = document.getElementById('presents-text');
 
@@ -4505,34 +4507,18 @@ function showPresents() {
     loadingEl.remove();
     presentsEl.classList.add('active');
 
-    // After animation + read time, reverse characters out
     setTimeout(() => {
-      const chars = presentsText.querySelectorAll('.presents-char');
-      const total = chars.length;
-      chars.forEach((ch, i) => {
-        setTimeout(() => {
-          ch.style.animation = 'none';
-          ch.style.transition = 'opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease';
-          ch.style.opacity = '0';
-          ch.style.filter = 'blur(10px)';
-          ch.style.transform = 'translateY(-20px)';
-        }, (total - i) * 30);
-      });
-
-      // After all chars reversed, hide screen and show welcome
+      presentsEl.classList.add('hidden');
       setTimeout(() => {
-        presentsEl.classList.add('hidden');
-        setTimeout(() => {
-          presentsEl.remove();
-          if (buildDone) {
-            showWelcomeScreen();
-            phase = 'welcome';
-          } else {
-            phase = 'welcome';
-          }
-        }, 1000);
-      }, total * 20 + 400);
-    }, 3000);
+        presentsEl.remove();
+        if (buildDone) {
+          showWelcomeScreen();
+          phase = 'welcome';
+        } else {
+          phase = 'welcome';
+        }
+      }, 1000);
+    }, 3500);
   }, 1000);
 }
 

@@ -53,6 +53,10 @@ p {
   overflow: hidden;
 }
 
+#loading .presents-char {
+  animation-play-state: running;
+}
+
 #loading.hidden {
   opacity: 0;
   pointer-events: none;
@@ -61,14 +65,15 @@ p {
 .intro-title {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.2rem, 3vw, 2rem);
   font-weight: 400;
   color: #fff;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: introFadeIn 1.2s ease-out 0.3s forwards;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
 }
 
 @keyframes introFadeIn {
@@ -780,6 +785,14 @@ p {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0);
+  }
+}
+
+@keyframes charOut {
+  to {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
   }
 }
 
