@@ -118,14 +118,6 @@ p {
   gap: 0;
 }
 
-.presents-tagline {
-  color: rgba(255, 255, 255, 0.35);
-  font-family: 'Google Sans Flex', sans-serif;
-  font-style: normal;
-  font-size: clamp(0.8rem, 1.8vw, 1.1rem);
-  font-weight: 300;
-}
-
 .presents-char {
   display: inline-block;
   opacity: 0;
@@ -133,6 +125,14 @@ p {
   transform: translateY(20px);
   animation: charIn 0.5s ease forwards;
   animation-play-state: paused;
+}
+
+.presents-char.presents-tagline {
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Google Sans Flex', sans-serif;
+  font-style: normal;
+  font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+  font-weight: 300;
 }
 
 #intro-presents.active .presents-char {
