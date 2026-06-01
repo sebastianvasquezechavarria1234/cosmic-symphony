@@ -1475,44 +1475,9 @@ function createAtmosphereScattering(radius, color, intensity) {
 // ── NEBULA BACKGROUND ──
 const nebulaParticles = [];
 function buildNebulaBackground() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 2048; canvas.height = 1024;
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#000003'; ctx.fillRect(0, 0, 2048, 1024);
-  // Colorful nebula clouds
-  const nebulae = [
-    { x: 500, y: 350, rx: 450, ry: 280, color: [50, 15, 90], op: 0.12 },
-    { x: 1500, y: 250, rx: 500, ry: 320, color: [90, 15, 35], op: 0.09 },
-    { x: 1050, y: 750, rx: 400, ry: 220, color: [15, 45, 90], op: 0.1 },
-    { x: 250, y: 800, rx: 350, ry: 200, color: [70, 20, 80], op: 0.07 },
-    { x: 1800, y: 550, rx: 300, ry: 380, color: [25, 50, 80], op: 0.08 },
-    { x: 800, y: 150, rx: 280, ry: 180, color: [80, 30, 60], op: 0.06 },
-  ];
-  nebulae.forEach(n => {
-    const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, Math.max(n.rx, n.ry));
-    grd.addColorStop(0, `rgba(${n.color[0]},${n.color[1]},${n.color[2]},${n.op})`);
-    grd.addColorStop(0.4, `rgba(${n.color[0]},${n.color[1]},${n.color[2]},${n.op * 0.5})`);
-    grd.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grd;
-    ctx.beginPath(); ctx.ellipse(n.x, n.y, n.rx, n.ry, Math.random() * 0.5, 0, Math.PI * 2); ctx.fill();
-  });
-  // Dust wisps
-  for (let i = 0; i < 150; i++) {
-    const x = Math.random() * 2048, y = Math.random() * 1024, r = 15 + Math.random() * 80;
-    const hue = 180 + Math.random() * 120;
-    const grd = ctx.createRadialGradient(x, y, 0, x, y, r);
-    grd.addColorStop(0, `hsla(${hue},50%,25%,0.05)`); grd.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-  }
-  // Bright distant star clusters
-  for (let i = 0; i < 300; i++) {
-    const x = Math.random() * 2048, y = Math.random() * 1024;
-    const s = Math.random() * 1.5 + 0.3;
-    ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.5 + 0.1})`;
-    ctx.beginPath(); ctx.arc(x, y, s, 0, Math.PI * 2); ctx.fill();
-  }
-  const tex = new THREE.CanvasTexture(canvas);
-  const geo = new THREE.SphereGeometry(900, 32, 32);
+  const tex = new THREE.TextureLoader().load('img/textures/8k_stars_milky_way.jpg');
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const geo = new THREE.SphereGeometry(900, 64, 64);
   const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide, depthWrite: false });
   scene.add(new THREE.Mesh(geo, mat));
 
