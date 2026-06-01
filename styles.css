@@ -431,7 +431,6 @@ p {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  overflow: hidden;
 }
 
 .nav-track {
@@ -439,7 +438,7 @@ p {
   align-items: flex-end;
   gap: 0.2rem;
   padding: 0.5rem 1rem;
-  overflow-x: auto;
+
   scrollbar-width: none;
   cursor: grab;
   -webkit-overflow-scrolling: touch;
