@@ -224,7 +224,7 @@ p {
   position: relative;
   z-index: 3;
   text-align: center;
-  animation: welcomeFadeIn 0.8s ease-out;
+  animation: welcomeFadeIn 0.4s ease-out;
   max-width: 560px;
   padding: 2rem;
   will-change: transform;
@@ -258,6 +258,20 @@ p {
   to {
     opacity: 1;
     filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes elemBlurIn {
+  from {
+    opacity: 0;
+    filter: blur(10px) drop-shadow(0 0 60px rgba(79, 195, 247, 0.25));
+    transform: scale(1.5);
+  }
+
+  to {
+    opacity: 0.7;
+    filter: blur(0) drop-shadow(0 0 60px rgba(79, 195, 247, 0.25));
     transform: scale(1);
   }
 }
@@ -3553,8 +3567,8 @@ a.ctrl-btn {
   z-index: 2;
   pointer-events: none;
   opacity: 0.7;
-  filter: drop-shadow(0 0 60px rgba(79, 195, 247, 0.25));
-  animation: fadeInOnly 1s ease-out 0.3s both;
+  filter: drop-shadow(0 0 60px rgba(79, 195, 247, 0.25)) blur(0);
+  animation: elemBlurIn 0.6s ease-out 0.2s both;
 }
 
 .welcome-galaxy {
@@ -3580,9 +3594,8 @@ a.ctrl-btn {
   z-index: 2;
   pointer-events: none;
   opacity: 0.5;
-  border-radius: 12px;
-  filter: drop-shadow(0 0 30px rgba(200, 180, 255, 0.15));
-  animation: fadeInOnly 1s ease-out 0.6s both;
+  filter: drop-shadow(0 0 30px rgba(200, 180, 255, 0.15)) blur(0);
+  animation: elemBlurIn 0.6s ease-out 0.3s both;
 }
 
 .welcome-images {
