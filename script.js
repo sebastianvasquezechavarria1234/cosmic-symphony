@@ -1089,7 +1089,7 @@ camera.position.set(0, 40, 120);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
-controls.minDistance = 0.3;
+controls.minDistance = 3;
 controls.maxDistance = 500;
 controls.enablePan = true;
 controls.panSpeed = 1.2;
@@ -2202,17 +2202,7 @@ renderer.domElement.addEventListener('click', (e) => {
   }
 });
 
-// Double-click to zoom to surface level
-renderer.domElement.addEventListener('dblclick', (e) => {
-  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-  const hits = raycaster.intersectObjects(getClickableMeshes());
-  if (hits.length > 0 && hits[0].object.userData.name) {
-    const name = hits[0].object.userData.name;
-    if (name !== 'Moon') surfaceZoom(name, hits[0].point);
-  }
-});
+// Double-click a planet to open modal
 
 // Fly camera to surface-level view of a planet
 window.surfaceZoom = function (name, hitPoint) {
@@ -2236,7 +2226,7 @@ window.surfaceZoom = function (name, hitPoint) {
   cameraOffset = camPos;
   cameraLerpT = 0;
   isCameraAnimating = true;
-  controls.minDistance = Math.max(0.15, data.radius * 0.15);
+  controls.minDistance = 3;
   showPlanetPanel(name);
 };
 
@@ -2283,7 +2273,7 @@ window.focusPlanet = function (name) {
   isCameraAnimating = true;
 
   // Set dynamic zoom limits for this planet
-  controls.minDistance = Math.max(0.15, data.radius * 0.15);
+  controls.minDistance = 3;
 
   // Show panel
   showPlanetPanel(name);
@@ -2315,7 +2305,7 @@ window.resetView = function () {
   cameraOffset = new THREE.Vector3(0, 40, 120);
   cameraLerpT = 0;
   isCameraAnimating = true;
-  controls.minDistance = 0.3; // Reset to default
+  controls.minDistance = 3; // Reset to default
   closePanel();
   hint.classList.remove('hidden');
 };
@@ -2863,7 +2853,7 @@ function animate() {
 
     // Dynamic minDistance — prevent camera from going inside any planet
     if (key === currentFocus) {
-      controls.minDistance = Math.max(0.15, radius * 0.15);
+      controls.minDistance = 3;
     }
 
     // Helper to animate hint text changes
@@ -4497,21 +4487,15 @@ let qi = 0;
 let buildDone = false;
 let phase = 'loading'; // loading -> presents -> welcome
 
-function splitTextToChars(el, text) {
+function splitTextToChars(el, text, delay = 0.03) {
   el.innerHTML = '';
   for (let i = 0; i < text.length; i++) {
     const span = document.createElement('span');
     span.className = 'presents-char' + (text[i] === ' ' ? ' space' : '');
+    span.style.animationDelay = `${delay + i * 0.06}s`;
     span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
     el.appendChild(span);
   }
-}
-
-function animateChars(el, startDelay) {
-  const chars = el.querySelectorAll('.presents-char');
-  chars.forEach((ch, i) => {
-    setTimeout(() => ch.classList.add('visible'), startDelay + i * 60);
-  });
 }
 
 function showPresents() {
@@ -4524,9 +4508,6 @@ function showPresents() {
   setTimeout(() => {
     loadingEl.remove();
     presentsEl.classList.add('active');
-    animateChars(presentsTitle, 300);
-    animateChars(presentsSubtitle, 1000);
-    animateChars(presentsTagline, 1600);
 
     setTimeout(() => {
       presentsEl.classList.add('hidden');

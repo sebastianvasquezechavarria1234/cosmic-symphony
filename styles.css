@@ -151,15 +151,14 @@ p {
 .presents-char {
   display: inline-block;
   opacity: 0;
-  filter: blur(12px);
-  transform: scale(1.6);
-  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
+  filter: blur(10px);
+  transform: translateY(20px);
+  animation: charIn 0.5s ease forwards;
+  animation-play-state: paused;
 }
 
-.presents-char.visible {
-  opacity: 1;
-  filter: blur(0);
-  transform: scale(1);
+#intro-presents.active .presents-char {
+  animation-play-state: running;
 }
 
 .presents-char.space {
