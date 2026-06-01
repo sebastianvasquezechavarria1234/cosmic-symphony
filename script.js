@@ -4487,9 +4487,11 @@ let phase = 'loading'; // loading -> presents -> welcome
 
 function splitTextToChars(el, text, delay = 0.03) {
   el.innerHTML = '';
+  const taglineStart = text.indexOf('Un viaje');
   for (let i = 0; i < text.length; i++) {
     const span = document.createElement('span');
-    span.className = 'presents-char' + (text[i] === ' ' ? ' space' : '');
+    const isTagline = i >= taglineStart;
+    span.className = 'presents-char' + (text[i] === ' ' ? ' space' : '') + (isTagline ? ' presents-tagline' : '');
     span.style.animationDelay = `${delay + i * 0.06}s`;
     span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
     el.appendChild(span);
@@ -4498,23 +4500,7 @@ function splitTextToChars(el, text, delay = 0.03) {
 
 function showPresents() {
   phase = 'presents';
-  presentsText.innerHTML = '';
-
-  const line1 = document.createElement('div');
-  line1.className = 'presents-line';
-  splitTextToChars(line1, '✦ Sinfonía Cósmica', 0.03);
-
-  const line2 = document.createElement('div');
-  line2.className = 'presents-line';
-  splitTextToChars(line2, 'presenta', 0.03);
-
-  const line3 = document.createElement('div');
-  line3.className = 'presents-line presents-tagline';
-  splitTextToChars(line3, 'Un viaje más allá de las estrellas', 0.03);
-
-  presentsText.appendChild(line1);
-  presentsText.appendChild(line2);
-  presentsText.appendChild(line3);
+  splitTextToChars(presentsText, '✦ Sinfonía Cósmica presenta Un viaje más allá de las estrellas', 0.03);
 
   loadingEl.classList.add('hidden');
   setTimeout(() => {
