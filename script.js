@@ -1475,9 +1475,14 @@ function createAtmosphereScattering(radius, color, intensity) {
 // ── NEBULA BACKGROUND ──
 const nebulaParticles = [];
 function buildNebulaBackground() {
-  const tex = new THREE.TextureLoader().load('img/textures/8k_stars_milky_way.jpg');
-  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  const geo = new THREE.SphereGeometry(900, 64, 64);
+  const tex = new THREE.TextureLoader().load('img/textures/8k_stars_milky_way.jpg', (loaded) => {
+    loaded.generateMipmaps = true;
+    loaded.minFilter = THREE.LinearMipmapLinearFilter;
+    loaded.magFilter = THREE.LinearFilter;
+    loaded.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    loaded.needsUpdate = true;
+  });
+  const geo = new THREE.SphereGeometry(900, 96, 96);
   const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide, depthWrite: false });
   scene.add(new THREE.Mesh(geo, mat));
 
