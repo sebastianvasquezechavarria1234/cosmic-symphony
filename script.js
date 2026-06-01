@@ -2061,30 +2061,34 @@ function updateShootingStars() {
 let cometGroup, cometTrail;
 function buildComet() {
   cometGroup = new THREE.Group();
-  // Comet nucleus
-  const nucleusGeo = new THREE.SphereGeometry(0.3, 16, 16);
-  const nucleusMat = new THREE.MeshBasicMaterial({ color: 0xccddff });
+  // Comet nucleus — bigger and brighter
+  const nucleusGeo = new THREE.SphereGeometry(0.6, 16, 16);
+  const nucleusMat = new THREE.MeshBasicMaterial({ color: 0xeeeeff });
   cometGroup.add(new THREE.Mesh(nucleusGeo, nucleusMat));
-  // Coma glow
-  const coma = createGlowSprite(0x88bbff, 4);
-  coma.material.opacity = 0.5;
+  // Coma glow — much bigger
+  const coma = createGlowSprite(0x88bbff, 8);
+  coma.material.opacity = 0.7;
   cometGroup.add(coma);
-  // Tail particles — realistic with varying lengths
-  const tailCount = 1500;
+  // Second inner glow
+  const innerComa = createGlowSprite(0xffffff, 3);
+  innerComa.material.opacity = 0.5;
+  cometGroup.add(innerComa);
+  // Tail particles — more visible
+  const tailCount = 2000;
   const tailPos = new Float32Array(tailCount * 3);
   const tailSizes = new Float32Array(tailCount);
   const tailLengths = new Float32Array(tailCount);
   for (let i = 0; i < tailCount; i++) {
     const t = Math.random();
-    const dist = t * 20 + 0.5;
-    const spread = dist * 0.15;
+    const dist = t * 25 + 0.5;
+    const spread = dist * 0.18;
     const angle = Math.random() * Math.PI * 2;
     const r = Math.random() * spread;
     tailPos[i * 3] = -dist;
     tailPos[i * 3 + 1] = Math.cos(angle) * r;
     tailPos[i * 3 + 2] = Math.sin(angle) * r;
-    tailSizes[i] = 0.1 + Math.random() * 0.35;
-    tailLengths[i] = 0.5 + Math.random() * 2.5;
+    tailSizes[i] = 0.2 + Math.random() * 0.5;
+    tailLengths[i] = 0.5 + Math.random() * 3.0;
   }
   const tailGeo = new THREE.BufferGeometry();
   tailGeo.setAttribute('position', new THREE.BufferAttribute(tailPos, 3));
@@ -2100,8 +2104,8 @@ function buildComet() {
       void main() {
         vLength = aLength;
         vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = aSize * (200.0 / -mvPos.z);
-        vAlpha = 1.0 - smoothstep(0.0, 20.0, -position.x);
+        gl_PointSize = aSize * (250.0 / -mvPos.z);
+        vAlpha = 1.0 - smoothstep(0.0, 25.0, -position.x);
         gl_Position = projectionMatrix * mvPos;
       }
     `,
@@ -2112,15 +2116,13 @@ function buildComet() {
         vec2 uv = gl_PointCoord - 0.5;
         float d = length(uv);
         if (d > 0.5) discard;
-        // Elongated streak shape
         float streak = 1.0 - smoothstep(0.0, 0.5, d);
         streak = pow(streak, 1.5);
-        // Stretch along x axis for streak effect
         float stretch = 1.0 - abs(uv.x) * 2.0 * vLength;
         stretch = max(stretch, 0.0);
         float glow = streak * (0.5 + stretch * 0.5);
-        vec3 col = mix(vec3(0.5, 0.7, 1.0), vec3(0.8, 0.9, 1.0), streak);
-        gl_FragColor = vec4(col, vAlpha * glow * 0.5);
+        vec3 col = mix(vec3(0.5, 0.7, 1.0), vec3(0.9, 0.95, 1.0), streak);
+        gl_FragColor = vec4(col, vAlpha * glow * 0.7);
       }
     `,
     transparent: true,
@@ -2129,14 +2131,14 @@ function buildComet() {
   });
   cometTrail = new THREE.Points(tailGeo, tailMat);
   cometGroup.add(cometTrail);
-  // Floating label
+  // Floating label — bigger
   const cometLabel = createTextSprite('☄ Cometa Halley', {
-    fontSize: 30,
+    fontSize: 40,
     color: '#aaddff',
     glowColor: '#88bbff',
-    scale: 2.0,
+    scale: 3.0,
   });
-  cometLabel.position.y = 2;
+  cometLabel.position.y = 3;
   cometGroup.add(cometLabel);
   cometGroup.userData = { angle: 0, orbitRadius: 80, orbitSpeed: 0.002, inclination: 0.4 };
   scene.add(cometGroup);
