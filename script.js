@@ -4039,7 +4039,7 @@ function activateTarsEgg() {
 // ═══════════════════════════════════════════════════════
 let screensaverMode = false;
 let screensaverTimer = null;
-const screensaverTargets = ['Sun', 'Earth', 'Saturn', 'Jupiter', 'Mars', 'Neptune', 'Venus', 'Uranus', 'Mercury'];
+const screensaverTargets = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
 let screensaverIdx = 0;
 
 window.toggleScreensaver = function () {
@@ -4066,27 +4066,9 @@ function doScreensaverStep() {
   const target = screensaverTargets[screensaverIdx % screensaverTargets.length];
   screensaverIdx++;
 
-  // Use wormhole travel every 3rd planet, normal flight otherwise
-  if (screensaverIdx % 3 === 0 && !wormholeActive) {
-    triggerWormhole(target, () => {
-      const po = planetObjects[target];
-      if (!po) return;
-      const wp = new THREE.Vector3();
-      if (target === 'Sun') wp.set(0, 0, 0);
-      else po.group.getWorldPosition(wp);
-      const data = PLANET_DATA[target];
-      const dist = data.radius * 5 + 8;
-      camera.position.copy(wp).add(new THREE.Vector3(dist * 0.7, dist * 0.5, dist));
-      controls.target.copy(wp);
-      controls.update();
-      currentFocus = target;
-    });
-  } else {
-    focusPlanet(target);
-  }
+  focusPlanet(target);
 
-  // Slowly orbit around the planet during screensaver
-  screensaverTimer = setTimeout(() => doScreensaverStep(), 12000);
+  screensaverTimer = setTimeout(() => doScreensaverStep(), 5000);
 }
 
 // ═══════════════════════════════════════════════════════
