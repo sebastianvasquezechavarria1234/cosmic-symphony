@@ -3613,3 +3613,9 @@ a.ctrl-btn {
   transform: translateY(-4px);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
 }
+
+@media (max-width: 1000px) {
+  .welcome-images {
+    bottom: 0;
+  }
+}
