@@ -1087,13 +1087,16 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerH
 camera.position.set(0, 40, 120);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = false;
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
 controls.minDistance = 0.3;
 controls.maxDistance = 500;
 controls.enablePan = true;
-controls.panSpeed = 1.5;
-controls.zoomSpeed = 3.0;
-controls.rotateSpeed = 2.0;
+controls.panSpeed = 1.2;
+controls.zoomSpeed = 2.5;
+controls.rotateSpeed = 1.8;
+controls.maxPolarAngle = Math.PI * 0.85;
+controls.minPolarAngle = Math.PI * 0.15;
 
 // ── POST-PROCESSING (Bloom) ──
 const composer = new THREE.EffectComposer(renderer);
