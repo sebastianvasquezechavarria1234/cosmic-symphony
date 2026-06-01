@@ -201,6 +201,7 @@ p {
   animation: welcomeFadeIn 0.8s ease-out;
   max-width: 560px;
   padding: 2rem;
+  margin-bottom: 15vh;
   will-change: transform;
   backface-visibility: hidden;
 }
