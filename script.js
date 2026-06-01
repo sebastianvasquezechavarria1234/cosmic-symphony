@@ -1778,7 +1778,7 @@ function buildPlanet(key) {
 
   // Rayleigh scattering atmosphere (realistic)
   const _atmoColors = { Venus: '#E8B96F', Earth: '#4fc3f7', Mars: '#C06030', Jupiter: '#D4A843', Saturn: '#F0D090', Uranus: '#7DE8E8', Neptune: '#5D6CC0' };
-  if (_atmoColors[key]) {
+  if (false && _atmoColors[key]) {
     const atmoIntensity = (key === 'Mars') ? 0.5 : (key === 'Earth') ? 1.8 : (key === 'Venus') ? 1.5 : (key === 'Jupiter') ? 1.0 : (key === 'Saturn') ? 0.9 : 1.2;
     group.add(createAtmosphereScattering(data.radius, _atmoColors[key], atmoIntensity));
   }
@@ -1804,21 +1804,6 @@ function buildPlanet(key) {
   // Apply real axial tilt
   if (data.axialTilt) mesh.rotation.z = data.axialTilt;
   group.add(mesh);
-
-  // Border shell (visible from far, hidden on focus)
-  const borderThickness = data.radius * 0.12 + 0.15;
-  const borderGeo = new THREE.SphereGeometry(data.radius + borderThickness, 48, 48);
-  const borderMat = new THREE.MeshBasicMaterial({
-    color: parseInt(data.glowColor.replace('#', ''), 16),
-    transparent: true,
-    opacity: 0.25,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-  });
-  const border = new THREE.Mesh(borderGeo, borderMat);
-  border.userData.isBorderRing = true;
-  border.raycast = () => {};
-  group.add(border);
 
   // Planet glow sprite
   const hex = parseInt(data.glowColor.replace('#', ''), 16);
@@ -1949,7 +1934,6 @@ function buildPlanet(key) {
 
   planetObjects[key] = {
     group, mesh, data, angle,
-    border,
     isTerrestrial,
     baseDisplacementScale: (useRealEarth) ? 0 : (isTerrestrial && !useRealTex ? data.radius * 0.035 : 0),
     baseNormalScale: (useRealEarth) ? 3.0 : (isTerrestrial && !useRealTex ? 1.2 : 0),
