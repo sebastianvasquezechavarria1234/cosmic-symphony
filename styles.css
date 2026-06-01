@@ -567,19 +567,22 @@ p {
 #tooltip {
   position: fixed;
   pointer-events: none;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 30px;
-  padding: 0.5rem 0.9rem;
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  padding: 0.65rem 1.4rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  border-radius: 100px;
   z-index: 20;
   transition: opacity 0.2s;
   display: none;
+  white-space: nowrap;
 }
 
 /* ── PLANET INFO PANEL (compact, left-bottom) ── */

@@ -2134,10 +2134,11 @@ renderer.domElement.addEventListener('mousemove', (e) => {
   if (hits.length > 0) {
     const name = hits[0].object.userData.name;
     if (name) {
+      const esNames = { Sun: 'Sol', Mercury: 'Mercurio', Venus: 'Venus', Earth: 'Tierra', Mars: 'Marte', Jupiter: 'Júpiter', Saturn: 'Saturno', Uranus: 'Urano', Neptune: 'Neptuno', Moon: 'Luna' };
       tooltip.style.display = 'block';
       tooltip.style.left = (e.clientX + 14) + 'px';
       tooltip.style.top = (e.clientY - 14) + 'px';
-      tooltip.textContent = name;
+      tooltip.textContent = esNames[name] || name;
       renderer.domElement.style.cursor = 'pointer';
     } else {
       tooltip.style.display = 'none';
