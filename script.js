@@ -4700,15 +4700,6 @@ function launchExperience() {
     canvas.style.filter = 'blur(0)';
     cinematicIntro();
     setTimeout(() => { if (!musicPlaying && typeof toggleMusic === 'function') toggleMusic(); }, 800);
-
-    setTimeout(() => {
-      uiOverlays.forEach(el => {
-        if (el) {
-          el.style.opacity = '1';
-          el.style.pointerEvents = '';
-        }
-      });
-    }, 1000);
   }, 350);
 }
 
@@ -4728,6 +4719,12 @@ function cinematicIntro() {
       camera.position.copy(endPos);
       controls.target.copy(endTgt);
       controls.update();
+      uiOverlays.forEach(el => {
+        if (el) {
+          el.style.opacity = '1';
+          el.style.pointerEvents = '';
+        }
+      });
       animate();
       return;
     }
