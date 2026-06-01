@@ -567,11 +567,13 @@ p {
 #tooltip {
   position: fixed;
   pointer-events: none;
-  background: rgba(10, 10, 30, 0.9);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 0.5rem 0.9rem;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: 0.8rem;
   letter-spacing: 1px;
   color: #fff;

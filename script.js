@@ -1484,7 +1484,10 @@ function buildNebulaBackground() {
   });
   const geo = new THREE.SphereGeometry(900, 96, 96);
   const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide, depthWrite: false });
-  scene.add(new THREE.Mesh(geo, mat));
+  const bgMesh = new THREE.Mesh(geo, mat);
+  bgMesh.rotation.x = 0;
+  scene.add(bgMesh);
+  window._bgMesh = bgMesh;
 
   // ── 3D NEBULA DUST CLOUDS (volumetric gas) ──
   const dustCount = 3000;
@@ -2691,6 +2694,9 @@ function animate() {
 
   // Twinkling stars
   if (starUniforms) starUniforms.uTime.value = animationTime;
+
+  // Background galaxy follows camera
+  if (window._bgMesh) window._bgMesh.position.copy(camera.position);
 
   // Sun pulse
   if (planetObjects.Sun && planetObjects.Sun.group.userData._pulse) {
