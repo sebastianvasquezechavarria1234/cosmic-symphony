@@ -284,12 +284,12 @@ p {
 }
 
 .welcome-description {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: 18px;
+
+  color: rgba(255, 255, 255, 0.531);
   max-width: 450px;
   margin: 0 auto 3rem;
-  font-weight: 400;
+  font-weight: 200;
   letter-spacing: 0.2px;
 }
 
@@ -352,14 +352,17 @@ p {
 
 .welcome-footer {
   margin-top: 2.5rem;
-  font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.15);
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.34);
+
 }
 
 .welcome-footer a {
-  color: rgba(255, 255, 255, 0.3);
-  text-decoration: none;
+  font-size: 14px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.34);
+
   transition: color 0.2s;
 }
 
@@ -495,9 +498,9 @@ p {
   border: 1.5px solid rgba(255, 255, 255, 0.1);
   filter: grayscale(100%);
   transition: border-width 0.4s ease,
-              border-color 0.4s ease,
-              box-shadow 0.5s ease,
-              filter 0.5s ease;
+    border-color 0.4s ease,
+    box-shadow 0.5s ease,
+    filter 0.5s ease;
 }
 
 .nav-orb img {
