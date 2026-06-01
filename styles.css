@@ -106,7 +106,7 @@ p {
 .presents-text {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.2rem, 3vw, 2rem);
   font-weight: 400;
   color: #fff;
   letter-spacing: -0.01em;
@@ -125,14 +125,6 @@ p {
   transform: translateY(20px);
   animation: charIn 0.5s ease forwards;
   animation-play-state: paused;
-}
-
-.presents-char.presents-tagline {
-  color: rgba(255, 255, 255, 0.35);
-  font-family: 'Google Sans Flex', sans-serif;
-  font-style: normal;
-  font-size: clamp(0.8rem, 1.8vw, 1.1rem);
-  font-weight: 300;
 }
 
 #intro-presents.active .presents-char {
