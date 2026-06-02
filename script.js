@@ -2072,72 +2072,56 @@ function buildComet() {
   const innerComa = createGlowSprite(0xffffff, 3);
   innerComa.material.opacity = 0.5;
   cometGroup.add(innerComa);
-  // Tail particles — round with varied sizes
-  const tailCount = 2000;
-  const tailPos = new Float32Array(tailCount * 3);
-  const tailSizes = new Float32Array(tailCount);
-  for (let i = 0; i < tailCount; i++) {
-    const t = Math.random();
-    const dist = t * 25 + 0.5;
-    const spread = dist * 0.18;
-    const angle = Math.random() * Math.PI * 2;
-    const r = Math.random() * spread;
-    tailPos[i * 3] = -dist;
-    tailPos[i * 3 + 1] = Math.cos(angle) * r;
-    tailPos[i * 3 + 2] = Math.sin(angle) * r;
-    tailSizes[i] = 0.4 + Math.random() * 1.2;
-  }
-  const tailGeo = new THREE.BufferGeometry();
-  tailGeo.setAttribute('position', new THREE.BufferAttribute(tailPos, 3));
-  tailGeo.setAttribute('size', new THREE.BufferAttribute(tailSizes, 1));
-  // Round particle texture
-  const dotCanvas = document.createElement('canvas');
-  dotCanvas.width = dotCanvas.height = 256;
-  const dotCtx = dotCanvas.getContext('2d');
-  const dotGrad = dotCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
-  dotGrad.addColorStop(0, 'rgba(255,255,255,1)');
-  dotGrad.addColorStop(0.15, 'rgba(220,240,255,0.9)');
-  dotGrad.addColorStop(0.4, 'rgba(170,210,255,0.5)');
-  dotGrad.addColorStop(0.7, 'rgba(130,180,255,0.15)');
-  dotGrad.addColorStop(1, 'rgba(100,150,255,0)');
-  dotCtx.fillStyle = dotGrad;
-  dotCtx.fillRect(0, 0, 256, 256);
-  const dotTex = new THREE.CanvasTexture(dotCanvas);
-  dotTex.minFilter = THREE.LinearFilter;
-  dotTex.magFilter = THREE.LinearFilter;
-  const tailMat = new THREE.ShaderMaterial({
+  // Tail particles — round & varied sizes (3 layers)
+  const roundMat = (size, opacity) => new THREE.ShaderMaterial({
     uniforms: {
-      uColor: { value: new THREE.Color(0xaaddff) },
-      uTex: { value: dotTex },
-      uOpacity: { value: 0.7 },
+      uSize: { value: size },
+      uOpacity: { value: opacity },
     },
     vertexShader: `
-      attribute float size;
-      varying float vAlpha;
+      uniform float uSize;
       void main() {
         vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = size * (800.0 / -mvPos.z);
+        gl_PointSize = uSize * (300.0 / -mvPos.z);
         gl_Position = projectionMatrix * mvPos;
-        vAlpha = smoothstep(80.0, 5.0, -mvPos.z);
       }
     `,
     fragmentShader: `
-      uniform vec3 uColor;
-      uniform sampler2D uTex;
       uniform float uOpacity;
-      varying float vAlpha;
       void main() {
-        vec4 texColor = texture2D(uTex, gl_PointCoord);
-        gl_FragColor = vec4(uColor, texColor.a * uOpacity * vAlpha);
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float alpha = smoothstep(0.5, 0.2, d) * uOpacity;
+        gl_FragColor = vec4(0.67, 0.87, 1.0, alpha);
       }
     `,
     transparent: true,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
-  cometTrail = new THREE.Points(tailGeo, tailMat);
-  cometTrail.userData.isCometTrail = true;
-  cometGroup.add(cometTrail);
+
+  const layerConfigs = [
+    { count: 800, size: 4, opacity: 0.5 },
+    { count: 800, size: 10, opacity: 0.7 },
+    { count: 400, size: 20, opacity: 0.4 },
+  ];
+  layerConfigs.forEach(cfg => {
+    const pos = new Float32Array(cfg.count * 3);
+    for (let i = 0; i < cfg.count; i++) {
+      const t = Math.random();
+      const dist = t * 25 + 0.5;
+      const spread = dist * 0.18;
+      const angle = Math.random() * Math.PI * 2;
+      const r = Math.random() * spread;
+      pos[i * 3] = -dist;
+      pos[i * 3 + 1] = Math.cos(angle) * r;
+      pos[i * 3 + 2] = Math.sin(angle) * r;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pts = new THREE.Points(geo, roundMat(cfg.size, cfg.opacity));
+    cometGroup.add(pts);
+  });
   // Floating label
   const cometLabel = createTextSprite('☄ Cometa Halley', {
     fontSize: 40,
