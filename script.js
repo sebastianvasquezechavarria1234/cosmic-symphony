@@ -2061,68 +2061,223 @@ function updateShootingStars() {
 let cometGroup, cometTrail;
 function buildComet() {
   cometGroup = new THREE.Group();
-  // Comet nucleus
-  const nucleusGeo = new THREE.SphereGeometry(0.6, 16, 16);
-  const nucleusMat = new THREE.MeshBasicMaterial({ color: 0xeeeeff });
-  cometGroup.add(new THREE.Mesh(nucleusGeo, nucleusMat));
-  // Coma glow
-  const coma = createGlowSprite(0x88bbff, 8);
-  coma.material.opacity = 0.7;
-  cometGroup.add(coma);
-  const innerComa = createGlowSprite(0xffffff, 3);
-  innerComa.material.opacity = 0.5;
-  cometGroup.add(innerComa);
-  // Tail particles — round & varied sizes (3 layers)
-  const roundMat = (size, opacity) => new THREE.ShaderMaterial({
-    uniforms: {
-      uSize: { value: size },
-      uOpacity: { value: opacity },
-    },
+
+  // ── NÚCLEO IRREGULAR ──
+  const nucleusGeo = new THREE.IcosahedronGeometry(0.55, 2);
+  const posAttr = nucleusGeo.getAttribute('position');
+  for (let i = 0; i < posAttr.count; i++) {
+    const x = posAttr.getX(i);
+    const y = posAttr.getY(i);
+    const z = posAttr.getZ(i);
+    const noise = 0.85 + Math.random() * 0.3;
+    posAttr.setXYZ(i, x * noise, y * noise, z * noise);
+  }
+  posAttr.needsUpdate = true;
+  nucleusGeo.computeVertexNormals();
+  const nucleusMat = new THREE.MeshStandardMaterial({
+    color: 0x5a5a6a,
+    roughness: 0.95,
+    metalness: 0.05,
+    flatShading: true,
+  });
+  const nucleus = new THREE.Mesh(nucleusGeo, nucleusMat);
+  cometGroup.add(nucleus);
+
+  // ── COMA CAPAS ──
+  const comaInner = createGlowSprite(0xffffff, 2.5);
+  comaInner.material.opacity = 0.6;
+  cometGroup.add(comaInner);
+  const comaMid = createGlowSprite(0x88ccff, 6);
+  comaMid.material.opacity = 0.5;
+  cometGroup.add(comaMid);
+  const comaOuter = createGlowSprite(0x4488cc, 12);
+  comaOuter.material.opacity = 0.3;
+  cometGroup.add(comaOuter);
+  const comaGreen = createGlowSprite(0x66ddaa, 9);
+  comaGreen.material.opacity = 0.15;
+  cometGroup.add(comaGreen);
+
+  // ── COLA DE POLVO (dorada, ancha, curva) ──
+  const dustCount = 500;
+  const dustPos = new Float32Array(dustCount * 3);
+  for (let i = 0; i < dustCount; i++) {
+    const t = Math.random();
+    const dist = t * 30 + 1;
+    const spread = dist * 0.22;
+    const curve = t * t * 3;
+    const angle = Math.random() * Math.PI * 2;
+    const r = Math.random() * spread;
+    dustPos[i * 3] = -dist;
+    dustPos[i * 3 + 1] = Math.cos(angle) * r + curve;
+    dustPos[i * 3 + 2] = Math.sin(angle) * r;
+  }
+  const dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  const dustMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
     vertexShader: `
-      uniform float uSize;
+      uniform float uTime;
       void main() {
-        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = uSize * (300.0 / -mvPos.z);
+        vec3 p = position;
+        p.y += sin(uTime * 0.5 + p.x * 0.3) * 0.15;
+        vec4 mvPos = modelViewMatrix * vec4(p, 1.0);
+        gl_PointSize = max(2.0, 6.0 * (300.0 / -mvPos.z));
         gl_Position = projectionMatrix * mvPos;
       }
     `,
     fragmentShader: `
-      uniform float uOpacity;
       void main() {
         float d = length(gl_PointCoord - 0.5);
         if (d > 0.5) discard;
-        float alpha = smoothstep(0.5, 0.2, d) * uOpacity;
-        gl_FragColor = vec4(0.67, 0.87, 1.0, alpha);
+        float alpha = smoothstep(0.5, 0.1, d) * 0.55;
+        vec3 col = mix(vec3(1.0, 0.85, 0.5), vec3(1.0, 0.6, 0.2), d * 2.0);
+        gl_FragColor = vec4(col, alpha);
       }
     `,
     transparent: true,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
+  const dustTail = new THREE.Points(dustGeo, dustMat);
+  cometGroup.add(dustTail);
 
-  const layerConfigs = [
-    { count: 800, size: 4, opacity: 0.5 },
-    { count: 800, size: 10, opacity: 0.7 },
-    { count: 400, size: 20, opacity: 0.4 },
-  ];
-  layerConfigs.forEach(cfg => {
-    const pos = new Float32Array(cfg.count * 3);
-    for (let i = 0; i < cfg.count; i++) {
-      const t = Math.random();
-      const dist = t * 25 + 0.5;
-      const spread = dist * 0.18;
-      const angle = Math.random() * Math.PI * 2;
-      const r = Math.random() * spread;
-      pos[i * 3] = -dist;
-      pos[i * 3 + 1] = Math.cos(angle) * r;
-      pos[i * 3 + 2] = Math.sin(angle) * r;
-    }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const pts = new THREE.Points(geo, roundMat(cfg.size, cfg.opacity));
-    cometGroup.add(pts);
+  // ── COLA DE IONES (azul, estrecha, recta) ──
+  const ionCount = 400;
+  const ionPos = new Float32Array(ionCount * 3);
+  for (let i = 0; i < ionCount; i++) {
+    const t = Math.random();
+    const dist = t * 40 + 0.5;
+    const spread = dist * 0.08;
+    const angle = Math.random() * Math.PI * 2;
+    const r = Math.random() * spread;
+    ionPos[i * 3] = -dist;
+    ionPos[i * 3 + 1] = Math.cos(angle) * r;
+    ionPos[i * 3 + 2] = Math.sin(angle) * r;
+  }
+  const ionGeo = new THREE.BufferGeometry();
+  ionGeo.setAttribute('position', new THREE.BufferAttribute(ionPos, 3));
+  const ionMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      uniform float uTime;
+      void main() {
+        vec3 p = position;
+        p.x += sin(uTime * 0.8 + p.y * 5.0) * 0.08;
+        vec4 mvPos = modelViewMatrix * vec4(p, 1.0);
+        gl_PointSize = max(1.5, 4.0 * (300.0 / -mvPos.z));
+        gl_Position = projectionMatrix * mvPos;
+      }
+    `,
+    fragmentShader: `
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float alpha = smoothstep(0.5, 0.05, d) * 0.6;
+        vec3 col = mix(vec3(0.5, 0.7, 1.0), vec3(0.3, 0.5, 1.0), d * 2.0);
+        gl_FragColor = vec4(col, alpha);
+      }
+    `,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
   });
-  // Floating label
+  const ionTail = new THREE.Points(ionGeo, ionMat);
+  cometGroup.add(ionTail);
+
+  // ── JETS DE GAS (chorros brillantes desde el núcleo) ──
+  const jetCount = 60;
+  const jetPos = new Float32Array(jetCount * 3);
+  for (let i = 0; i < jetCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = (Math.random() - 0.5) * 1.2;
+    const len = 1.0 + Math.random() * 2.5;
+    jetPos[i * 3] = Math.sin(phi) * Math.cos(theta) * len;
+    jetPos[i * 3 + 1] = Math.sin(theta) * Math.cos(phi) * len;
+    jetPos[i * 3 + 2] = Math.cos(phi) * len * 0.5;
+  }
+  const jetGeo = new THREE.BufferGeometry();
+  jetGeo.setAttribute('position', new THREE.BufferAttribute(jetPos, 3));
+  const jetMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      uniform float uTime;
+      void main() {
+        vec3 p = position;
+        float pulse = sin(uTime * 2.0 + length(p) * 3.0) * 0.3 + 0.7;
+        vec4 mvPos = modelViewMatrix * vec4(p * pulse, 1.0);
+        gl_PointSize = max(2.0, 5.0 * (300.0 / -mvPos.z));
+        gl_Position = projectionMatrix * mvPos;
+      }
+    `,
+    fragmentShader: `
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float alpha = smoothstep(0.5, 0.0, d) * 0.8;
+        gl_FragColor = vec4(0.8, 0.95, 1.0, alpha);
+      }
+    `,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const jets = new THREE.Points(jetGeo, jetMat);
+  cometGroup.add(jets);
+
+  // ── POLVO CERCA DEL NÚCLEO (brillo denso) ──
+  const closeCount = 150;
+  const closePos = new Float32Array(closeCount * 3);
+  for (let i = 0; i < closeCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = 0.8 + Math.random() * 1.5;
+    closePos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    closePos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    closePos[i * 3 + 2] = r * Math.cos(phi);
+  }
+  const closeGeo = new THREE.BufferGeometry();
+  closeGeo.setAttribute('position', new THREE.BufferAttribute(closePos, 3));
+  const closeMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      uniform float uTime;
+      void main() {
+        vec3 p = position;
+        p *= 1.0 + sin(uTime + length(p) * 2.0) * 0.1;
+        vec4 mvPos = modelViewMatrix * vec4(p, 1.0);
+        gl_PointSize = max(1.0, 3.0 * (300.0 / -mvPos.z));
+        gl_Position = projectionMatrix * mvPos;
+      }
+    `,
+    fragmentShader: `
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float alpha = smoothstep(0.5, 0.0, d) * 0.7;
+        gl_FragColor = vec4(0.9, 0.95, 1.0, alpha);
+      }
+    `,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const closeDust = new THREE.Points(closeGeo, closeMat);
+  cometGroup.add(closeDust);
+
+  // Referencias para animación
+  cometGroup.userData = {
+    angle: 0,
+    orbitRadius: 80,
+    orbitSpeed: 0.002,
+    inclination: 0.4,
+    dustMat,
+    ionMat,
+    jetMat,
+    closeMat,
+    nucleus,
+  };
+
+  // ── LABEL ──
   const cometLabel = createTextSprite('☄ Cometa Halley', {
     fontSize: 40,
     color: '#aaddff',
@@ -2131,7 +2286,6 @@ function buildComet() {
   });
   cometLabel.position.y = 3;
   cometGroup.add(cometLabel);
-  cometGroup.userData = { angle: 0, orbitRadius: 80, orbitSpeed: 0.002, inclination: 0.4 };
   scene.add(cometGroup);
 }
 
@@ -2764,9 +2918,15 @@ function animate() {
     cometGroup.position.x = Math.cos(cd.angle) * cd.orbitRadius;
     cometGroup.position.z = Math.sin(cd.angle) * cd.orbitRadius;
     cometGroup.position.y = Math.sin(cd.angle * 0.7) * cd.orbitRadius * cd.inclination;
-    // Point tail away from sun
     cometGroup.lookAt(0, 0, 0);
     cometGroup.rotateY(Math.PI);
+    // Update comet shader time
+    const t = performance.now() * 0.001;
+    if (cd.dustMat) cd.dustMat.uniforms.uTime.value = t;
+    if (cd.ionMat) cd.ionMat.uniforms.uTime.value = t;
+    if (cd.jetMat) cd.jetMat.uniforms.uTime.value = t;
+    if (cd.closeMat) cd.closeMat.uniforms.uTime.value = t;
+    if (cd.nucleus) cd.nucleus.rotation.y = t * 0.1;
   }
 
   // Orbit planets
@@ -4750,6 +4910,12 @@ function cinematicIntro() {
       cometGroup.position.y = Math.sin(cd.angle * 0.7) * cd.orbitRadius * cd.inclination;
       cometGroup.lookAt(0, 0, 0);
       cometGroup.rotateY(Math.PI);
+      const ct = performance.now() * 0.001;
+      if (cd.dustMat) cd.dustMat.uniforms.uTime.value = ct;
+      if (cd.ionMat) cd.ionMat.uniforms.uTime.value = ct;
+      if (cd.jetMat) cd.jetMat.uniforms.uTime.value = ct;
+      if (cd.closeMat) cd.closeMat.uniforms.uTime.value = ct;
+      if (cd.nucleus) cd.nucleus.rotation.y = ct * 0.1;
     }
     const sunPO = planetObjects['Sun'];
     if (sunPO) {
