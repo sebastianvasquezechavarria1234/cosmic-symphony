@@ -2235,6 +2235,90 @@ a.ctrl-btn {
 }
 
 /* ── MOBILE RESPONSIVE ── */
+/* ── TABLET / SMALL DESKTOP ── */
+@media (max-width: 1400px) {
+
+  /* Controls panel */
+  #controls-panel {
+    bottom: 7rem;
+    gap: 0.25rem;
+  }
+
+  .ctrl-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 1.1rem;
+    gap: 0.45rem;
+  }
+
+  .ctrl-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .speed-label {
+    font-size: 0.6rem;
+  }
+
+  .ctrl-row--speed {
+    padding: 0.22rem 0.6rem;
+    gap: 0.4rem;
+  }
+
+  #speed-slider {
+    width: 60px;
+  }
+
+  /* Minimap */
+  #minimap {
+    width: 130px;
+    height: 130px;
+    top: 1.2rem;
+    right: 0.8rem;
+  }
+
+  /* Planet nav */
+  .nav-orb {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-planet-name {
+    font-size: 0.5rem;
+  }
+
+  /* Planet info panel */
+  #planet-panel {
+    bottom: 5rem;
+    left: 0.8rem;
+    min-width: 260px;
+    max-width: 420px;
+    padding: 0.9rem 1.2rem 0.8rem;
+  }
+
+  .panel-body .panel-name {
+    font-size: 4rem !important;
+  }
+
+  .panel-body .panel-type {
+    font-size: 0.5rem;
+  }
+
+  .panel-body .panel-desc {
+    font-size: 1rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .panel-footer-btn {
+    font-size: 0.78rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .panel-footer-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 @media (max-width: 768px) {
 
   /* Hide keyboard-only hints */

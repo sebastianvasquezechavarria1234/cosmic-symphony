@@ -1701,16 +1701,6 @@ function buildSun() {
   scene.add(group);
   planetObjects['Sun'] = { group, mesh, data: PLANET_DATA['Sun'] };
 
-  // Sun floating label
-  const sunLabel = createTextSprite('\u2606 Sun', {
-    fontSize: 36,
-    color: '#ffffff',
-    glowColor: '#FF8C00',
-    scale: 3.0,
-  });
-  sunLabel.position.y = 7;
-  group.add(sunLabel);
-
   return group;
 }
 // Sun built via deferred queue below
@@ -2917,20 +2907,6 @@ function animate() {
       }
     });
   });
-
-  // Fade Sun label too
-  const sunPO2 = planetObjects['Sun'];
-  if (sunPO2 && sunPO2.group) {
-    const sunDist = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
-    const sunZR = sunDist / 5;
-    sunPO2.group.children.forEach(child => {
-      if (child.userData && child.userData.isLabel) {
-        if (sunZR < 3) child.material.opacity = 0;
-        else if (sunZR < 6) child.material.opacity = (sunZR - 3) / 3;
-        else child.material.opacity = 1;
-      }
-    });
-  }
 
   // Update selection particles
   updateSelectionParticles();
