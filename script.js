@@ -2085,23 +2085,26 @@ function buildComet() {
     tailPos[i * 3] = -dist;
     tailPos[i * 3 + 1] = Math.cos(angle) * r;
     tailPos[i * 3 + 2] = Math.sin(angle) * r;
-    tailSizes[i] = 0.15 + Math.random() * 0.55;
+    tailSizes[i] = 0.4 + Math.random() * 1.2;
   }
   const tailGeo = new THREE.BufferGeometry();
   tailGeo.setAttribute('position', new THREE.BufferAttribute(tailPos, 3));
   tailGeo.setAttribute('size', new THREE.BufferAttribute(tailSizes, 1));
   // Round particle texture
   const dotCanvas = document.createElement('canvas');
-  dotCanvas.width = dotCanvas.height = 64;
+  dotCanvas.width = dotCanvas.height = 256;
   const dotCtx = dotCanvas.getContext('2d');
-  const dotGrad = dotCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  const dotGrad = dotCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
   dotGrad.addColorStop(0, 'rgba(255,255,255,1)');
-  dotGrad.addColorStop(0.3, 'rgba(200,230,255,0.8)');
-  dotGrad.addColorStop(0.7, 'rgba(150,200,255,0.2)');
-  dotGrad.addColorStop(1, 'rgba(100,170,255,0)');
+  dotGrad.addColorStop(0.15, 'rgba(220,240,255,0.9)');
+  dotGrad.addColorStop(0.4, 'rgba(170,210,255,0.5)');
+  dotGrad.addColorStop(0.7, 'rgba(130,180,255,0.15)');
+  dotGrad.addColorStop(1, 'rgba(100,150,255,0)');
   dotCtx.fillStyle = dotGrad;
-  dotCtx.fillRect(0, 0, 64, 64);
+  dotCtx.fillRect(0, 0, 256, 256);
   const dotTex = new THREE.CanvasTexture(dotCanvas);
+  dotTex.minFilter = THREE.LinearFilter;
+  dotTex.magFilter = THREE.LinearFilter;
   const tailMat = new THREE.ShaderMaterial({
     uniforms: {
       uColor: { value: new THREE.Color(0xaaddff) },
@@ -2113,9 +2116,9 @@ function buildComet() {
       varying float vAlpha;
       void main() {
         vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = size * (300.0 / -mvPos.z);
+        gl_PointSize = size * (800.0 / -mvPos.z);
         gl_Position = projectionMatrix * mvPos;
-        vAlpha = smoothstep(25.0, 2.0, -mvPos.z);
+        vAlpha = smoothstep(80.0, 5.0, -mvPos.z);
       }
     `,
     fragmentShader: `
