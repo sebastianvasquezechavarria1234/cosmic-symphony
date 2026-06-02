@@ -2024,11 +2024,16 @@ a.ctrl-btn {
   filter: blur(0);
 }
 
+#about-overlay .modal-scroll-area {
+  align-items: center;
+  justify-content: center;
+}
+
 .about-modal-content {
   position: relative;
   max-width: 480px;
   width: 50%;
-  padding-bottom: 3rem;
+  padding-bottom: 0;
   text-align: center;
 }
 
