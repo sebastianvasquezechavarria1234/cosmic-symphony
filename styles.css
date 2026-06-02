@@ -995,8 +995,8 @@ p {
 }
 
 #planet-modal .atmo-pct {
-  color: var(--planet-color, #4fc3f7);
-  font-weight: 600;
+  color: var(--planet-color, #ffffff69);
+  font-weight: 200;
 }
 
 #planet-modal .atmo-bar {
@@ -1008,7 +1008,7 @@ p {
 
 #planet-modal .atmo-fill {
   height: 100%;
-  background: var(--planet-color, #4fc3f7);
+  background: var(--planet-color, #ffffff72);
   border-radius: 2px;
   width: 0;
   transition: width 1s ease;
@@ -1057,8 +1057,9 @@ p {
 
 #planet-modal .mission-year {
   font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--planet-color, #4fc3f7);
+  color: var(--planet-color, #ffffffc4);
+  font-weight: 200;
+  font-style: italic;
   min-width: 3.2rem;
 }
 
