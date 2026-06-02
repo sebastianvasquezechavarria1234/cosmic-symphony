@@ -832,9 +832,11 @@ p {
 /* Reuse existing inner panel styles for modal */
 #planet-modal .section-title {
   font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: 0.65rem;
-  letter-spacing: 3px;
-  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.776);
   text-transform: uppercase;
   margin: 1.5rem 0 0.75rem;
 }
@@ -854,16 +856,18 @@ p {
 
 #planet-modal .stat-label {
   font-size: 0.6rem;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: -0.1px;
+  color: rgba(255, 255, 255, 0.552);
   text-transform: uppercase;
   margin-bottom: 0.2rem;
+  font-weight: 100;
 }
 
 #planet-modal .stat-value {
   font-family: 'Playfair Display', serif;
   font-size: 0.85rem;
   font-weight: 600;
+  font-style: italic;
   color: #fff;
 }
 
@@ -899,9 +903,9 @@ p {
 }
 
 #planet-modal .temp-range-label {
-  font-size: 0.55rem;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.65rem;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.595);
 }
 
 #planet-modal .temp-range-val {
@@ -933,8 +937,8 @@ p {
 #planet-modal .moon-count {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
-  font-weight: 200;
-  color: var(--planet-color, #4fc3f7);
+  font-weight:  100;
+  color: var(--planet-color, #ffffff);
 }
 
 #planet-modal .moon-label {
