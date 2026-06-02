@@ -1701,6 +1701,14 @@ function buildSun() {
   scene.add(group);
   planetObjects['Sun'] = { group, mesh, data: PLANET_DATA['Sun'] };
 
+  const sunLabel = createTextSprite('Sol', {
+    fontSize: 36,
+    color: '#ffffff',
+    scale: 3.0,
+  });
+  sunLabel.position.y = 7;
+  group.add(sunLabel);
+
   return group;
 }
 // Sun built via deferred queue below

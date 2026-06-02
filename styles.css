@@ -2148,7 +2148,7 @@ a.ctrl-btn {
 
 @keyframes creditsPulse {
   0%, 100% { box-shadow: none; }
-  50% { box-shadow: 0 0 12px rgba(79, 195, 247, 0.4), 0 0 24px rgba(79, 195, 247, 0.15); }
+  50% { box-shadow: 0 0 12px rgba(255, 255, 255, 0.4), 0 0 24px rgba(255, 255, 255, 0.15); }
 }
 
 /* ── MOBILE TOUCH CONTROLS ── */
