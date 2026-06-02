@@ -2130,6 +2130,8 @@ a.ctrl-btn {
   border: 1px solid rgba(79, 195, 247, 0.2);
   border-radius: 12px;
   padding: 0.2rem 0.6rem;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: 0.65rem;
   color: rgba(79, 195, 247, 0.7);
   margin: 0.2rem;

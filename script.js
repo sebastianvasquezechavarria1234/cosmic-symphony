@@ -2535,6 +2535,7 @@ window.openAboutOverlay = function () {
   overlay.classList.remove('active');
   overlay.offsetHeight;
   overlay.classList.add('active');
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 };
 
 window.closeAboutOverlay = function () {
