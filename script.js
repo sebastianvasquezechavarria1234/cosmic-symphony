@@ -2398,6 +2398,24 @@ window.closePanel = function () {
 // ── PLANET MODAL (full-screen details) ──
 let currentPlanetData = null;
 
+const emojiToSvg = {
+  '🧬': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="M17 6l-2.5-2.5"/><path d="M14 8l-1-1"/><path d="M7 18l2.5 2.5"/><path d="M3.5 14.5l.5.5"/><path d="M20 9l.5.5"/><path d="M6.5 12.5l1 1"/><path d="M16.5 10.5l1 1"/></svg>',
+  '🔥': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
+  '⚡': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  '🌊': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>',
+  '☄': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M12.2 2a10.7 10.7 0 0 0-2.4 6.3 8 8 0 0 0-4.5 4.5A10.7 10.7 0 0 0 12.2 22a10.7 10.7 0 0 0 2.4-6.3 8 8 0 0 0 4.5-4.5A10.7 10.7 0 0 0 12.2 2z"/></svg>',
+  '🌡': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>',
+  '🧲': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M6 15a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/><path d="M12 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/></svg>',
+  '💨': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M17.7 7.7a7.5 7.5 0 1 0-10.1 10.8"/><path d="M18 12h.01"/><path d="M12 2v2"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M12 20v2"/></svg>',
+  '🌀': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M12 12c-2-2.67-6-2.67-6 0 0 4 6 8 6 8s6-4 6-8c0-2.67-4-2.67-6 0Z"/></svg>',
+};
+
+function replaceEmojis(html) {
+  return html.replace(/([\u{1F300}-\u{1FAFF}\u2600-\u27BF\u2B50\u2604\u26A1\u26C4\u26C5\u2B55])/gu, (match) => {
+    return emojiToSvg[match] || match;
+  });
+}
+
 window.openPlanetModal = function () {
   const name = panel.dataset.planet;
   const d = PLANET_DATA[name];
@@ -2411,7 +2429,7 @@ window.openPlanetModal = function () {
   content.innerHTML = `
     <div class="modal-name" style="--planet-color:${d.cssColor}">${chars}</div>
     <div class="modal-type">${d.type}</div>
-    <div class="modal-desc">${d.description}</div>
+    <div class="modal-desc">${replaceEmojis(d.description)}</div>
 
     <div class="section-title">Esencia física</div>
     <div class="stats-grid">
@@ -2499,8 +2517,8 @@ window.openPlanetModal = function () {
     <div class="fact-list">
       ${d.facts.map(f => `
         <div class="fact-item">
-          <span class="fact-icon">${f.icon}</span>
-          <span>${f.text}</span>
+          <span class="fact-icon">${replaceEmojis(f.icon)}</span>
+          <span>${replaceEmojis(f.text)}</span>
         </div>
       `).join('')}
     </div>

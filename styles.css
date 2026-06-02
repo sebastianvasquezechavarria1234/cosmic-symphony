@@ -742,6 +742,23 @@ p {
   transform-style: preserve-3d;
 }
 
+.modal-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
 .modal-close {
   position: fixed;
   top: 1rem;
