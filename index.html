@@ -152,34 +152,39 @@
 
   <!-- ABOUT OVERLAY -->
   <div id="about-overlay">
-    <div class="about-card">
-      <div class="about-close" onclick="document.getElementById('about-overlay').classList.remove('active')"><i
-          data-lucide="x"></i></div>
-      <div class="about-avatar"><i data-lucide="rocket" style="width:2rem;height:2rem;stroke:#4fc3f7"></i></div>
-      <div class="about-name">Ritesh Meena</div>
-      <div class="about-role">Desarrollador de software &amp; entusiasta del espacio</div>
-      <div class="about-bio">
-        ¡Hola! Soy Ritesh — un desarrollador apasionado y creador de este Museo del Cosmos. Este proyecto es una oda
-        visual al cosmos, diseñada para evocar paz y asombro. Cada pincelada de código busca transmitir la serenidad del
-        espacio infinito, invitándote a una profunda contemplación estelar.
+    <div class="welcome-bg-image" id="about-bg-image"></div>
+    <div class="welcome-spotlight"></div>
+    <div class="welcome-bg-stars" id="about-stars"></div>
+    <div class="modal-close" onclick="closeAboutOverlay()">✕</div>
+
+    <div class="modal-scroll-area" onclick="if(event.target===this)closeAboutOverlay()">
+      <div class="modal-content about-modal-content">
+        <div class="about-avatar"><i data-lucide="rocket" style="width:2rem;height:2rem;stroke:#4fc3f7"></i></div>
+        <div class="about-name">Ritesh Meena</div>
+        <div class="about-role">Desarrollador de software &amp; entusiasta del espacio</div>
+        <div class="about-bio">
+          ¡Hola! Soy Ritesh — un desarrollador apasionado y creador de este Museo del Cosmos. Este proyecto es una oda
+          visual al cosmos, diseñada para evocar paz y asombro. Cada pincelada de código busca transmitir la serenidad del
+          espacio infinito, invitándote a una profunda contemplación estelar.
+        </div>
+        <div class="about-links">
+          <a href="https://www.linkedin.com/in/ritesh-meena/" target="_blank" rel="noopener noreferrer"
+            class="about-link">
+            <i data-lucide="linkedin" class="about-link-icon"></i> LinkedIn
+          </a>
+          <a href="https://github.com/rtm20" target="_blank" rel="noopener noreferrer" class="about-link">
+            <i data-lucide="github" class="about-link-icon"></i> GitHub
+          </a>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <span class="about-badge">Three.js</span>
+          <span class="about-badge">JavaScript</span>
+          <span class="about-badge">WebGL</span>
+          <span class="about-badge">3D Graphics</span>
+          <span class="about-badge">Generación procedural</span>
+        </div>
+        <div class="about-tech">Hecho con ♥ y Three.js — Miles de líneas de código artesanal</div>
       </div>
-      <div class="about-links">
-        <a href="https://www.linkedin.com/in/ritesh-meena/" target="_blank" rel="noopener noreferrer"
-          class="about-link">
-          <i data-lucide="linkedin" class="about-link-icon"></i> LinkedIn
-        </a>
-        <a href="https://github.com/rtm20" target="_blank" rel="noopener noreferrer" class="about-link">
-          <i data-lucide="github" class="about-link-icon"></i> GitHub
-        </a>
-      </div>
-      <div style="margin-bottom: 1rem;">
-        <span class="about-badge">Three.js</span>
-        <span class="about-badge">JavaScript</span>
-        <span class="about-badge">WebGL</span>
-        <span class="about-badge">3D Graphics</span>
-        <span class="about-badge">Generación procedural</span>
-      </div>
-      <div class="about-tech">Hecho con ♥ y Three.js — Miles de líneas de código artesanal</div>
     </div>
   </div>
   <!-- CONTROLS HINT -->
@@ -232,8 +237,8 @@
       </button>
     </div>
     <div class="ctrl-row">
-      <button class="ctrl-btn" id="sidebar-about-btn"
-        onclick="document.getElementById('about-overlay').classList.add('active')" title="El Creador del Museo">
+  <button class="ctrl-btn" id="sidebar-about-btn"
+    onclick="openAboutOverlay()" title="El Creador del Museo">
         El Autor <i data-lucide="info"></i>
       </button>
     </div>

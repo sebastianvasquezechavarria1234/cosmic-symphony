@@ -2005,62 +2005,31 @@ a.ctrl-btn {
 }
 
 #about-overlay {
-  display: none;
   position: fixed;
   inset: 0;
+  background: #000;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  align-items: center;
-  justify-content: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(20px);
+  transition: opacity 0.8s ease, filter 0.8s ease;
+  overflow: hidden;
 }
 
 #about-overlay.active {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+  filter: blur(0);
 }
 
-.about-card {
-  background: rgba(5, 5, 25, 0.95);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(79, 195, 247, 0.2);
-  border-radius: 24px;
-  padding: 2.5rem;
-  max-width: 520px;
-  width: 90%;
-  text-align: center;
+.about-modal-content {
   position: relative;
-  animation: fadeSlideUp 0.5s ease;
-}
-
-.about-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.6);
-  transition: all 0.3s;
-}
-
-.about-close svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  pointer-events: none;
-}
-
-.about-close:hover {
-  background: rgba(239, 83, 80, 0.2);
-  border-color: rgba(239, 83, 80, 0.5);
-  color: #ef5350;
+  max-width: 520px;
+  width: 100%;
+  padding-bottom: 3rem;
+  text-align: center;
 }
 
 .about-avatar {
@@ -2077,13 +2046,13 @@ a.ctrl-btn {
 
 .about-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: 3px;
-  margin-bottom: 0.3rem;
-  background: linear-gradient(90deg, #4fc3f7, #ab47bc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-style: italic;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  line-height: 1;
 }
 
 .about-role {
@@ -2412,7 +2381,7 @@ a.ctrl-btn {
   }
 
   /* About overlay — scrollable */
-  .about-card {
+  .about-modal-content {
     max-height: 90vh;
     overflow-y: auto;
     padding: 1.5rem;
@@ -2425,7 +2394,7 @@ a.ctrl-btn {
   }
 
   .about-name {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
 
   /* Hint bar */
