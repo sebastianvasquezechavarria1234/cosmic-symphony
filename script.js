@@ -2072,9 +2072,10 @@ function buildComet() {
   const innerComa = createGlowSprite(0xffffff, 3);
   innerComa.material.opacity = 0.5;
   cometGroup.add(innerComa);
-  // Tail particles — simple and visible
+  // Tail particles — round with varied sizes
   const tailCount = 2000;
   const tailPos = new Float32Array(tailCount * 3);
+  const tailSizes = new Float32Array(tailCount);
   for (let i = 0; i < tailCount; i++) {
     const t = Math.random();
     const dist = t * 25 + 0.5;
@@ -2084,19 +2085,55 @@ function buildComet() {
     tailPos[i * 3] = -dist;
     tailPos[i * 3 + 1] = Math.cos(angle) * r;
     tailPos[i * 3 + 2] = Math.sin(angle) * r;
+    tailSizes[i] = 0.15 + Math.random() * 0.55;
   }
   const tailGeo = new THREE.BufferGeometry();
   tailGeo.setAttribute('position', new THREE.BufferAttribute(tailPos, 3));
-  const tailMat = new THREE.PointsMaterial({
-    color: 0xaaddff,
-    size: 0.5,
+  tailGeo.setAttribute('size', new THREE.BufferAttribute(tailSizes, 1));
+  // Round particle texture
+  const dotCanvas = document.createElement('canvas');
+  dotCanvas.width = dotCanvas.height = 64;
+  const dotCtx = dotCanvas.getContext('2d');
+  const dotGrad = dotCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  dotGrad.addColorStop(0, 'rgba(255,255,255,1)');
+  dotGrad.addColorStop(0.3, 'rgba(200,230,255,0.8)');
+  dotGrad.addColorStop(0.7, 'rgba(150,200,255,0.2)');
+  dotGrad.addColorStop(1, 'rgba(100,170,255,0)');
+  dotCtx.fillStyle = dotGrad;
+  dotCtx.fillRect(0, 0, 64, 64);
+  const dotTex = new THREE.CanvasTexture(dotCanvas);
+  const tailMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uColor: { value: new THREE.Color(0xaaddff) },
+      uTex: { value: dotTex },
+      uOpacity: { value: 0.7 },
+    },
+    vertexShader: `
+      attribute float size;
+      varying float vAlpha;
+      void main() {
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = size * (300.0 / -mvPos.z);
+        gl_Position = projectionMatrix * mvPos;
+        vAlpha = smoothstep(25.0, 2.0, -mvPos.z);
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 uColor;
+      uniform sampler2D uTex;
+      uniform float uOpacity;
+      varying float vAlpha;
+      void main() {
+        vec4 texColor = texture2D(uTex, gl_PointCoord);
+        gl_FragColor = vec4(uColor, texColor.a * uOpacity * vAlpha);
+      }
+    `,
     transparent: true,
-    opacity: 0.7,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
-    sizeAttenuation: true,
   });
   cometTrail = new THREE.Points(tailGeo, tailMat);
+  cometTrail.userData.isCometTrail = true;
   cometGroup.add(cometTrail);
   // Floating label
   const cometLabel = createTextSprite('☄ Cometa Halley', {
