@@ -4472,7 +4472,7 @@ window.toggleMusic = function () {
 // ═══════════════════════════════════════════════════════
 const loadingEl = document.getElementById('loading');
 const introTitle = document.getElementById('intro-title');
-splitTextToChars(introTitle, '✦ Museo del Cosmos', 0.03);
+splitTextToChars(introTitle, '✦ Cargando', 0.03);
 const presentsEl = document.getElementById('intro-presents');
 const presentsText = document.getElementById('presents-text');
 
@@ -4631,10 +4631,18 @@ function showWelcomeScreen() {
       galaxy.style.transform = `translate3d(${currentX * -25}px, ${currentY * -25}px, 0)`;
     }
     if (earth) {
-      earth.style.transform = `translate3d(${currentX * -60}px, ${currentY * -60}px, 0)`;
+      earth.style.transform = `
+        translate3d(${currentX * -60}px, ${currentY * -60}px, 0)
+        rotateX(${currentY * -8}deg)
+        rotateY(${currentX * 8}deg)
+      `;
     }
     if (telescope) {
-      telescope.style.transform = `translate3d(${currentX * -80}px, ${currentY * -80}px, 0)`;
+      telescope.style.transform = `
+        translate3d(${currentX * -80}px, ${currentY * -80}px, 0)
+        rotateX(${currentY * -10}deg)
+        rotateY(${currentX * 10}deg)
+      `;
     }
 
     rafId = requestAnimationFrame(animate);
